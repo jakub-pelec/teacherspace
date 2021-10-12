@@ -1,10 +1,10 @@
 import React from "react";
-import { Button as MuiButton, ButtonProps } from "@material-ui/core";
-
+import { ButtonProps } from '@material-ui/core';
+import { StyledButton } from "./Elements";
 interface IProps extends ButtonProps {
-	children: React.ReactNode;
+	children: string;
 }
 
 export const Button: React.FC<IProps> = (props) => {
-	return <MuiButton {...props}>{props.children}</MuiButton>;
+	return <StyledButton {...props}>{props.children}</StyledButton>;
 };

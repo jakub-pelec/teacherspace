@@ -1,3 +1,3 @@
 export const lightTheme = {
-	primary: "white",
+	primary: "blue",
 };
