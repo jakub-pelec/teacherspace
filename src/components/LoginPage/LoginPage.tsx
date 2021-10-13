@@ -5,7 +5,7 @@ import { changeTheme } from "../../actions/actions";
 import { useForm, Controller } from "react-hook-form";
 import { useSnackbar } from "notistack";
 
-import { PageWrapper, ContentColumn, FormField, FormWrapper } from "./Elements";
+import { PageWrapper, ContentColumn, FormField, FormWrapper, ColumnWrapper } from "./Elements";
 import { TextField } from "../../shared/components/TextInput/TextInput";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../schemas/loginSchema";
@@ -26,36 +26,38 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps }) =>
 	};
 	return (
 		<PageWrapper>
-			<ContentColumn>
-				<FormWrapper onSubmit={handleSubmit(submitHandler)}>
-					<FormField>
-						<Controller
-							name="email"
-							control={control}
-							defaultValue=""
-							render={({ field: { onChange, onBlur, value, ref } }) => (
-								<TextField onChange={onChange} onBlur={onBlur} value={value} inputRef={ref} />
-							)}
-						/>
-					</FormField>
-					<FormField>
-						<Controller
-							name="password"
-							control={control}
-							defaultValue=""
-							render={({ field: { onChange, onBlur, value, ref } }) => (
-								<TextField onChange={onChange} onBlur={onBlur} value={value} inputRef={ref} type="password" />
-							)}
-						/>
-					</FormField>
-					<FormField>
-						<Button type="submit">Login</Button>
-					</FormField>
-				</FormWrapper>
-			</ContentColumn>
-			<ContentColumn>
-				<div>hello world</div>
-			</ContentColumn>
+			<ColumnWrapper>
+				<ContentColumn>
+					<FormWrapper onSubmit={handleSubmit(submitHandler)}>
+						<FormField>
+							<Controller
+								name="email"
+								control={control}
+								defaultValue=""
+								render={({ field: { onChange, onBlur, value, ref } }) => (
+									<TextField onChange={onChange} onBlur={onBlur} value={value} inputRef={ref} />
+								)}
+							/>
+						</FormField>
+						<FormField>
+							<Controller
+								name="password"
+								control={control}
+								defaultValue=""
+								render={({ field: { onChange, onBlur, value, ref } }) => (
+									<TextField onChange={onChange} onBlur={onBlur} value={value} inputRef={ref} type="password" />
+								)}
+							/>
+						</FormField>
+						<FormField>
+							<Button type="submit">Login</Button>
+						</FormField>
+					</FormWrapper>
+				</ContentColumn>
+				<ContentColumn>
+					<div>hello world</div>
+				</ContentColumn>
+			</ColumnWrapper>
 		</PageWrapper>
 	);
 };

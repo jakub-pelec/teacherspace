@@ -1,7 +1,9 @@
 export const lightTheme = {
-	primary: "#4c4c9d",
+	primary: "#F6725E",
 	secondary: "#bfdbf7",
-	accent: "#ffc482",
+	background: "#FFF",
+	font: "#303030",
+	accent: "#FF725E",
 	error: "#C20114",
 	success: "#82FF9E",
 };

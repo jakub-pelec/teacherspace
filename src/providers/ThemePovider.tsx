@@ -6,10 +6,10 @@ import { lightTheme } from "../theme/lightTheme";
 
 interface IProps {
 	children: React.ReactNode;
-	theme: 'dark' | 'light';
+	theme: "dark" | "light";
 }
 
-const ThemeProvider: React.FC<IProps> = ({ children, theme }) => {
+const ThemeProvider: React.FC<IProps> = ({ children, theme = "light" }) => {
 	return <ThemeProviderSC theme={theme === "light" ? lightTheme : darkTheme}>{children}</ThemeProviderSC>;
 };
 
