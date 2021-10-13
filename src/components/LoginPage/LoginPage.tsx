@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Button } from "../../shared/components/Button/Button";
 import { changeTheme } from "../../actions/actions";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useSnackbar } from "notistack";
 import { PageWrapper, ContentColumnRight, ContentColumnLeft, FormField, Title, FormWrapper, ColumnWrapper } from "./Elements";
 import { yupResolver } from "@hookform/resolvers/yup";
