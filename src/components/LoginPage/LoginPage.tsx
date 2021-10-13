@@ -3,22 +3,26 @@ import { connect } from "react-redux";
 import { Button } from "../../shared/components/Button/Button";
 import { changeTheme } from "../../actions/actions";
 import { useForm, Controller } from "react-hook-form";
+import { useSnackbar } from "notistack";
 
 import { PageWrapper, ContentColumn, FormField, FormWrapper } from "./Elements";
 import { TextField } from "../../shared/components/TextInput/TextInput";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../schemas/loginSchema";
+import { login } from "../../actions/actions";
 
 interface IProps {
-	changeThemeProps: typeof changeTheme;
+	changeThemeProps: any;
+	loginProps: any;
 	theme: "light" | "dark";
 }
 
-const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme }) => {
+const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps }) => {
+	const { enqueueSnackbar } = useSnackbar();
 	const { control, handleSubmit } = useForm({ resolver: yupResolver(loginSchema) });
 
-	const submitHandler = (a: any) => {
-		//TODO: LOGIN LOGIC
+	const submitHandler = (loginData: Credentials) => {
+		loginProps({ ...loginData, enqueueSnackbar });
 	};
 	return (
 		<PageWrapper>
@@ -60,4 +64,4 @@ const mapStateToProps = (state: any) => ({
 	theme: state.theme.theme,
 });
 
-export default connect(mapStateToProps, { changeThemeProps: changeTheme })(LoginPage);
+export default connect(mapStateToProps, { changeThemeProps: changeTheme, loginProps: login })(LoginPage);
