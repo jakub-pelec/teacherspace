@@ -33,10 +33,10 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps }) =>
 					<FormWrapper onSubmit={handleSubmit(submitHandler)}>
 						<Title>Get's started</Title>
 						<FormField>
-							<FormTextField name="Email address" control={control} defaultValue="" />
+							<FormTextField name="email" control={control} defaultValue="" label={"Email address"} />
 						</FormField>
 						<FormField>
-							<FormTextField name="Password" control={control} defaultValue="" inputProps={{ type: "password" }} />
+							<FormTextField name="password" control={control} defaultValue="" label={"Password"} inputProps={{ type: "password" }} />
 						</FormField>
 						<FormField>
 							<Button type="submit">Login</Button>
