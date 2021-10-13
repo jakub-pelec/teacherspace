@@ -6,7 +6,9 @@ export const StyledButton = styled(Button)`
 		border: none;
 		outline: none;
 		border-radius: 5px;
-		padding: 10px;
+		padding: 0.5em;
 		background-color: ${({ theme }) => theme.primary};
+		color: ${({ theme }) => theme.background};
+		width: 100%;
 	}
 `;

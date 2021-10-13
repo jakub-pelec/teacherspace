@@ -15,8 +15,8 @@ export const ColumnWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	border-radius: 1em;
-	max-width: 60%;
-	min-width: 70vw;
+	max-width: 50vw;
+	width: 70vw;
 	height: 60%;
 	overflow: hidden;
 `;
@@ -57,8 +57,12 @@ export const FormWrapper = styled.form`
 export const Title = styled.h1`
 	align-self: flex-start;
 	margin-left: 1em;
+	margin-bottom: 1.5em;
 `;
 
 export const FormField = styled.div`
 	padding-bottom: 2em;
+	padding-left: 2em;
+	padding-right: 2em;
+	width: 100%;
 `;

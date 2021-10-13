@@ -4,12 +4,11 @@ import { Button } from "../../shared/components/Button/Button";
 import { changeTheme } from "../../actions/actions";
 import { useForm, Controller } from "react-hook-form";
 import { useSnackbar } from "notistack";
-
 import { PageWrapper, ContentColumnRight, ContentColumnLeft, FormField, Title, FormWrapper, ColumnWrapper } from "./Elements";
-import { TextField } from "../../shared/components/TextInput/TextInput";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../schemas/loginSchema";
 import { login } from "../../actions/actions";
+import FormTextField from "../../shared/form-components/FormTextField/FormTextField";
 
 interface IProps {
 	changeThemeProps: any;
@@ -34,24 +33,10 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps }) =>
 					<FormWrapper onSubmit={handleSubmit(submitHandler)}>
 						<Title>Get's started</Title>
 						<FormField>
-							<Controller
-								name="email"
-								control={control}
-								defaultValue=""
-								render={({ field: { onChange, onBlur, value, ref } }) => (
-									<TextField onChange={onChange} onBlur={onBlur} value={value} inputRef={ref} />
-								)}
-							/>
+							<FormTextField name="Email address" control={control} defaultValue="" />
 						</FormField>
 						<FormField>
-							<Controller
-								name="password"
-								control={control}
-								defaultValue=""
-								render={({ field: { onChange, onBlur, value, ref } }) => (
-									<TextField onChange={onChange} onBlur={onBlur} value={value} inputRef={ref} type="password" />
-								)}
-							/>
+							<FormTextField name="Password" control={control} defaultValue="" inputProps={{ type: "password" }} />
 						</FormField>
 						<FormField>
 							<Button type="submit">Login</Button>
