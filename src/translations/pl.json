@@ -1,0 +1,9 @@
+{
+	"login": "Zaloguj się",
+	"password": "Hasło",
+	"email": "Email",
+	"confirmPassword": "Potwierdź hasło",
+	"firstName": "Imie",
+	"lastName": "Nazwisko",
+    "register": "Zarejestruj się"
+}

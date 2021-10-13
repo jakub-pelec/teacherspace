@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../schemas/loginSchema";
 import { login } from "../../actions/actions";
 import FormTextField from "../../shared/form-components/FormTextField/FormTextField";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
 	changeThemeProps: any;
@@ -18,6 +19,7 @@ interface IProps {
 
 const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps }) => {
 	const { enqueueSnackbar } = useSnackbar();
+	const { t } = useTranslation();
 	const { control, handleSubmit } = useForm({ resolver: yupResolver(loginSchema) });
 
 	const submitHandler = (loginData: Credentials) => {
