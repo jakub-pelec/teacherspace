@@ -4,7 +4,7 @@ import { Button } from "../../shared/components/Button/Button";
 import { changeTheme } from "../../actions/actions";
 import { useForm } from "react-hook-form";
 import { useSnackbar } from "notistack";
-import { PageWrapper, ContentColumnRight, ContentColumnLeft, FormField, Title, FormWrapper, ColumnWrapper } from "./Elements";
+import { PageWrapper, ContentColumnRight, ContentColumnLeft, FormField, Title, ColumnWrapper } from "./Elements";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../schemas/loginSchema";
 import { login } from "../../actions/actions";
@@ -30,8 +30,8 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps }) =>
 					<div>hello world</div>
 				</ContentColumnLeft>
 				<ContentColumnRight>
-					<FormWrapper onSubmit={handleSubmit(submitHandler)}>
-						<Title>Get's started</Title>
+					<Title>Get's started</Title>
+					<form onSubmit={handleSubmit(submitHandler)}>
 						<FormField>
 							<FormTextField name="email" control={control} defaultValue="" label={"Email address"} />
 						</FormField>
@@ -41,7 +41,7 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps }) =>
 						<FormField>
 							<Button type="submit">Login</Button>
 						</FormField>
-					</FormWrapper>
+					</form>
 				</ContentColumnRight>
 			</ColumnWrapper>
 		</PageWrapper>
