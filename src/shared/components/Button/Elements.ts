@@ -10,5 +10,6 @@ export const StyledButton = styled(Button)`
 		background-color: ${({ theme }) => theme.primary};
 		color: ${({ theme }) => theme.background};
 		width: 100%;
+		text-transform: none;
 	}
 `;
