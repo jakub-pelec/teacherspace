@@ -8,12 +8,14 @@ import { Wrapper, FormField } from "./Elements";
 import { registerSchema } from "../../schemas/registerSchema";
 import { useSnackbar } from "notistack";
 import { register } from "../../actions/actions";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
 	registerProps: any;
 }
 
 const RegisterPage: React.FC<IProps> = ({ registerProps }) => {
+	const { t } = useTranslation();
 	const { enqueueSnackbar } = useSnackbar();
 	const { control, handleSubmit } = useForm({ resolver: yupResolver(registerSchema) });
 	const submitHandler = (formData: any) => {
@@ -73,7 +75,7 @@ const RegisterPage: React.FC<IProps> = ({ registerProps }) => {
 						)}
 					/>
 				</FormField>
-				<Button type="submit">Register</Button>
+				<Button type="submit">{t("register")}</Button>
 			</form>
 		</Wrapper>
 	);

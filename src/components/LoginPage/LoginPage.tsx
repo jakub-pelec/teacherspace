@@ -10,6 +10,7 @@ import { TextField } from "../../shared/components/TextInput/TextInput";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../schemas/loginSchema";
 import { login } from "../../actions/actions";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
 	changeThemeProps: any;
@@ -19,6 +20,7 @@ interface IProps {
 
 const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps }) => {
 	const { enqueueSnackbar } = useSnackbar();
+	const { t } = useTranslation();
 	const { control, handleSubmit } = useForm({ resolver: yupResolver(loginSchema) });
 
 	const submitHandler = (loginData: Credentials) => {
@@ -49,12 +51,12 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps }) =>
 						/>
 					</FormField>
 					<FormField>
-						<Button type="submit">Login</Button>
+						<Button type="submit">{t("login")}</Button>
 					</FormField>
 				</FormWrapper>
 			</ContentColumn>
 			<ContentColumn>
-				<div>hello world</div>
+				<div>{t("hello_world")}</div>
 			</ContentColumn>
 		</PageWrapper>
 	);
