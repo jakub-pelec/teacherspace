@@ -8,40 +8,57 @@ export const PageWrapper = styled.div`
 	align-items: center;
 	flex-direction: row;
 	background-color: ${({ theme }) => theme.primary};
-	border: 3px solid purple;
 `;
 
 export const ColumnWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: ${({ theme }) => theme.background};
-	border-radius: 1rem;
-	width: 30%;
+	border-radius: 1em;
+	max-width: 60%;
+	min-width: 70vw;
 	height: 60%;
+	overflow: hidden;
 `;
 
-export const ContentColumn = styled.div`
+export const ContentColumnRight = styled.div`
 	display: flex;
 	height: 100%;
 	width: 100%;
-	border: 1px solid blue;
 	justify-content: center;
 	align-items: center;
 	background-color: ${({ theme }) => theme.background};
+`;
+
+export const ContentColumnLeft = styled.div`
+	display: flex;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(255, 255, 255, 0.3);
+	backdrop-filter: blur(1em);
 `;
 
 export const FormWrapper = styled.form`
 	margin: auto;
-	width: 50%;
+	width: 100%;
 	background-color: ${({ theme }) => theme.primary};
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	text-align: left;
 	flex-direction: column;
 	padding: 5% 0;
-	border: 2px solid black;
 	background-color: ${({ theme }) => theme.background};
 `;
 
-export const FormField = styled.div``;
+export const Title = styled.h1`
+	align-self: flex-start;
+	margin-left: 1em;
+`;
+
+export const FormField = styled.div`
+	padding-bottom: 2em;
+`;
