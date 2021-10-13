@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { TextField } from "../../shared/components/TextInput/TextInput";
+import FormTextInput from "../../shared/form-components/FormTextField/FormTextField";
 import { Button } from "../../shared/components/Button/Button";
 import { Wrapper, FormField } from "./Elements";
 import { registerSchema } from "../../schemas/registerSchema";
@@ -24,54 +24,19 @@ const RegisterPage: React.FC<IProps> = ({ registerProps }) => {
 		<Wrapper>
 			<form onSubmit={handleSubmit(submitHandler)}>
 				<FormField>
-					<Controller
-						name="firstName"
-						control={control}
-						defaultValue=""
-						render={({ field: { onChange, onBlur, value, ref } }) => (
-							<TextField onChange={onChange} onBlur={onBlur} value={value} inputRef={ref} />
-						)}
-					/>
+					<FormTextInput name="firstName" control={control} />
 				</FormField>
 				<FormField>
-					<Controller
-						name="lastName"
-						control={control}
-						defaultValue=""
-						render={({ field: { onChange, onBlur, value, ref } }) => (
-							<TextField onChange={onChange} onBlur={onBlur} value={value} inputRef={ref} />
-						)}
-					/>
+					<FormTextInput name="lastName" control={control} />
 				</FormField>
 				<FormField>
-					<Controller
-						name="email"
-						control={control}
-						defaultValue=""
-						render={({ field: { onChange, onBlur, value, ref } }) => (
-							<TextField onChange={onChange} onBlur={onBlur} value={value} inputRef={ref} />
-						)}
-					/>
+					<FormTextInput name="email" control={control} />
 				</FormField>
 				<FormField>
-					<Controller
-						name="password"
-						control={control}
-						defaultValue=""
-						render={({ field: { onChange, onBlur, value, ref } }) => (
-							<TextField onChange={onChange} onBlur={onBlur} value={value} inputRef={ref} type="password" />
-						)}
-					/>
+					<FormTextInput name="password" control={control} inputProps={{ type: "password" }} />
 				</FormField>
 				<FormField>
-					<Controller
-						name="confirmPassword"
-						control={control}
-						defaultValue=""
-						render={({ field: { onChange, onBlur, value, ref } }) => (
-							<TextField onChange={onChange} onBlur={onBlur} value={value} inputRef={ref} type="password" />
-						)}
-					/>
+					<FormTextInput name="confirmPassword" control={control} inputProps={{ type: "password" }} />
 				</FormField>
 				<Button type="submit">Register</Button>
 			</form>
