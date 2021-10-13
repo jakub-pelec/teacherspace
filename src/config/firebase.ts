@@ -19,3 +19,7 @@ export const auth = getAuth(app);
 export const firestore = getFirestore(app);
 export const analytics = getAnalytics(app);
 export const storage = getStorage(app);
+export const apiPath = "https://us-central1-teacherspace-dev.cloudfunctions.net/api/v1";
+export const apiRoutes = {
+	createAccount: "/create_account",
+};

@@ -21,3 +21,7 @@ interface LoginParams extends EnqueueSnackbar {
     email: string,
     password: string
 }
+
+interface Response<T> extends ResponseType {
+    data: T
+}
