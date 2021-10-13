@@ -1,26 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import FormTextInput from "../../shared/form-components/FormTextField/FormTextField";
+import FieldWithLabel from "../../shared/form-components/FieldWithLabel/FieldWithLabel";
 import { Button } from "../../shared/components/Button/Button";
-import { Wrapper, FormField, FormContainer, Title, FullNameContainer, ContentColumnRight, ContentColumnLeft } from "./Elements";
+import { Wrapper, FormField, FormContainer, Title, FullNameContainer, ContentColumnRight, ContentColumnLeft, Background } from "./Elements";
 import { registerSchema } from "../../schemas/registerSchema";
 import { useSnackbar } from "notistack";
 import { register } from "../../actions/actions";
 import { useTranslation } from "react-i18next";
+import { CircularProgress } from "@material-ui/core";
 
 interface IProps {
 	registerProps: any;
 }
 
 const RegisterPage: React.FC<IProps> = ({ registerProps }) => {
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const { t } = useTranslation();
 	const { enqueueSnackbar } = useSnackbar();
-	const { control, handleSubmit } = useForm({ resolver: yupResolver(registerSchema) });
+	const {
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({ resolver: yupResolver(registerSchema) });
 	const submitHandler = (formData: any) => {
 		const { firstName, lastName, email, password } = formData;
-		registerProps({ firstName, lastName, email, password, enqueueSnackbar });
+		setIsLoading(true);
+		registerProps({ firstName, lastName, email, password, enqueueSnackbar, disableLoading: setIsLoading });
 	};
 	return (
 		<Wrapper>
@@ -30,25 +37,39 @@ const RegisterPage: React.FC<IProps> = ({ registerProps }) => {
 					<form onSubmit={handleSubmit(submitHandler)}>
 						<FullNameContainer>
 							<FormField>
-								<FormTextInput name="firstName" label="First name" control={control} />
+								<FieldWithLabel name="firstName" label="First name" control={control} errorMessage={errors.firstName?.message} />
 							</FormField>
 							<FormField>
-								<FormTextInput name="lastName" label="Last name" control={control} />
+								<FieldWithLabel name="lastName" label="Last name" control={control} errorMessage={errors.lastName?.message} />
 							</FormField>
 						</FullNameContainer>
 						<FormField>
-							<FormTextInput name="email" label="Email address" control={control} />
+							<FieldWithLabel name="email" label="Email address" control={control} errorMessage={errors.email?.message} />
 						</FormField>
 						<FormField>
-							<FormTextInput name="password" label="Password" control={control} inputProps={{ type: "password" }} />
+							<FieldWithLabel
+								name="password"
+								label="Password"
+								control={control}
+								inputProps={{ type: "password" }}
+								errorMessage={errors.password?.message}
+							/>
 						</FormField>
 						<FormField>
-							<FormTextInput name="confirmPassword" label="Confirm password" control={control} inputProps={{ type: "password" }} />
+							<FieldWithLabel
+								name="confirmPassword"
+								label="Confirm password"
+								control={control}
+								inputProps={{ type: "password" }}
+								errorMessage={errors.confirmPassword?.message}
+							/>
 						</FormField>
-						<Button type="submit">Register</Button>
+						<Button type="submit" disabled={isLoading}>
+							{isLoading ? <CircularProgress size={23} /> : "Login"}
+						</Button>
 					</form>
 				</ContentColumnLeft>
-				<ContentColumnRight>hello world</ContentColumnRight>
+				<ContentColumnRight><Background /></ContentColumnRight>
 			</FormContainer>
 		</Wrapper>
 	);

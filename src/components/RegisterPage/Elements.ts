@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import background from "../../assets/background.svg";
 
 export const Wrapper = styled.div`
 	display: flex;
@@ -21,11 +22,10 @@ export const FormContainer = styled.div`
 	button {
 		margin-top: 2em;
 	}
-	box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+	box-shadow: 10px 10px 34px 0px rgba(0, 0, 0, .6);
 `;
 
 export const ContentColumnRight = styled.div`
-	padding: 5em;
 	display: flex;
 	height: 100%;
 	width: 100%;
@@ -36,7 +36,7 @@ export const ContentColumnRight = styled.div`
 `;
 
 export const ContentColumnLeft = styled.div`
-	padding: 5em;
+	padding: 50px;
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -60,4 +60,11 @@ export const FormField = styled.div`
 
 export const Title = styled.h1`
 	margin-bottom: 1em;
+`;
+
+export const Background = styled.div`
+	width: 100%;
+	height: 100%;
+	background-image: url(${background});
+	background-size: contain;
 `;

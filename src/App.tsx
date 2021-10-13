@@ -8,18 +8,23 @@ import reducer from "./reducers/rootReducer";
 import Router from "./components/Router/Router";
 import ThemeProvider from "./providers/ThemePovider";
 import { SnackbarProvider } from "notistack";
-import './providers/I18nProvider';
+import "./providers/I18nProvider";
+
+import GlobalFonts from "./fonts/font";
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 function App() {
 	return (
 		<ReduxProvider store={store}>
+			<>
+				<GlobalFonts />
 				<ThemeProvider>
 					<SnackbarProvider>
 						<Router />
 					</SnackbarProvider>
 				</ThemeProvider>
+			</>
 		</ReduxProvider>
 	);
 }

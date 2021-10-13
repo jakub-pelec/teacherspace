@@ -11,7 +11,7 @@ interface RegisterResponseData {
 }
 
 export const register =
-	({ firstName, lastName, email, password, enqueueSnackbar }: RegisterParams) =>
+	({ firstName, lastName, email, password, enqueueSnackbar, disableLoading }: RegisterParams) =>
 	async (dispatch: Dispatch) => {
 		try {
 			const userDocument = { firstName, lastName, email, password };
@@ -21,11 +21,13 @@ export const register =
 			enqueueSnackbar("Account created succesfully!", { variant: "success" });
 		} catch (e) {
 			enqueueSnackbar("Something went wrong! Please try again.", { variant: "error" });
+		} finally {
+			disableLoading(false);
 		}
 	};
 
 export const login =
-	({ email, password, enqueueSnackbar }: LoginParams) =>
+	({ email, password, enqueueSnackbar, disableLoading }: LoginParams) =>
 	async (dispatch: Dispatch) => {
 		try {
 			await signInWithEmailAndPassword(auth, email, password);
@@ -34,6 +36,8 @@ export const login =
 			enqueueSnackbar("Logged in!", { variant: "success" });
 		} catch (e) {
 			enqueueSnackbar("Something went wrong! Please try again.", { variant: "error" });
+		} finally {
+			disableLoading(false);
 		}
 	};
 

@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Button } from "../../shared/components/Button/Button";
 import { changeTheme } from "../../actions/actions";
 import { useForm } from "react-hook-form";
 import { useSnackbar } from "notistack";
-import { PageWrapper, ContentColumnRight, ContentColumnLeft, FormField, Title, ColumnWrapper } from "./Elements";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../schemas/loginSchema";
 import { login } from "../../actions/actions";
-import FormTextField from "../../shared/form-components/FormTextField/FormTextField";
+import FieldWithLabel from "../../shared/form-components/FieldWithLabel/FieldWithLabel";
 import { useTranslation } from "react-i18next";
+import { CircularProgress } from "@material-ui/core";
+
+import { PageWrapper, ContentColumnRight, ContentColumnLeft, FormField, Title, ColumnWrapper, Background } from "./Elements";
 
 interface IProps {
 	changeThemeProps: any;
@@ -18,30 +20,51 @@ interface IProps {
 }
 
 const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps }) => {
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const { enqueueSnackbar } = useSnackbar();
 	const { t } = useTranslation();
-	const { control, handleSubmit } = useForm({ resolver: yupResolver(loginSchema) });
+	const {
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({ resolver: yupResolver(loginSchema) });
 
 	const submitHandler = (loginData: Credentials) => {
-		loginProps({ ...loginData, enqueueSnackbar });
+		setIsLoading(true);
+		loginProps({ ...loginData, enqueueSnackbar, disableLoading: setIsLoading });
 	};
 	return (
 		<PageWrapper>
 			<ColumnWrapper>
 				<ContentColumnLeft>
-					<div>hello world</div>
+					<Background />
 				</ContentColumnLeft>
 				<ContentColumnRight>
-					<Title>Get's started</Title>
+					<Title>Let's get started</Title>
 					<form onSubmit={handleSubmit(submitHandler)}>
 						<FormField>
-							<FormTextField name="email" control={control} defaultValue="" label={"Email address"} />
+							<FieldWithLabel
+								name="email"
+								control={control}
+								defaultValue=""
+								label="Email address"
+								errorMessage={errors.email?.message}
+							/>
 						</FormField>
 						<FormField>
-							<FormTextField name="password" control={control} defaultValue="" label={"Password"} inputProps={{ type: "password" }} />
+							<FieldWithLabel
+								name="password"
+								control={control}
+								defaultValue=""
+								label="Password"
+								errorMessage={errors.password?.message}
+								inputProps={{ type: "password" }}
+							/>
 						</FormField>
 						<FormField>
-							<Button type="submit">Login</Button>
+							<Button type="submit" disabled={isLoading}>
+								{isLoading ? <CircularProgress size={23} /> : "Login"}
+							</Button>
 						</FormField>
 					</form>
 				</ContentColumnRight>

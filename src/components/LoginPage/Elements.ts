@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import background from "../../assets/background.svg";
 
 export const PageWrapper = styled.div`
 	width: 100%;
@@ -18,14 +19,14 @@ export const ColumnWrapper = styled.div`
 	min-width: 50vw;
 	height: 60%;
 	overflow: hidden;
-	box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+	box-shadow: 10px 10px 34px 0px rgba(0, 0, 0, 0.6);
 `;
 
 export const ContentColumnRight = styled.div`
 	display: flex;
 	height: 100%;
 	width: 100%;
-	padding: 5em;
+	padding: 80px;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
@@ -38,7 +39,6 @@ export const ContentColumnRight = styled.div`
 export const ContentColumnLeft = styled.div`
 	display: flex;
 	position: relative;
-	padding: 5em;
 	height: 100%;
 	width: 100%;
 	justify-content: center;
@@ -52,6 +52,12 @@ export const Title = styled.h1`
 `;
 
 export const FormField = styled.div`
-	padding-bottom: 2em;
 	width: 100%;
+`;
+
+export const Background = styled.div`
+	width: 100%;
+	height: 100%;
+	background-image: url(${background});
+	background-size: contain;
 `;

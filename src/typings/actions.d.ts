@@ -13,11 +13,15 @@ interface PersonalDetails {
     email: string
 }
 
-interface RegisterParams extends PersonalDetails, EnqueueSnackbar {
+interface LoadingCallback {
+    disableLoading: (s: boolean) => void
+}
+
+interface RegisterParams extends PersonalDetails, EnqueueSnackbar, LoadingCallback {
     password: string
 }
 
-interface LoginParams extends EnqueueSnackbar {
+interface LoginParams extends EnqueueSnackbar, LoadingCallback {
     email: string,
     password: string
 }

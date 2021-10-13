@@ -11,5 +11,15 @@ export const StyledButton = styled(Button)`
 		color: ${({ theme }) => theme.background};
 		width: 100%;
 		text-transform: none;
+
+		transition: all .2s ease-in-out;
+		
+		:disabled {
+			abackground-color: ${({ theme }) => theme.primaryWithOpacity};
+		}
+
+		:hover {
+			color: ${({ theme }) => theme.primary};
+		}
 	}
 `;
