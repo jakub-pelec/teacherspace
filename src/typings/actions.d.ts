@@ -24,7 +24,7 @@ interface RegisterParams extends PersonalDetails, EnqueueSnackbar, LoadingCallba
 interface LoginParams extends EnqueueSnackbar, LoadingCallback {
 	email: string;
 	password: string;
-	redirectToDashboard: () => void;
+	redirect: () => void;
 }
 
 interface Response<T> extends ResponseType {
