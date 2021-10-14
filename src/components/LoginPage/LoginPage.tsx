@@ -10,15 +10,13 @@ import { login } from "../../actions/actions";
 import FieldWithLabel from "../../shared/form-components/FieldWithLabel/FieldWithLabel";
 import { useTranslation } from "react-i18next";
 import { CircularProgress } from "@material-ui/core";
-import { withRouter } from "react-router-dom";
-
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import { PageWrapper, ContentColumnRight, ContentColumnLeft, FormField, Title, ColumnWrapper, Background } from "./Elements";
 
-interface IProps {
+interface IProps extends RouteComponentProps {
 	changeThemeProps: any;
 	loginProps: any;
 	theme: "light" | "dark";
-	history?: any;
 }
 
 const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps, history }) => {

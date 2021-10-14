@@ -10,8 +10,8 @@ export const Label = styled.div<ExpandProps>`
 	opacity: ${({ expanded }) => (expanded ? 1 : 0)};
 	margin: 0 0.5em;
 	transition: all 0.3s ease-out;
+	color: ${({ theme }) => theme.background};
 `;
-
 export const NavBar = styled.nav<ExpandProps>`
 	position: relative;
 	display: flex;
@@ -48,11 +48,6 @@ export const NavOption = styled(Button)`
 		min-width: 0px;
 		&:hover {
 			background-color: ${({ theme }) => theme.background};
-		}
-		a {
-			display: flex;
-			justify-content: center;
-			align-items: center;
 		}
 		&:not(:last-child) {
 			margin-bottom: 2em;
