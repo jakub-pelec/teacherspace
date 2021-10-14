@@ -19,6 +19,7 @@ export const ColumnWrapper = styled.div`
 	min-width: 50vw;
 	height: 60%;
 	overflow: hidden;
+	filter: blur(0px);
 	box-shadow: 10px 10px 34px 0px rgba(0, 0, 0, 0.6);
 `;
 

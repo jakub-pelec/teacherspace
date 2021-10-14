@@ -18,11 +18,11 @@ export const FormContainer = styled.div`
 	min-width: 50vw;
 	height: 60%;
 	overflow: hidden;
-
+	filter: blur(0px);
 	button {
 		margin-top: 2em;
 	}
-	box-shadow: 10px 10px 34px 0px rgba(0, 0, 0, .6);
+	box-shadow: 10px 10px 34px 0px rgba(0, 0, 0, 0.6);
 `;
 
 export const ContentColumnRight = styled.div`
