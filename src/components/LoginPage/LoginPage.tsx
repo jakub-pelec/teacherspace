@@ -10,16 +10,16 @@ import { login } from "../../actions/actions";
 import FieldWithLabel from "../../shared/form-components/FieldWithLabel/FieldWithLabel";
 import { useTranslation } from "react-i18next";
 import { CircularProgress } from "@material-ui/core";
-
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import { PageWrapper, ContentColumnRight, ContentColumnLeft, FormField, Title, ColumnWrapper, Background } from "./Elements";
 
-interface IProps {
+interface IProps extends RouteComponentProps {
 	changeThemeProps: any;
 	loginProps: any;
 	theme: "light" | "dark";
 }
 
-const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps }) => {
+const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps, history }) => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const { enqueueSnackbar } = useSnackbar();
 	const { t } = useTranslation();
@@ -31,7 +31,17 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps }) =>
 
 	const submitHandler = (loginData: Credentials) => {
 		setIsLoading(true);
-		loginProps({ ...loginData, enqueueSnackbar, disableLoading: setIsLoading });
+		const successCallback = () => {
+			enqueueSnackbar("Logged in!", { variant: "success" });
+			history.push("/dashboard");
+		};
+		const errorCallback = () => {
+			enqueueSnackbar("Something went wrong! Please try again.", { variant: "error" });
+		};
+		const finalCallback = () => {
+			setIsLoading(false);
+		};
+		loginProps({ ...loginData, successCallback, errorCallback, finalCallback });
 	};
 	return (
 		<PageWrapper>
@@ -77,4 +87,4 @@ const mapStateToProps = (state: any) => ({
 	theme: state.theme.theme,
 });
 
-export default connect(mapStateToProps, { changeThemeProps: changeTheme, loginProps: login })(LoginPage);
+export default withRouter(connect(mapStateToProps, { changeThemeProps: changeTheme, loginProps: login })(LoginPage));

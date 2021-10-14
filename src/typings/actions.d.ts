@@ -1,31 +1,32 @@
 interface EnqueueSnackbar {
-    enqueueSnackbar: (s: string, o: any) => void
+	enqueueSnackbar: (s: string, o: any) => void;
 }
 
 interface Credentials {
-    email: string,
-    password: string
+	email: string;
+	password: string;
 }
 
 interface PersonalDetails {
-    firstName: string,
-    lastName: string,
-    email: string
+	firstName: string;
+	lastName: string;
+	email: string;
 }
 
-interface LoadingCallback {
-    disableLoading: (s: boolean) => void
+interface PromiseCallback {
+	successCallback: () => void;
+	errorCallback: () => void;
+	finalCallback: () => void;
+}
+interface RegisterParams extends PersonalDetails, EnqueueSnackbar, PromiseCallback {
+	password: string;
 }
 
-interface RegisterParams extends PersonalDetails, EnqueueSnackbar, LoadingCallback {
-    password: string
-}
-
-interface LoginParams extends EnqueueSnackbar, LoadingCallback {
-    email: string,
-    password: string
+interface LoginParams extends EnqueueSnackbar, PromiseCallback {
+	email: string;
+	password: string;
 }
 
 interface Response<T> extends ResponseType {
-    data: T
+	data: T;
 }

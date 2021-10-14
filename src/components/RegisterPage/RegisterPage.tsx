@@ -27,7 +27,16 @@ const RegisterPage: React.FC<IProps> = ({ registerProps }) => {
 	const submitHandler = (formData: any) => {
 		const { firstName, lastName, email, password } = formData;
 		setIsLoading(true);
-		registerProps({ firstName, lastName, email, password, enqueueSnackbar, disableLoading: setIsLoading });
+		const succesCallback = () => {
+			enqueueSnackbar("Account created succesfully!", { variant: "success" });
+		};
+		const errorCallback = () => {
+			enqueueSnackbar("Something went wrong! Please try again.", { variant: "error" });
+		};
+		const finalCallback = () => {
+			setIsLoading(false);
+		};
+		registerProps({ firstName, lastName, email, password, succesCallback, errorCallback, finalCallback });
 	};
 	return (
 		<Wrapper>

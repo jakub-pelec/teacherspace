@@ -11,33 +11,33 @@ interface RegisterResponseData {
 }
 
 export const register =
-	({ firstName, lastName, email, password, enqueueSnackbar, disableLoading }: RegisterParams) =>
+	({ firstName, lastName, email, password, successCallback, errorCallback, finalCallback }: RegisterParams) =>
 	async (dispatch: Dispatch) => {
 		try {
 			const userDocument = { firstName, lastName, email, password };
 			const resp: Response<RegisterResponseData> = await axios.post(`${apiPath}${apiRoutes.createAccount}`, userDocument);
 			const { firestoreID } = resp.data;
 			dispatch({ type: SAVE_USER_UUID, payload: firestoreID });
-			enqueueSnackbar("Account created succesfully!", { variant: "success" });
+			successCallback();
 		} catch (e) {
-			enqueueSnackbar("Something went wrong! Please try again.", { variant: "error" });
+			errorCallback();
 		} finally {
-			disableLoading(false);
+			finalCallback();
 		}
 	};
 
 export const login =
-	({ email, password, enqueueSnackbar, disableLoading }: LoginParams) =>
+	({ email, password, successCallback, errorCallback, finalCallback }: LoginParams) =>
 	async (dispatch: Dispatch) => {
 		try {
 			await signInWithEmailAndPassword(auth, email, password);
 			const userAuthData = await auth.currentUser?.getIdTokenResult();
 			dispatch({ type: SAVE_USER_UUID, payload: userAuthData?.claims.firestoreID });
-			enqueueSnackbar("Logged in!", { variant: "success" });
+			successCallback();
 		} catch (e) {
-			enqueueSnackbar("Something went wrong! Please try again.", { variant: "error" });
+			errorCallback();
 		} finally {
-			disableLoading(false);
+			finalCallback();
 		}
 	};
 
