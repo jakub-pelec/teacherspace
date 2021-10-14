@@ -10,6 +10,7 @@ import { login } from "../../actions/actions";
 import FieldWithLabel from "../../shared/form-components/FieldWithLabel/FieldWithLabel";
 import { useTranslation } from "react-i18next";
 import { CircularProgress } from "@material-ui/core";
+import { withRouter } from "react-router-dom";
 
 import { PageWrapper, ContentColumnRight, ContentColumnLeft, FormField, Title, ColumnWrapper, Background } from "./Elements";
 
@@ -17,9 +18,10 @@ interface IProps {
 	changeThemeProps: any;
 	loginProps: any;
 	theme: "light" | "dark";
+	history?: any;
 }
 
-const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps }) => {
+const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps, history }) => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const { enqueueSnackbar } = useSnackbar();
 	const { t } = useTranslation();
@@ -29,9 +31,13 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps }) =>
 		formState: { errors },
 	} = useForm({ resolver: yupResolver(loginSchema) });
 
+	const redirectToDashboard = () => {
+		history.push("/dashboard");
+	};
+
 	const submitHandler = (loginData: Credentials) => {
 		setIsLoading(true);
-		loginProps({ ...loginData, enqueueSnackbar, disableLoading: setIsLoading });
+		loginProps({ ...loginData, enqueueSnackbar, disableLoading: setIsLoading, redirectToDashboard });
 	};
 	return (
 		<PageWrapper>
@@ -77,4 +83,4 @@ const mapStateToProps = (state: any) => ({
 	theme: state.theme.theme,
 });
 
-export default connect(mapStateToProps, { changeThemeProps: changeTheme, loginProps: login })(LoginPage);
+export default withRouter(connect(mapStateToProps, { changeThemeProps: changeTheme, loginProps: login })(LoginPage));

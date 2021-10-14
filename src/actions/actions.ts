@@ -27,12 +27,13 @@ export const register =
 	};
 
 export const login =
-	({ email, password, enqueueSnackbar, disableLoading }: LoginParams) =>
+	({ email, password, enqueueSnackbar, disableLoading, redirectToDashboard }: LoginParams) =>
 	async (dispatch: Dispatch) => {
 		try {
 			await signInWithEmailAndPassword(auth, email, password);
 			const userAuthData = await auth.currentUser?.getIdTokenResult();
 			dispatch({ type: SAVE_USER_UUID, payload: userAuthData?.claims.firestoreID });
+			redirectToDashboard();
 			enqueueSnackbar("Logged in!", { variant: "success" });
 		} catch (e) {
 			enqueueSnackbar("Something went wrong! Please try again.", { variant: "error" });
