@@ -31,13 +31,19 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps, hist
 		formState: { errors },
 	} = useForm({ resolver: yupResolver(loginSchema) });
 
-	const redirectToDashboard = () => {
-		history.push("/dashboard");
-	};
-
 	const submitHandler = (loginData: Credentials) => {
 		setIsLoading(true);
-		loginProps({ ...loginData, enqueueSnackbar, disableLoading: setIsLoading, redirectToDashboard });
+		const successCallback = () => {
+			enqueueSnackbar("Logged in!", { variant: "success" });
+			history.push("/dashboard");
+		};
+		const errorCallback = () => {
+			enqueueSnackbar("Something went wrong! Please try again.", { variant: "error" });
+		};
+		const finalCallback = () => {
+			setIsLoading(false);
+		};
+		loginProps({ ...loginData, successCallback, errorCallback, finalCallback });
 	};
 	return (
 		<PageWrapper>

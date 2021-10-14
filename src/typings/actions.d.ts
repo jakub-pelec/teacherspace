@@ -13,18 +13,18 @@ interface PersonalDetails {
 	email: string;
 }
 
-interface LoadingCallback {
-	disableLoading: (s: boolean) => void;
+interface PromiseCallback {
+	successCallback: () => void;
+	errorCallback: () => void;
+	finalCallback: () => void;
 }
-
-interface RegisterParams extends PersonalDetails, EnqueueSnackbar, LoadingCallback {
+interface RegisterParams extends PersonalDetails, EnqueueSnackbar, PromiseCallback {
 	password: string;
 }
 
-interface LoginParams extends EnqueueSnackbar, LoadingCallback {
+interface LoginParams extends EnqueueSnackbar, PromiseCallback {
 	email: string;
 	password: string;
-	redirect: () => void;
 }
 
 interface Response<T> extends ResponseType {
