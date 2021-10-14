@@ -43,17 +43,24 @@ export const NavOption = styled(Button)`
 	&& {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		border-radius: 1em;
 		text-transform: none;
 		min-width: 0px;
+		border: 3px solid rgba(0, 0, 0, 0);
 		&:hover {
-			background-color: ${({ theme }) => theme.background};
+			border: 3px solid ${({ theme }) => theme.background};
 		}
 		&:not(:last-child) {
 			margin-bottom: 2em;
 		}
 		&:last-child {
 			margin-bottom: 1em;
+		}
+		a {
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
 	}
 `;

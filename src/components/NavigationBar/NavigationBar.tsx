@@ -41,7 +41,7 @@ const NavigationBar = () => {
 				<Label expanded={expanded}>Logout</Label>
 			</NavOption>
 			<ExpandButton expanded={expanded} onClick={() => setExpanded((prevState) => !prevState)}>
-				<ArrowBackIosNewIcon />
+				<ArrowBackIosNewIcon htmlColor={expanded ? theme.primary : theme.background} />
 			</ExpandButton>
 		</NavBar>
 	);
