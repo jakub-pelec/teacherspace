@@ -1,3 +1,5 @@
 export const SWITCH_THEME = "SWITCH_THEME";
 
 export const SAVE_USER_UUID = 'SAVE_USER_UUID';
+
+export const SAVE_SIGNUP_DATA = 'SAVE_SIGNUP_DATA';
