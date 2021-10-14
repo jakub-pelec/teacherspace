@@ -1,26 +1,28 @@
 import React from "react";
 import NavigationBar from "../NavigationBar/NavigationBar";
 import styled from "styled-components";
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Route, RouteComponentProps } from "react-router-dom";
 import Home from "../Home/Home";
 import Profile from "../Profile/Profile";
 import Notes from "../Notes/Notes";
 
-const Dashboard = () => {
+interface IProps extends RouteComponentProps {}
+
+const Dashboard: React.FC<IProps> = ({ history }) => {
 	return (
 		<Wrapper>
 			<HashRouter>
-				<NavigationBar />
+				<NavigationBar topLevelHistory={history} />
 				<ContentWrapper>
 					<Switch>
 						<Route path="/home">
-							<Home />
+							<Home topLevelHistory={history} />
 						</Route>
 						<Route path="/profile">
-							<Profile />
+							<Profile topLevelHistory={history} />
 						</Route>
 						<Route path="/notes">
-							<Notes />
+							<Notes topLevelHistory={history} />
 						</Route>
 					</Switch>
 				</ContentWrapper>

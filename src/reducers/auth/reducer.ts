@@ -1,4 +1,4 @@
-import { SAVE_USER_UUID } from "../../actions/types";
+import { SAVE_USER_UUID, CLEAR_AUTH } from "../../actions/types";
 import { ActionWithPayload } from "../../typings/redux";
 
 const INITIAL_STATE = {
@@ -9,6 +9,8 @@ const reducer = (state: typeof INITIAL_STATE = INITIAL_STATE, action: ActionWith
 	switch (action.type) {
 		case SAVE_USER_UUID:
 			return { ...state, firestoreID: action.payload };
+		case CLEAR_AUTH:
+			return INITIAL_STATE;
 		default:
 			return state;
 	}
