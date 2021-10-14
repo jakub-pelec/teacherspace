@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { ThemeContext } from "styled-components";
 import HomeIcon from "@mui/icons-material/Home";
 import { NavBar, Logo, OptionWrapper, NavOption, Label, ExpandButton } from "./Elements";
+import { Link } from "react-router-dom";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -15,28 +16,28 @@ const NavigationBar = () => {
 			<Logo />
 			<OptionWrapper>
 				<NavOption>
-					<a href="/dashboard">
+					<Link to="/dashboard">
 						<HomeIcon fontSize="large" htmlColor={theme.font} />
-					</a>
+					</Link>
 					<Label expanded={expanded}>Home</Label>
 				</NavOption>
 				<NavOption>
-					<a href="/dashboard">
+					<Link to="/dashboard">
 						<AssignmentIndIcon fontSize="large" htmlColor={theme.font} />
-					</a>
+					</Link>
 					<Label expanded={expanded}>Profile</Label>
 				</NavOption>
 				<NavOption>
-					<a href="/dashboard">
+					<Link to="/dashboard">
 						<NoteAltIcon fontSize="large" htmlColor={theme.font} />
-					</a>
+					</Link>
 					<Label expanded={expanded}>Notes</Label>
 				</NavOption>
 			</OptionWrapper>
 			<NavOption>
-				<a href="/dashboard">
+				<Link to="/dashboard">
 					<ExitToAppIcon fontSize="large" htmlColor={theme.font} />
-				</a>
+				</Link>
 				<Label expanded={expanded}>Logout</Label>
 			</NavOption>
 			<ExpandButton expanded={expanded} onClick={() => setExpanded((prevState) => !prevState)}>

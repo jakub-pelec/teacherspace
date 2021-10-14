@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Button } from "@material-ui/core";
 
 interface ExpandProps {
 	expanded?: boolean;
@@ -38,24 +39,27 @@ export const Logo = styled.div`
 
 export const OptionWrapper = styled.div``;
 
-export const NavOption = styled.div`
-	display: flex;
-	align-items: center;
-	border-radius: 1em;
-	padding: 0.5em;
-	&:hover {
-		background-color: ${({ theme }) => theme.background};
-	}
-	a {
+export const NavOption = styled(Button)`
+	&& {
 		display: flex;
-		justify-content: center;
 		align-items: center;
-	}
-	&:not(:last-child) {
-		margin-bottom: 2em;
-	}
-	&:last-child {
-		margin-bottom: 1em;
+		border-radius: 1em;
+		text-transform: none;
+		min-width: 0px;
+		&:hover {
+			background-color: ${({ theme }) => theme.background};
+		}
+		a {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		&:not(:last-child) {
+			margin-bottom: 2em;
+		}
+		&:last-child {
+			margin-bottom: 1em;
+		}
 	}
 `;
 
