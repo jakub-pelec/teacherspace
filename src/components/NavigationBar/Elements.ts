@@ -1,9 +1,14 @@
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 interface ExpandProps {
 	expanded?: boolean;
 }
+
+export const StyledLink = styled(Link)`
+	text-decoration: none;
+`;
 
 export const Label = styled.div<ExpandProps>`
 	display: ${({ expanded }) => (expanded ? "block" : "none")};
