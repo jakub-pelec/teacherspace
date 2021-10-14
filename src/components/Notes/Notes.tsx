@@ -1,6 +1,11 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
-const Notes = () => {
+interface IProps {
+	topLevelHistory: ReturnType<typeof useHistory>;
+}
+
+const Notes: React.FC<IProps> = ({ topLevelHistory }) => {
 	return (
 		<div>
 			<h1>Notes</h1>

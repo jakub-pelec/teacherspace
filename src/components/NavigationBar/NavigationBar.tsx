@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import { logout } from "../../actions/actions";
+import { Button } from "../../shared/components/Button/Button";
 import { useTheme } from "styled-components";
 import HomeIcon from "@mui/icons-material/Home";
 import { NavBar, Logo, OptionWrapper, NavOption, Label, ExpandButton, StyledLink } from "./Elements";
@@ -7,10 +11,28 @@ import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { useSnackbar } from "notistack";
 
-const NavigationBar = () => {
+interface IProps {
+	logoutProps: any;
+	topLevelHistory: ReturnType<typeof useHistory>;
+}
+
+const NavigationBar: React.FC<IProps> = ({ logoutProps, topLevelHistory }) => {
 	const [expanded, setExpanded] = useState<boolean>(false);
+	const { enqueueSnackbar } = useSnackbar();
 	const theme: any = useTheme();
+	const handleLogout = () => {
+		const successCallback = () => {
+			enqueueSnackbar("Bye bye!", { variant: "success" });
+			topLevelHistory.push("/");
+		};
+		const errorCallback = () => {
+			enqueueSnackbar("Something went wrong. Please try again!", { variant: "error" });
+		};
+		const finalCallback = () => {};
+		logoutProps({ successCallback, errorCallback, finalCallback });
+	};
 	return (
 		<NavBar expanded={expanded}>
 			<Logo />
@@ -42,9 +64,9 @@ const NavigationBar = () => {
 				</StyledLink>
 			</OptionWrapper>
 			<NavOption>
-				<Link to="/dashboard">
+				<Button onClick={() => handleLogout()}>
 					<ExitToAppIcon fontSize="large" htmlColor={theme.background} />
-				</Link>
+				</Button>
 				<Label expanded={expanded}>Logout</Label>
 			</NavOption>
 			<ExpandButton expanded={expanded} onClick={() => setExpanded((prevState) => !prevState)}>
@@ -54,4 +76,4 @@ const NavigationBar = () => {
 	);
 };
 
-export default NavigationBar;
+export default connect(null, { logoutProps: logout })(NavigationBar);
