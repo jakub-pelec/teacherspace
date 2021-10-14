@@ -1,7 +1,7 @@
 import React from "react";
 import NavigationBar from "../NavigationBar/NavigationBar";
 import styled from "styled-components";
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Route, Redirect } from "react-router-dom";
 import Home from "../Home/Home";
 import Profile from "../Profile/Profile";
 import Notes from "../Notes/Notes";
@@ -13,6 +13,9 @@ const Dashboard = () => {
 				<NavigationBar />
 				<ContentWrapper>
 					<Switch>
+						<Route exact path="/">
+							<Redirect to="/home" />3
+						</Route>
 						<Route path="/home">
 							<Home />
 						</Route>
@@ -33,6 +36,7 @@ const Wrapper = styled.div`
 	display: flex;
 	width: 100%;
 	height: 100vh;
+	background-color: ${({ theme }) => theme.bluredBg};
 `;
 
 const ContentWrapper = styled.div`

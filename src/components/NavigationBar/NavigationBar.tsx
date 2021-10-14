@@ -23,7 +23,6 @@ const NavigationBar = () => {
 						<Label expanded={expanded}>Home</Label>
 					</NavOption>
 				</StyledLink>
-
 				<StyledLink to="/profile">
 					<NavOption>
 						<Link to="/profile">
