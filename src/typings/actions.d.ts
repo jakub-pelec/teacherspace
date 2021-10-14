@@ -13,13 +13,18 @@ interface PersonalDetails {
 	email: string;
 }
 
+interface SignupData extends PersonalDetails {
+	password: string
+}
+
 interface PromiseCallback {
 	successCallback: () => void;
 	errorCallback: () => void;
 	finalCallback: () => void;
 }
-interface RegisterParams extends PersonalDetails, EnqueueSnackbar, PromiseCallback {
-	password: string;
+interface RegisterParams extends PromiseCallback {
+	classes: Class[],
+	subjects: Subject[]
 }
 
 interface LoginParams extends EnqueueSnackbar, PromiseCallback {
@@ -29,4 +34,20 @@ interface LoginParams extends EnqueueSnackbar, PromiseCallback {
 
 interface Response<T> extends ResponseType {
 	data: T;
+}
+
+interface Subject {
+	value: string,
+	label: string
+}
+
+interface Class {
+	value: string,
+	label: string
+}
+
+interface Option {
+	label: string;
+	value: string;
+	__isNew__?: boolean
 }

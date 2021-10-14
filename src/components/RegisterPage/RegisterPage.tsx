@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,16 +7,16 @@ import { Button } from "../../shared/components/Button/Button";
 import { Wrapper, FormField, FormContainer, Title, FullNameContainer, ContentColumnRight, ContentColumnLeft, Background } from "./Elements";
 import { registerSchema } from "../../schemas/registerSchema";
 import { useSnackbar } from "notistack";
-import { register } from "../../actions/actions";
+import { saveSignupData } from "../../actions/actions";
 import { useTranslation } from "react-i18next";
-import { CircularProgress } from "@material-ui/core";
+import { useHistory } from "react-router";
 
 interface IProps {
-	registerProps: any;
+	saveSignupDataProps: any;
 }
 
-const RegisterPage: React.FC<IProps> = ({ registerProps }) => {
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+const RegisterPage: React.FC<IProps> = ({ saveSignupDataProps }) => {
+	const { push } = useHistory();
 	const { t } = useTranslation();
 	const { enqueueSnackbar } = useSnackbar();
 	const {
@@ -24,19 +24,12 @@ const RegisterPage: React.FC<IProps> = ({ registerProps }) => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm({ resolver: yupResolver(registerSchema) });
+
 	const submitHandler = (formData: any) => {
-		const { firstName, lastName, email, password } = formData;
-		setIsLoading(true);
-		const succesCallback = () => {
-			enqueueSnackbar("Account created succesfully!", { variant: "success" });
-		};
-		const errorCallback = () => {
-			enqueueSnackbar("Something went wrong! Please try again.", { variant: "error" });
-		};
-		const finalCallback = () => {
-			setIsLoading(false);
-		};
-		registerProps({ firstName, lastName, email, password, succesCallback, errorCallback, finalCallback });
+		const { firstName, lastName, password, email } = formData;
+		saveSignupDataProps({ firstName, lastName, password, email });
+		enqueueSnackbar("Just one more step!", { variant: "success" });
+		push("/second-stage");
 	};
 	return (
 		<Wrapper>
@@ -73,17 +66,15 @@ const RegisterPage: React.FC<IProps> = ({ registerProps }) => {
 								errorMessage={errors.confirmPassword?.message}
 							/>
 						</FormField>
-						<Button type="submit" disabled={isLoading}>
-							{isLoading ? <CircularProgress size={23} /> : "Login"}
-						</Button>
+						<Button type="submit">Continue</Button>
 					</form>
 				</ContentColumnLeft>
-				<ContentColumnRight><Background /></ContentColumnRight>
+				<ContentColumnRight>
+					<Background />
+				</ContentColumnRight>
 			</FormContainer>
 		</Wrapper>
 	);
 };
 
-const mapStateToProps = (state: any) => ({});
-
-export default connect(mapStateToProps, { registerProps: register })(RegisterPage);
+export default connect(null, { saveSignupDataProps: saveSignupData })(RegisterPage);
