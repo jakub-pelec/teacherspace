@@ -5,12 +5,18 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 import Dashboard from "../Dashboard/Dashboard";
 import SignupSecondStage from "../SignupSecondStage/SignupSecondStage";
 import LandingPage from "../LandingPage/LandingPage";
+import { subscribeToAuthUser } from "../../actions/actions";
+import { useEffect } from "react";
 
 interface IProps {
 	isLoggedIn: boolean;
+	subscribeToAuthUserProps: any;
 }
 
-const Router: React.FC<IProps> = ({ isLoggedIn }) => {
+const Router: React.FC<IProps> = ({ isLoggedIn, subscribeToAuthUserProps }) => {
+	useEffect(() => {
+		subscribeToAuthUserProps();
+	}, []);
 	return (
 		<BrowserRouter>
 			<Switch>
@@ -28,4 +34,4 @@ const mapStateToProps = (state: any) => ({
 	isLoggedIn: !!state.auth.firestoreID,
 });
 
-export default connect(mapStateToProps)(Router);
+export default connect(mapStateToProps, { subscribeToAuthUserProps: subscribeToAuthUser })(Router);
