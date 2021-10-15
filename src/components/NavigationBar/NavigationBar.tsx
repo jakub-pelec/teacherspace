@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/actions";
-import { Button } from "../../shared/components/Button/Button";
 import { useTheme } from "styled-components";
 import HomeIcon from "@mui/icons-material/Home";
-import { NavBar, Logo, OptionWrapper, NavOption, Label, ExpandButton, StyledLink } from "./Elements";
+import { NavBar, Logo, OptionWrapper, NavOption, Label, ExpandButton, StyledLink, LogOut } from "./Elements";
 import { Link } from "react-router-dom";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
@@ -63,9 +62,9 @@ const NavigationBar: React.FC<IProps> = ({ logoutProps, topLevelHistory }) => {
 				</StyledLink>
 			</OptionWrapper>
 			<NavOption>
-				<Button onClick={() => handleLogout()}>
+				<LogOut role="button" onClick={() => handleLogout()}>
 					<ExitToAppIcon fontSize="large" htmlColor={theme.background} />
-				</Button>
+				</LogOut>
 				<Label expanded={expanded}>Logout</Label>
 			</NavOption>
 			<ExpandButton expanded={expanded} onClick={() => setExpanded((prevState) => !prevState)}>

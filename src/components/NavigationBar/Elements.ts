@@ -70,6 +70,12 @@ export const NavOption = styled(Button)`
 	}
 `;
 
+export const LogOut = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
 export const ExpandButton = styled.div<ExpandProps>`
 	display: grid;
 	place-items: center;
