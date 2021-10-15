@@ -1,4 +1,4 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
@@ -24,7 +24,8 @@ const Router: React.FC<IProps> = ({ isLoggedIn, subscribeToAuthUserProps }) => {
 				<Route exact path="/login" component={LoginPage} />
 				<Route exact path="/register" component={RegisterPage} />
 				<Route exact path="/second-stage" component={SignupSecondStage} />
-				{isLoggedIn && <Route exact path="/dashboard" component={Dashboard} />}
+				{/* @ts-ignore */}
+				<Route exact path="/dashboard" render={() => isLoggedIn ? <Dashboard /> : <Redirect to='/' />} />
 			</Switch>
 		</BrowserRouter>
 	);
