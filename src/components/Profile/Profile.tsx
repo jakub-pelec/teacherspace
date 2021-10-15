@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { doc, getDoc } from "firebase/firestore";
 import { firestore } from "../../config/firebase";
@@ -6,9 +7,10 @@ import { Wrapper, Logo, LogoWrapper, Grid, InfoSection, Information, Label } fro
 
 interface IProps {
 	auth: any;
+	topLevelHistory: ReturnType<typeof useHistory>;
 }
 
-const Profile: React.FC<IProps> = ({ auth }) => {
+const Profile: React.FC<IProps> = ({ auth, topLevelHistory }) => {
 	const [userInfo, setUserInfo] = useState<any>({});
 	const { firestoreID } = auth;
 

@@ -1,4 +1,4 @@
-import { SAVE_SIGNUP_DATA } from "../../actions/types";
+import { SAVE_SIGNUP_DATA, CLEAR_SIGNUP } from "../../actions/types";
 import { ActionWithPayload } from "../../typings/redux";
 
 const INITIAL_STATE = {
@@ -12,6 +12,8 @@ const reducer = (state: typeof INITIAL_STATE = INITIAL_STATE, action: ActionWith
 	switch (action.type) {
 		case SAVE_SIGNUP_DATA:
 			return { ...state, ...action.payload };
+        case CLEAR_SIGNUP:
+            return INITIAL_STATE;
 		default:
 			return state;
 	}
