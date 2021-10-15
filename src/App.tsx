@@ -8,7 +8,6 @@ import reducer from "./reducers/rootReducer";
 import Router from "./components/Router/Router";
 import ThemeProvider from "./providers/ThemePovider";
 import { SnackbarProvider } from "notistack";
-import { subscribeToAuthUser } from './actions/actions';
 import "./providers/I18nProvider";
 
 import GlobalFonts from "./fonts/font";
@@ -16,9 +15,6 @@ import GlobalFonts from "./fonts/font";
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 function App() {
-	useEffect(() => {
-		subscribeToAuthUser();
-	}, [])
 	return (
 		<ReduxProvider store={store}>
 			<>

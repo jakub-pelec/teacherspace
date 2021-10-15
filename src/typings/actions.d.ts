@@ -51,3 +51,18 @@ interface Option {
 	value: string;
 	__isNew__?: boolean
 }
+
+interface Note {
+	content: string;
+	title: string;
+	classes: Class[];
+	subjects: Subject[];
+}
+
+interface UserData {
+	firstName: string;
+	lastName: string;
+	email: string;
+	classes: Class[];
+	subjects: Subject[];
+}

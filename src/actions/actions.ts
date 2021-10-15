@@ -1,7 +1,17 @@
-import { CLEAR_AUTH, CLEAR_SIGNUP, CLEAR_THEME, SAVE_SIGNUP_DATA, SAVE_USER_UUID, SWITCH_THEME } from "./types";
+import {
+	CLEAR_AUTH,
+	CLEAR_FETCH,
+	CLEAR_SIGNUP,
+	CLEAR_THEME,
+	SAVE_NOTES,
+	SAVE_SIGNUP_DATA,
+	SAVE_USER_DATA,
+	SAVE_USER_UUID,
+	SWITCH_THEME,
+} from "./types";
 import { auth, apiPath, apiRoutes, firestore } from "../config/firebase";
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "@firebase/auth";
-import { collection, onSnapshot } from "@firebase/firestore";
+import { collection, onSnapshot, doc } from "firebase/firestore";
 import { Dispatch } from "redux";
 import axios from "axios";
 
@@ -66,17 +76,24 @@ export const saveSignupData = (signupData: SignupData) => ({
 	payload: signupData,
 });
 
-export const subscribeToAuthUser = () =>
+export const subscribeToAuthUser = () => async (dispatch: Dispatch) =>
 	onAuthStateChanged(auth, async (user) => {
 		if (user) {
 			const {
 				claims: { firestoreID },
 			} = await user.getIdTokenResult();
 			const userNotesRef = collection(firestore, `users/${firestoreID}/notes`);
+			const userDocRef = doc(firestore, `users/${firestoreID}`);
+			onSnapshot(userDocRef, (doc) => {
+				const userData = doc.data();
+				dispatch({ type: SAVE_USER_DATA, payload: userData });
+			});
 			onSnapshot(userNotesRef, (snapshot) => {
+				const notes: Note[] = [];
 				snapshot.docs.forEach((doc) => {
-					/*TODO*/
+					notes.push(doc.data() as Note);
 				});
+				dispatch({ type: SAVE_NOTES, payload: notes });
 			});
 		}
 	});
@@ -85,4 +102,5 @@ const clearStore = (dispatch: Dispatch) => {
 	dispatch({ type: CLEAR_THEME });
 	dispatch({ type: CLEAR_AUTH });
 	dispatch({ type: CLEAR_SIGNUP });
+	dispatch({ type: CLEAR_FETCH });
 };
