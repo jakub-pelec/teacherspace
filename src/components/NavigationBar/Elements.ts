@@ -28,7 +28,7 @@ export const NavBar = styled.nav<ExpandProps>`
 	margin-top: 0.5em;
 	margin-left: 0.5em;
 	padding-top: 1em;
-	padding-left: 1.3em;
+	padding-left: 1.1em;
 	align-items: flex-start;
 	justify-content: space-between;
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
