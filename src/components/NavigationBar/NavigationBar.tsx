@@ -45,7 +45,6 @@ const NavigationBar: React.FC<IProps> = ({ logoutProps, topLevelHistory }) => {
 						<Label expanded={expanded}>Home</Label>
 					</NavOption>
 				</StyledLink>
-
 				<StyledLink to="/profile">
 					<NavOption>
 						<Link to="/profile">

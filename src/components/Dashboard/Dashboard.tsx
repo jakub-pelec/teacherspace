@@ -1,7 +1,7 @@
 import React from "react";
 import NavigationBar from "../NavigationBar/NavigationBar";
 import styled from "styled-components";
-import { HashRouter, Switch, Route, RouteComponentProps } from "react-router-dom";
+import { HashRouter, Switch, Route, Redirect, RouteComponentProps } from "react-router-dom";
 import Home from "../Home/Home";
 import Profile from "../Profile/Profile";
 import Notes from "../Notes/Notes";
@@ -15,6 +15,9 @@ const Dashboard: React.FC<IProps> = ({ history }) => {
 				<NavigationBar topLevelHistory={history} />
 				<ContentWrapper>
 					<Switch>
+						<Route exact path="/">
+							<Redirect to="/home" />3
+						</Route>
 						<Route path="/home">
 							<Home topLevelHistory={history} />
 						</Route>
@@ -35,6 +38,7 @@ const Wrapper = styled.div`
 	display: flex;
 	width: 100%;
 	height: 100vh;
+	background-color: ${({ theme }) => theme.bluredBg};
 `;
 
 const ContentWrapper = styled.div`
