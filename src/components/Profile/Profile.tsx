@@ -13,12 +13,11 @@ const Profile: React.FC<IProps> = ({ auth }) => {
 	const { firestoreID } = auth;
 
 	useEffect(() => {
-		const fetchData = async () => {
-			const docRef = doc(firestore, "users", firestoreID);
-			const docSnap = await getDoc(docRef);
-			setUserInfo(docSnap.data());
+		const fetchUserData = async () => {
+			const userData = (await getDoc(doc(firestore, "users", firestoreID))).data();
+			setUserInfo(userData);
 		};
-		fetchData();
+		fetchUserData();
 	}, [setUserInfo, firestoreID]);
 
 	return (
