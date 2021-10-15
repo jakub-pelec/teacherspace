@@ -16,7 +16,7 @@ interface IProps {
 const Router: React.FC<IProps> = ({ isLoggedIn, subscribeToAuthUserProps }) => {
 	useEffect(() => {
 		subscribeToAuthUserProps();
-	}, []);
+	}, [subscribeToAuthUserProps]);
 	return (
 		<BrowserRouter>
 			<Switch>

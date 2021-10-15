@@ -26,7 +26,7 @@ export const register =
 	async (dispatch: Dispatch, getState: any) => {
 		const { firstName, lastName, email, password } = getState().signup;
 		try {
-			const userDocument = { firstName, lastName, email, password, subjects, classes };
+			const userDocument = { firstName, lastName, email, password, subjects: subjects || [], classes: classes || [] };
 			const resp: Response<RegisterResponseData> = await axios.post(`${apiPath}${apiRoutes.createAccount}`, userDocument);
 			const { firestoreID } = resp.data;
 			dispatch({ type: SAVE_USER_UUID, payload: firestoreID });

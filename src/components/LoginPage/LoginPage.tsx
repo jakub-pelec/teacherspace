@@ -8,7 +8,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../schemas/loginSchema";
 import { login } from "../../actions/actions";
 import FieldWithLabel from "../../shared/form-components/FieldWithLabel/FieldWithLabel";
-import { useTranslation } from "react-i18next";
 import { CircularProgress } from "@material-ui/core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { PageWrapper, ContentColumnRight, ContentColumnLeft, FormField, Title, ColumnWrapper, Background } from "./Elements";
@@ -22,7 +21,6 @@ interface IProps extends RouteComponentProps {
 const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps, history }) => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const { enqueueSnackbar } = useSnackbar();
-	const { t } = useTranslation();
 	const {
 		control,
 		handleSubmit,
