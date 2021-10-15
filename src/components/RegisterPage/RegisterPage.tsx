@@ -8,7 +8,6 @@ import { Wrapper, FormField, FormContainer, Title, FullNameContainer, ContentCol
 import { registerSchema } from "../../schemas/registerSchema";
 import { useSnackbar } from "notistack";
 import { saveSignupData } from "../../actions/actions";
-import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router";
 
 interface IProps {
@@ -17,7 +16,6 @@ interface IProps {
 
 const RegisterPage: React.FC<IProps> = ({ saveSignupDataProps }) => {
 	const { push } = useHistory();
-	const { t } = useTranslation();
 	const { enqueueSnackbar } = useSnackbar();
 	const {
 		control,

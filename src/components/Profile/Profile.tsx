@@ -1,60 +1,54 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { doc, getDoc } from "firebase/firestore";
-import { firestore } from "../../config/firebase";
-import { Wrapper, Logo, LogoWrapper, Grid, InfoSection, Information, Label } from "./Elements";
+import { Wrapper, Logo, LogoWrapper, Grid, InfoSection, Information, Label, ListElement } from "./Elements";
 
 interface IProps {
-	auth: any;
 	topLevelHistory: ReturnType<typeof useHistory>;
+	userData: UserData;
 }
 
-const Profile: React.FC<IProps> = ({ auth, topLevelHistory }) => {
-	const [userInfo, setUserInfo] = useState<any>({});
-	const { firestoreID } = auth;
-
-	useEffect(() => {
-		const fetchUserData = async () => {
-			const userData = (await getDoc(doc(firestore, "users", firestoreID))).data();
-			setUserInfo(userData);
-		};
-		fetchUserData();
-	}, [setUserInfo, firestoreID]);
-
+const Profile: React.FC<IProps> = ({ userData: { firstName, lastName, email, classes, subjects }, topLevelHistory }) => {
 	return (
 		<Wrapper>
 			<LogoWrapper>
-				<Logo></Logo>
+				<Logo>
+					{firstName[0]}
+					{lastName[0]}
+				</Logo>
 			</LogoWrapper>
 			<Grid>
 				<InfoSection>
-					<Label>Name</Label>
-					<Information>{`${userInfo.firstName} ${userInfo.lastName}`}</Information>
+					<Label>Name:</Label>
+					<Information>{`${firstName} ${lastName}`}</Information>
 				</InfoSection>
 
 				<InfoSection>
-					<Label>Email</Label>
-					<Information>{userInfo.email}</Information>
+					<Label>Email:</Label>
+					<Information>{email}</Information>
 				</InfoSection>
 				<InfoSection>
-					<Label>Classes</Label>
+					<Label>Classes:</Label>
 					<Information>
-						{userInfo.classes
-							? userInfo.classes.map((el: any) => {
-									return <div>{el.label}</div>;
-							  })
-							: ""}
+						{classes.length ? (
+							classes.map((el: any) => {
+								return <ListElement>{el.label}</ListElement>;
+							})
+						) : (
+							<ListElement>No classes to display. Please add at least 1 class.</ListElement>
+						)}
 					</Information>
 				</InfoSection>
 				<InfoSection>
-					<Label>Subjects</Label>
+					<Label>Subjects:</Label>
 					<Information>
-						{userInfo.subjects
-							? userInfo.subjects.map((el: any) => {
-									return <div>{el.label}</div>;
-							  })
-							: ""}
+						{subjects.length ? (
+							subjects.map((el: any) => {
+								return <ListElement>{el.label}</ListElement>;
+							})
+						) : (
+							<div>No subjects to display. Please add at least 1 subject.</div>
+						)}
 					</Information>
 				</InfoSection>
 			</Grid>
@@ -62,8 +56,8 @@ const Profile: React.FC<IProps> = ({ auth, topLevelHistory }) => {
 	);
 };
 
-const mapStateToProps = (state: any) => {
-	return { auth: state.auth };
-};
+const mapStateToProps = (state: any) => ({
+	userData: state.fetch.userData,
+});
 
-export default connect(mapStateToProps, {})(Profile);
+export default connect(mapStateToProps)(Profile);
