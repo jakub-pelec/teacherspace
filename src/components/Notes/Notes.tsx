@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 
 interface IProps {
 	topLevelHistory: ReturnType<typeof useHistory>;
@@ -13,4 +14,6 @@ const Notes: React.FC<IProps> = ({ topLevelHistory }) => {
 	);
 };
 
-export default Notes;
+const mapStateToProps = () => {};
+
+export default connect(mapStateToProps)(Notes);
