@@ -11,7 +11,7 @@ import {
 } from "./types";
 import { auth, apiPath, apiRoutes, firestore } from "../config/firebase";
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "@firebase/auth";
-import { collection, onSnapshot, doc } from "firebase/firestore";
+import { collection, onSnapshot, doc, addDoc } from "firebase/firestore";
 import { Dispatch } from "redux";
 import axios from "axios";
 
@@ -89,14 +89,19 @@ export const subscribeToAuthUser = () => async (dispatch: Dispatch) =>
 				dispatch({ type: SAVE_USER_DATA, payload: userData });
 			});
 			onSnapshot(userNotesRef, (snapshot) => {
-				const notes: Note[] = [];
+				const notes: FirestoreDocumentDataWithId<Note>[] = [];
 				snapshot.docs.forEach((doc) => {
-					notes.push(doc.data() as Note);
+					notes.push({ ...doc.data() as Note, id: doc.id });
 				});
 				dispatch({ type: SAVE_NOTES, payload: notes });
 			});
 		}
 	});
+
+export const addNote = async (note: any, firestoreID: string) => {
+	const noteRef = collection(firestore, "users", firestoreID, "notes");
+	await addDoc(noteRef, note);
+};
 
 const clearStore = (dispatch: Dispatch) => {
 	dispatch({ type: CLEAR_THEME });

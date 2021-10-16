@@ -66,3 +66,7 @@ interface UserData {
 	classes: Class[];
 	subjects: Subject[];
 }
+
+type FirestoreDocumentDataWithId<T> = T & {
+	id: string
+}
