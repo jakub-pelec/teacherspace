@@ -1,10 +1,10 @@
 import React from "react";
-import { Controller } from "react-hook-form";
+import { Control, Controller } from "react-hook-form";
 import { TextField } from "../../components/TextInput/TextInput";
 import { StandardTextFieldProps } from "@material-ui/core";
 
 interface IProps {
-	control: any;
+	control: Control;
 	name: string;
 	errored: boolean;
 	inputProps?: StandardTextFieldProps;

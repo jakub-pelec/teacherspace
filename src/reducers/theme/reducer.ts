@@ -1,7 +1,7 @@
 import { SWITCH_THEME, CLEAR_THEME } from "../../actions/types";
 import { ActionWithPayload } from "../../typings/redux";
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
 	color: "light",
 };
 

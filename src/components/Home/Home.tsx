@@ -1,5 +1,6 @@
 import React from "react";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 interface IProps {
 	topLevelHistory: ReturnType<typeof useHistory>;
@@ -7,9 +8,14 @@ interface IProps {
 
 const Home: React.FC<IProps> = ({ topLevelHistory }) => {
 	return (
-		<div>
-			<h1>Home</h1>
-		</div>
+		<>
+			<Helmet>
+				<title>Teacherspace - Home</title>
+			</Helmet>
+			<div>
+				<h1>Home</h1>
+			</div>
+		</>
 	);
 };
 

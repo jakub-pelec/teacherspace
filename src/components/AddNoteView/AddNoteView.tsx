@@ -7,6 +7,7 @@ import { classOptions } from "../SignupSecondStage/options";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
 import { addNote } from "../../actions/actions";
+import { AppState } from "../../typings/redux";
 
 interface IProps {
 	addNoteView: boolean;
@@ -17,11 +18,8 @@ interface IProps {
 const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, firestoreID }) => {
 	const { control, handleSubmit } = useForm();
 	const submitHandler = async (data: any) => {
-		const classes = data.classes.map((el: any) => {
-			return { label: el.label, value: el.value };
-		});
+		const classes = data.classes.map(({ label, value }: Option) => ({ label, value }));
 		const note = { ...data, dateModified: Date.now(), classes };
-		console.log(note);
 		addNote(note, firestoreID);
 		setAddNoteView((prevState: boolean) => !prevState);
 	};
@@ -53,7 +51,7 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, firestoreI
 		</AddNoteViewStyling>
 	);
 };
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: AppState) => {
 	return {
 		firestoreID: state.auth.firestoreID,
 	};

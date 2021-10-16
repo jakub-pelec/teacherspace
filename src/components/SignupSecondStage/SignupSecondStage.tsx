@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 
 import { Wrapper, FormField, FormContainer, Title, ContentColumnRight, ContentColumnLeft, Background, Form } from "./Elements";
 import { CircularProgress } from "@material-ui/core";
+import { Helmet } from "react-helmet";
 
 interface IProps extends RouteComponentProps {
 	registerProps: any;
@@ -41,39 +42,44 @@ const SignupSecondStage: React.FC<IProps> = ({ registerProps }) => {
 		registerProps({ classes, subjects, successCallback, errorCallback, finalCallback });
 	};
 	return (
-		<Wrapper>
-			<FormContainer>
-				<ContentColumnRight>
-					<Background />
-				</ContentColumnRight>
-				<ContentColumnLeft>
-					<Title>Let's get to know each other!</Title>
-					<Form onSubmit={handleSubmit(submitHandler)}>
-						<FormField>
-							<FormSelectField
-								options={subjectOptions}
-								control={control}
-								name="subjects"
-								errored={errors.subject?.message}
-								placeholder="Subject"
-							/>
-						</FormField>
-						<FormField>
-							<FormSelectField
-								options={classOptions}
-								control={control}
-								name="classes"
-								errored={errors.class?.message}
-								placeholder="Class"
-							/>
-						</FormField>
-						<Button type="submit" disabled={loading}>
-							{loading ? <CircularProgress size={23} /> : "Register"}
-						</Button>
-					</Form>
-				</ContentColumnLeft>
-			</FormContainer>
-		</Wrapper>
+		<>
+			<Helmet>
+				<title>Teacherspace - Create account</title>
+			</Helmet>
+			<Wrapper>
+				<FormContainer>
+					<ContentColumnRight>
+						<Background />
+					</ContentColumnRight>
+					<ContentColumnLeft>
+						<Title>Let's get to know each other!</Title>
+						<Form onSubmit={handleSubmit(submitHandler)}>
+							<FormField>
+								<FormSelectField
+									options={subjectOptions}
+									control={control}
+									name="subjects"
+									errored={errors.subject?.message}
+									placeholder="Subject"
+								/>
+							</FormField>
+							<FormField>
+								<FormSelectField
+									options={classOptions}
+									control={control}
+									name="classes"
+									errored={errors.class?.message}
+									placeholder="Class"
+								/>
+							</FormField>
+							<Button type="submit" disabled={loading}>
+								{loading ? <CircularProgress size={23} /> : "Register"}
+							</Button>
+						</Form>
+					</ContentColumnLeft>
+				</FormContainer>
+			</Wrapper>
+		</>
 	);
 };
 

@@ -1,7 +1,7 @@
 import { SAVE_USER_UUID, CLEAR_AUTH } from "../../actions/types";
 import { ActionWithPayload } from "../../typings/redux";
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
 	firestoreID: null,
 };
 

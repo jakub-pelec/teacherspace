@@ -1,10 +1,10 @@
 import React from "react";
-import { Controller } from "react-hook-form";
+import { Control, Controller } from "react-hook-form";
 import CreatableSelect from "../../components/CreatableSelect/CreatableSelect";
 import * as Select from 'react-select/creatable';
 
 interface IProps extends Select.CreatableProps<any, any, any> {
-	control: any;
+	control: Control;
 	name: string;
 	errored: boolean;
 	options: Option[];

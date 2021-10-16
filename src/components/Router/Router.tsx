@@ -7,6 +7,7 @@ import SignupSecondStage from "../SignupSecondStage/SignupSecondStage";
 import LandingPage from "../LandingPage/LandingPage";
 import { subscribeToAuthUser } from "../../actions/actions";
 import { useEffect } from "react";
+import { AppState } from "../../typings/redux";
 
 interface IProps {
 	isLoggedIn: boolean;
@@ -24,14 +25,13 @@ const Router: React.FC<IProps> = ({ isLoggedIn, subscribeToAuthUserProps }) => {
 				<Route exact path="/login" component={LoginPage} />
 				<Route exact path="/register" component={RegisterPage} />
 				<Route exact path="/second-stage" component={SignupSecondStage} />
-				{/* @ts-ignore */}
-				<Route exact path="/dashboard" render={() => isLoggedIn ? <Dashboard /> : <Redirect to='/' />} />
+				<Route exact path="/dashboard" render={(props) => isLoggedIn ? <Dashboard {...props} /> : <Redirect to='/' />} />
 			</Switch>
 		</BrowserRouter>
 	);
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppState) => ({
 	isLoggedIn: !!state.auth.firestoreID,
 });
 

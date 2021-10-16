@@ -1,7 +1,7 @@
 import { SAVE_SIGNUP_DATA, CLEAR_SIGNUP } from "../../actions/types";
 import { ActionWithPayload } from "../../typings/redux";
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
 	firstName: '',
     lastName: '',
     email: '',

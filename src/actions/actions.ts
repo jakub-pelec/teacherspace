@@ -14,6 +14,7 @@ import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "@fireba
 import { collection, onSnapshot, doc, addDoc } from "firebase/firestore";
 import { Dispatch } from "redux";
 import axios from "axios";
+import { AppState } from "../typings/redux";
 
 interface RegisterResponseData {
 	code: string;
@@ -23,7 +24,7 @@ interface RegisterResponseData {
 
 export const register =
 	({ subjects, classes, successCallback, errorCallback, finalCallback }: RegisterParams) =>
-	async (dispatch: Dispatch, getState: any) => {
+	async (dispatch: Dispatch, getState: () => AppState) => {
 		const { firstName, lastName, email, password } = getState().signup;
 		try {
 			const userDocument = { firstName, lastName, email, password, subjects: subjects || [], classes: classes || [] };
@@ -55,7 +56,7 @@ export const login =
 
 export const logout =
 	({ successCallback, errorCallback, finalCallback }: PromiseCallback) =>
-	async (dispatch: Dispatch, getState: any) => {
+	async (dispatch: Dispatch) => {
 		try {
 			await signOut(auth);
 			clearStore(dispatch);
@@ -98,7 +99,7 @@ export const subscribeToAuthUser = () => async (dispatch: Dispatch) =>
 		}
 	});
 
-export const addNote = async (note: any, firestoreID: string) => {
+export const addNote = async (note: Note, firestoreID: string) => {
 	const noteRef = collection(firestore, "users", firestoreID, "notes");
 	await addDoc(noteRef, note);
 };

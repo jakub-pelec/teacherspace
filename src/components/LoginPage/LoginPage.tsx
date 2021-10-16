@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { Button } from "../../shared/components/Button/Button";
 import { changeTheme } from "../../actions/actions";
@@ -11,6 +12,7 @@ import FieldWithLabel from "../../shared/form-components/FieldWithLabel/FieldWit
 import { CircularProgress } from "@material-ui/core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { PageWrapper, ContentColumnRight, ContentColumnLeft, FormField, Title, ColumnWrapper, Background } from "./Elements";
+import { AppState } from "../../typings/redux";
 
 interface IProps extends RouteComponentProps {
 	changeThemeProps: any;
@@ -42,46 +44,51 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps, hist
 		loginProps({ ...loginData, successCallback, errorCallback, finalCallback });
 	};
 	return (
-		<PageWrapper>
-			<ColumnWrapper>
-				<ContentColumnLeft>
-					<Background />
-				</ContentColumnLeft>
-				<ContentColumnRight>
-					<Title>Let's get started</Title>
-					<form onSubmit={handleSubmit(submitHandler)}>
-						<FormField>
-							<FieldWithLabel
-								name="email"
-								control={control}
-								defaultValue=""
-								label="Email address"
-								errorMessage={errors.email?.message}
-							/>
-						</FormField>
-						<FormField>
-							<FieldWithLabel
-								name="password"
-								control={control}
-								defaultValue=""
-								label="Password"
-								errorMessage={errors.password?.message}
-								inputProps={{ type: "password" }}
-							/>
-						</FormField>
-						<FormField>
-							<Button type="submit" disabled={isLoading}>
-								{isLoading ? <CircularProgress size={23} /> : "Login"}
-							</Button>
-						</FormField>
-					</form>
-				</ContentColumnRight>
-			</ColumnWrapper>
-		</PageWrapper>
+		<>
+			<Helmet>
+				<title>Teacherspace - Login</title>
+			</Helmet>
+			<PageWrapper>
+				<ColumnWrapper>
+					<ContentColumnLeft>
+						<Background />
+					</ContentColumnLeft>
+					<ContentColumnRight>
+						<Title>Let's get started</Title>
+						<form onSubmit={handleSubmit(submitHandler)}>
+							<FormField>
+								<FieldWithLabel
+									name="email"
+									control={control}
+									defaultValue=""
+									label="Email address"
+									errorMessage={errors.email?.message}
+								/>
+							</FormField>
+							<FormField>
+								<FieldWithLabel
+									name="password"
+									control={control}
+									defaultValue=""
+									label="Password"
+									errorMessage={errors.password?.message}
+									inputProps={{ type: "password" }}
+								/>
+							</FormField>
+							<FormField>
+								<Button type="submit" disabled={isLoading}>
+									{isLoading ? <CircularProgress size={23} /> : "Login"}
+								</Button>
+							</FormField>
+						</form>
+					</ContentColumnRight>
+				</ColumnWrapper>
+			</PageWrapper>
+		</>
 	);
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppState) => ({
 	theme: state.theme.theme,
 });
 

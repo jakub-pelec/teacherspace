@@ -1,11 +1,12 @@
 import React from "react";
 import FormTextField from "../FormTextField/FormTextField";
 import { StandardTextFieldProps } from "@material-ui/core";
+import { Control } from 'react-hook-form';
 
 import { Label, ErrorMessage, FieldWrapper } from './Elements';
 
 interface IProps {
-	control: any;
+	control: Control;
 	name: string;
 	inputProps?: StandardTextFieldProps;
 	defaultValue?: string;

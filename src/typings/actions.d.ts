@@ -56,7 +56,7 @@ interface Note {
 	content: string;
 	title: string;
 	classes: Class[];
-	subjects: Subject[];
+	subject: Subject;
 }
 
 interface UserData {

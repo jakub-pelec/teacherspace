@@ -6,7 +6,7 @@ interface State {
 	notes: Note[];
 }
 
-const INITIAL_STATE: State = {
+export const INITIAL_STATE: State = {
 	userData: {
 		firstName: "",
 		lastName: "",
