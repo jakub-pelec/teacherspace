@@ -89,9 +89,9 @@ export const subscribeToAuthUser = () => async (dispatch: Dispatch) =>
 				dispatch({ type: SAVE_USER_DATA, payload: userData });
 			});
 			onSnapshot(userNotesRef, (snapshot) => {
-				const notes: Note[] = [];
+				const notes: Merge<FirestoreID, Note>[] = [];
 				snapshot.docs.forEach((doc) => {
-					notes.push({ ...doc.data(), id: doc.id });
+					notes.push({ ...doc.data() as Note, id: doc.id });
 				});
 				dispatch({ type: SAVE_NOTES, payload: notes });
 			});
