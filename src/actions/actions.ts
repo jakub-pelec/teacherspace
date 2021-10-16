@@ -15,6 +15,7 @@ import { collection, onSnapshot, doc, addDoc } from "firebase/firestore";
 import { Dispatch } from "redux";
 import axios from "axios";
 import { AppState } from "../typings/redux";
+import { NoteType } from "../typings/wysiwyg";
 
 interface RegisterResponseData {
 	code: string;
@@ -90,16 +91,16 @@ export const subscribeToAuthUser = () => async (dispatch: Dispatch) =>
 				dispatch({ type: SAVE_USER_DATA, payload: userData });
 			});
 			onSnapshot(userNotesRef, (snapshot) => {
-				const notes: FirestoreDocumentDataWithId<Note>[] = [];
+				const notes: FirestoreDocumentDataWithId<NoteType>[] = [];
 				snapshot.docs.forEach((doc) => {
-					notes.push({ ...doc.data() as Note, id: doc.id });
+					notes.push({ ...(doc.data() as NoteType), id: doc.id });
 				});
 				dispatch({ type: SAVE_NOTES, payload: notes });
 			});
 		}
 	});
 
-export const addNote = async (note: Note, firestoreID: string) => {
+export const addNote = async (note: NoteType, firestoreID: string) => {
 	const noteRef = collection(firestore, "users", firestoreID, "notes");
 	await addDoc(noteRef, note);
 };

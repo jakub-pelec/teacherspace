@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 interface StyledProps {
-	visable?: boolean;
+	visible?: boolean;
 }
 
 export const ButtonWrapper = styled.div`
@@ -15,7 +15,7 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const OptionWrapper = styled.div`
-	padding: 2em;
+	height: 100%;
 `;
 export const Label = styled.div`
 	font-weight: 700;
@@ -23,19 +23,41 @@ export const Label = styled.div`
 
 export const AddNoteView = styled.div<StyledProps>`
 	position: absolute;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	width: 30%;
-	height: 70%;
-	min-height: fit-content;
+	width: 60%;
+	height: 80%;
 	background-color: ${({ theme }) => theme.background};
 	border-radius: 1em;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	opacity: ${({ visable }) => (visable ? 1 : 0)};
+	opacity: ${({ visible }) => (visible ? 1 : 0)};
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	transition: all 0.3s ease-out;
+	padding: 40px;
+`;
+
+export const Form = styled.form`
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	> * {
+		width: 100%;
+	}
+`;
+
+export const RowWrapper = styled.div<{ editor?: boolean }>`
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-direction: row;
+	flex: ${({ editor }) => (editor ? 5 : 1)};
+	${({ editor }) =>
+		editor &&
+		css`
+			* {
+				align-self: flex-start;
+			}
+		`}
 `;

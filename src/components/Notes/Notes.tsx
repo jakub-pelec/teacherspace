@@ -5,11 +5,13 @@ import AddIcon from "@mui/icons-material/Add";
 import AddNoteView from "../AddNoteView/AddNoteView";
 import { Wrapper, Card, Title, Subject, ClassesWrapper, Class, Note, AddButton, CardGrid, ScrollContainer } from "./Elements";
 import { Helmet } from "react-helmet";
+import draftToHtml from "draftjs-to-html";
 import { AppState } from "../../typings/redux";
+import { NoteType } from "../../typings/wysiwyg";
 
 interface IProps {
 	topLevelHistory: ReturnType<typeof useHistory>;
-	notes: FirestoreDocumentDataWithId<Note>[];
+	notes: FirestoreDocumentDataWithId<NoteType>[];
 }
 
 const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
@@ -24,7 +26,7 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 				<h1>Notes</h1>
 				<ScrollContainer>
 					<CardGrid>
-						{notes.map(({ id, title, subject, classes, content }: FirestoreDocumentDataWithId<Note>) => (
+						{notes.map(({ id, title, subject, classes, content }: FirestoreDocumentDataWithId<NoteType>) => (
 							<Card id={id}>
 								<Title>{title}</Title>
 								<Subject>{subject}</Subject>
@@ -35,7 +37,7 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 										  })
 										: ""}
 								</ClassesWrapper>
-								<Note>{content}</Note>
+								<Note dangerouslySetInnerHTML={{ __html: draftToHtml(content) }} />
 							</Card>
 						))}
 					</CardGrid>

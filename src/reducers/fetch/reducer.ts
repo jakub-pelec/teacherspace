@@ -1,9 +1,10 @@
 import { SAVE_USER_DATA, CLEAR_FETCH, SAVE_NOTES } from "../../actions/types";
 import { ActionWithPayload } from "../../typings/redux";
+import { NoteType } from "../../typings/wysiwyg";
 
 interface State {
 	userData: UserData;
-	notes: Note[];
+	notes: NoteType[];
 }
 
 export const INITIAL_STATE: State = {
