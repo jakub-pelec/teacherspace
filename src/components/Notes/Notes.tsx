@@ -19,7 +19,7 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 			<ScrollContainer>
 				<CardGrid>
 					{notes.map((note: any) => (
-						<Card>
+						<Card id={note.id}>
 							<Title>{note.title}</Title>
 							<Subject>{note.subject}</Subject>
 
