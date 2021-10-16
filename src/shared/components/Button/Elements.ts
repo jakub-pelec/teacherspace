@@ -12,10 +12,10 @@ export const StyledButton = styled(Button)`
 		width: 100%;
 		text-transform: none;
 
-		transition: all .2s ease-in-out;
-		
+		transition: all 0.2s ease-in-out;
+
 		:disabled {
-			abackground-color: ${({ theme }) => theme.primaryWithOpacity};
+			background-color: ${({ theme }) => theme.primaryWithOpacity};
 		}
 
 		:hover {
