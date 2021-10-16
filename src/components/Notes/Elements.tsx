@@ -6,18 +6,19 @@ export const Wrapper = styled.div`
 	height: 100%;
 	padding-left: 2em;
 	h1 {
-		padding-bottom: 2em;
 		font-size: 3em;
 	}
 `;
 export const ScrollContainer = styled.div`
-	max-height: 100%;
-	overflow: auto;
+	padding: 3em;
+	height: 100%;
+	overflow-y: auto;
 `;
 export const CardGrid = styled.div`
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-row-gap: 4em;
+	padding-bottom: 1em;
 `;
 
 export const AddButton = styled(Button)`

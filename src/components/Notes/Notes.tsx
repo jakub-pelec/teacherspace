@@ -16,12 +16,13 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 	return (
 		<Wrapper>
 			<h1>Notes</h1>
-			<CardGrid>
-				{notes.map((note: any) => (
-					<Card>
-						<Title>{note.title}</Title>
-						<Subject>{note.subject}</Subject>
-						<ScrollContainer>
+			<ScrollContainer>
+				<CardGrid>
+					{notes.map((note: any) => (
+						<Card>
+							<Title>{note.title}</Title>
+							<Subject>{note.subject}</Subject>
+
 							<ClassesWrapper>
 								{note?.classes?.length
 									? note.classes.map((el: any) => {
@@ -29,12 +30,12 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 									  })
 									: ""}
 							</ClassesWrapper>
-						</ScrollContainer>
 
-						<Note>{note.content}</Note>
-					</Card>
-				))}
-			</CardGrid>
+							<Note>{note.content}</Note>
+						</Card>
+					))}
+				</CardGrid>
+			</ScrollContainer>
 			<AddButton onClick={() => setAddNoteView((prevState) => !prevState)}>
 				<AddIcon fontSize="large" />
 			</AddButton>

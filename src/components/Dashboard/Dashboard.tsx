@@ -46,6 +46,7 @@ const ContentWrapper = styled.div`
 	width: 100%;
 	padding: 1em;
 	padding-top: 5em;
+	overflow: hidden;
 `;
 
 export default Dashboard;
