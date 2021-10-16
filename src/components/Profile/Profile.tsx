@@ -57,7 +57,7 @@ const Profile: React.FC<IProps> = ({ userData: { firstName, lastName, email, cla
 };
 
 const mapStateToProps = (state: any) => ({
-	userData: state.auth.firestoreID,
+	userData: state.fetch.userData
 });
 
 export default connect(mapStateToProps)(Profile);
