@@ -4,6 +4,16 @@ interface StyledProps {
 	open: boolean;
 }
 
+export const Background = styled.div`
+	position: fixed;
+	top: 0;
+	left: 0em;
+	right: 0;
+	bottom: 0;
+	content: " ";
+	background: rgba(0, 0, 0, 0.5);
+`;
+
 const SlideIn = keyframes`
  0% { transform: translate(-50%, -200%); }
 
@@ -28,6 +38,7 @@ export const NoteView = styled.div<StyledProps>`
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
 		rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 	animation: ${SlideIn} 0.4s ease-in-out;
+	z-index: 100;
 `;
 
 export const Title = styled.h1`
