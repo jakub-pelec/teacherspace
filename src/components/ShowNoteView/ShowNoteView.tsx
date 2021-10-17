@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { NoteType } from "../../typings/wysiwyg";
 import draftToHtml from "draftjs-to-html";
 
@@ -14,8 +14,9 @@ const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote }) => {
 	return (
 		<NoteView open={open}>
 			<Title>{title}</Title>
-			<Subject>{subject}</Subject>
+			<Subject>Subject: {subject}</Subject>
 			<ClassesWrapper>
+				Classes:
 				{classes?.length
 					? classes.map(({ label }: Option) => {
 							return <Class>{label}</Class>;
@@ -24,7 +25,7 @@ const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote }) => {
 			</ClassesWrapper>
 			<Content dangerouslySetInnerHTML={{ __html: draftToHtml(content) }} />
 			<ExitButton role="button" onClick={() => setShowNote(undefined)}>
-				x
+				X
 			</ExitButton>
 		</NoteView>
 	);
@@ -34,22 +35,35 @@ interface StyledProps {
 	open: boolean;
 }
 
+const SlideIn = keyframes`
+ 0% { transform: translate(-50%, -200%); }
+
+ 100% { transform: translate(-50%, -50%); }
+`;
+
 export const NoteView = styled.div<StyledProps>`
 	visibility: ${({ open }) => (open ? "visable" : "hidden")};
 	transform: scale(${({ open }) => (open ? 1 : 0)});
 	position: absolute;
+	display: flex;
+	flex-direction: column;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
 	background-color: ${({ theme }) => theme.background};
 	height: 80%;
 	width: 40%;
 	border-radius: 1em;
 	padding: 1em;
 	overflow: hidden;
+	transform: translate(-50%, -50%);
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+		rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+	animation: ${SlideIn} 0.4s ease-in-out;
 `;
 
-export const Title = styled.h1``;
+export const Title = styled.h1`
+	align-self: center;
+`;
 export const Subject = styled.h2`
 	margin-bottom: 0.5em;
 `;
@@ -57,6 +71,9 @@ export const ClassesWrapper = styled.div`
 	display: flex;
 	max-width: 15em;
 	margin-bottom: 0.5em;
+	font-size: 1em;
+	font-weight: bold;
+	align-items: center;
 `;
 export const Class = styled.div`
 	font-size: 1em;
@@ -78,10 +95,20 @@ export const Content = styled.div`
 
 export const ExitButton = styled.div`
 	position: absolute;
-	top: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 0.5em;
 	right: 0.5em;
 	font-weight: bold;
-	font-size: 2em;
+	font-size: 1.5em;
+	color: ${({ theme }) => theme.background};
+	background-color: ${({ theme }) => theme.primary};
+	height: 1em;
+	width: 1em;
+	border-radius: 50%;
+	padding: 0.5em;
+
 	&:hover {
 		cursor: pointer;
 	}
