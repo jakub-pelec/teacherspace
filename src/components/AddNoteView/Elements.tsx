@@ -52,6 +52,7 @@ export const RowWrapper = styled.div<{ editor?: boolean }>`
 	justify-content: space-evenly;
 	align-items: center;
 	flex-direction: row;
+	max-height: 70%;
 	flex: ${({ editor }) => (editor ? 5 : 1)};
 	${({ editor }) =>
 		editor &&
