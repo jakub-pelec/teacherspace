@@ -46,7 +46,7 @@ export const AddButton = styled(Button)`
 export const Card = styled.div`
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	background-color: ${({ theme }) => theme.background};
 	border-radius: 1em;
 	padding: 1.5em;
@@ -60,8 +60,11 @@ export const Card = styled.div`
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
 		rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 	overflow: hidden;
+	transition: transform 0.2s;
 	&:hover {
 		cursor: pointer;
+		transform: scale(1.05);
+		transition: transform 0.2s;
 	}
 `;
 

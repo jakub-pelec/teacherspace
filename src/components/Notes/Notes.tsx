@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet";
 import draftToHtml from "draftjs-to-html";
 import { AppState } from "../../typings/redux";
 import { NoteType } from "../../typings/wysiwyg";
+import ShowNoteView from "../ShowNoteView/ShowNoteView";
 
 interface IProps {
 	topLevelHistory: ReturnType<typeof useHistory>;
@@ -16,6 +17,7 @@ interface IProps {
 
 const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 	const [addNoteView, setAddNoteView] = useState(false);
+	const [showNote, setShowNote] = useState<FirestoreDocumentDataWithId<NoteType>>();
 
 	return (
 		<>
@@ -27,7 +29,12 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 				<ScrollContainer>
 					<CardGrid>
 						{notes.map(({ id, title, subject, classes, content }: FirestoreDocumentDataWithId<NoteType>) => (
-							<Card id={id}>
+							<Card
+								id={id}
+								onClick={() => {
+									setShowNote({ id, title, subject, classes, content });
+								}}
+							>
 								<Title>{title}</Title>
 								<Subject>{subject}</Subject>
 								<ClassesWrapper>
@@ -46,6 +53,7 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 					<AddIcon fontSize="large" />
 				</AddButton>
 				{addNoteView && <AddNoteView addNoteView={addNoteView} setAddNoteView={setAddNoteView} />}
+				{showNote?.id && <ShowNoteView note={showNote} open={showNote?.id ? true : false} setShowNote={setShowNote} />}
 			</Wrapper>
 		</>
 	);
