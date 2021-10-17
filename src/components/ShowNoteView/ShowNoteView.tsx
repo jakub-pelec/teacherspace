@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { NoteType } from "../../typings/wysiwyg";
 import draftToHtml from "draftjs-to-html";
+import CloseIcon from "@mui/icons-material/Close";
 import { NoteView, Title, Subject, ClassesWrapper, Class, Content, ExitButton, Background } from "./Elements";
 
 interface IProps {
@@ -27,7 +28,7 @@ const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote }) => {
 				</ClassesWrapper>
 				<Content dangerouslySetInnerHTML={{ __html: draftToHtml(content) }} />
 				<ExitButton role="button" onClick={() => setShowNote(undefined)}>
-					X
+					<CloseIcon />
 				</ExitButton>
 			</NoteView>
 		</Background>
