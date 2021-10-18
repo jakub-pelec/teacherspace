@@ -5,7 +5,6 @@ import { logout } from "../../actions/actions";
 import { useTheme } from "styled-components";
 import HomeIcon from "@mui/icons-material/Home";
 import { NavBar, Logo, OptionWrapper, NavOption, Label, ExpandButton, StyledLink, LogOut } from "./Elements";
-import { Link } from "react-router-dom";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -38,25 +37,25 @@ const NavigationBar: React.FC<IProps> = ({ logoutProps, topLevelHistory }) => {
 			<OptionWrapper>
 				<StyledLink to="home">
 					<NavOption>
-						<Link to="/home">
+						<LogOut>
 							<HomeIcon fontSize="large" htmlColor={theme.background} />
-						</Link>
+						</LogOut>
 						<Label expanded={expanded}>Home</Label>
 					</NavOption>
 				</StyledLink>
 				<StyledLink to="/profile">
 					<NavOption>
-						<Link to="/profile">
+						<LogOut>
 							<AssignmentIndIcon fontSize="large" htmlColor={theme.background} />
-						</Link>
+						</LogOut>
 						<Label expanded={expanded}>Profile</Label>
 					</NavOption>
 				</StyledLink>
 				<StyledLink to="/notes">
 					<NavOption>
-						<Link to="/notes">
+						<LogOut>
 							<NoteAltIcon fontSize="large" htmlColor={theme.background} />
-						</Link>
+						</LogOut>
 						<Label expanded={expanded}>Notes</Label>
 					</NavOption>
 				</StyledLink>

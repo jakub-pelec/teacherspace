@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
 import { addNote } from "../../actions/actions";
 import { AppState } from "../../typings/redux";
+import FadeBackground from "../../shared/components/FadeBackground/FadeBackground";
 
 import FormWysiwyg from "../../shared/form-components/FormWysiwyg/FormWysiwyg";
 
@@ -27,38 +28,40 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, firestoreI
 	};
 
 	return (
-		<AddNoteViewStyling visible={addNoteView}>
-			<Form onSubmit={handleSubmit(submitHandler)}>
-				<RowWrapper>
-					<OptionWrapper>
-						<Label>Title</Label>
-						<FormTextField control={control} name="title" errored={false}></FormTextField>
-					</OptionWrapper>
-				</RowWrapper>
-				<RowWrapper>
-					<OptionWrapper>
-						<Label>Subject</Label>
-						<FormTextField control={control} name="subject" errored={false}></FormTextField>
-					</OptionWrapper>
-					<OptionWrapper>
-						<Label>Classes</Label>
-						<FormSelectField options={classOptions} control={control} name="classes" errored={false}></FormSelectField>
-					</OptionWrapper>
-				</RowWrapper>
-				<RowWrapper editor>
-					<OptionWrapper>
-						<Label>Note</Label>
-						<FormWysiwyg control={control} name="content" errored={false} />
-					</OptionWrapper>
-				</RowWrapper>
-				<RowWrapper>
-					<ButtonWrapper>
-						<StyledButton onClick={() => setAddNoteView((prevState: boolean) => !prevState)}>Cancel</StyledButton>
-						<StyledButton type="submit">Add</StyledButton>
-					</ButtonWrapper>
-				</RowWrapper>
-			</Form>
-		</AddNoteViewStyling>
+		<FadeBackground>
+			<AddNoteViewStyling visible={addNoteView}>
+				<Form onSubmit={handleSubmit(submitHandler)}>
+					<RowWrapper>
+						<OptionWrapper>
+							<Label>Title</Label>
+							<FormTextField control={control} name="title" errored={false}></FormTextField>
+						</OptionWrapper>
+					</RowWrapper>
+					<RowWrapper>
+						<OptionWrapper>
+							<Label>Subject</Label>
+							<FormTextField control={control} name="subject" errored={false}></FormTextField>
+						</OptionWrapper>
+						<OptionWrapper>
+							<Label>Classes</Label>
+							<FormSelectField options={classOptions} control={control} name="classes" errored={false}></FormSelectField>
+						</OptionWrapper>
+					</RowWrapper>
+					<RowWrapper editor>
+						<OptionWrapper>
+							<Label>Note</Label>
+							<FormWysiwyg control={control} name="content" errored={false} />
+						</OptionWrapper>
+					</RowWrapper>
+					<RowWrapper>
+						<ButtonWrapper>
+							<StyledButton onClick={() => setAddNoteView((prevState: boolean) => !prevState)}>Cancel</StyledButton>
+							<StyledButton type="submit">Add</StyledButton>
+						</ButtonWrapper>
+					</RowWrapper>
+				</Form>
+			</AddNoteViewStyling>
+		</FadeBackground>
 	);
 };
 const mapStateToProps = (state: AppState) => {

@@ -37,8 +37,8 @@ const Profile: React.FC<IProps> = ({ userData: { firstName, lastName, email, cla
 						<Label>Classes:</Label>
 						<Information>
 							{classes.length ? (
-								classes.map(({label}: Option) => {
-									return <ListElement>{label}</ListElement>;
+								classes.map(({ label }: Option, index: number) => {
+									return <ListElement key={index}>{label}</ListElement>;
 								})
 							) : (
 								<ListElement>No classes to display. Please add at least 1 class.</ListElement>
@@ -49,8 +49,8 @@ const Profile: React.FC<IProps> = ({ userData: { firstName, lastName, email, cla
 						<Label>Subjects:</Label>
 						<Information>
 							{subjects.length ? (
-								subjects.map(({label}: Option) => {
-									return <ListElement>{label}</ListElement>;
+								subjects.map(({ label }: Option, index: number) => {
+									return <ListElement key={index}>{label}</ListElement>;
 								})
 							) : (
 								<div>No subjects to display. Please add at least 1 subject.</div>
