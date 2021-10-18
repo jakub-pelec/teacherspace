@@ -2,7 +2,8 @@ import React, { Dispatch, SetStateAction } from "react";
 import { NoteType } from "../../typings/wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import CloseIcon from "@mui/icons-material/Close";
-import { NoteView, Title, Subject, ClassesWrapper, Class, Content, ExitButton, Background } from "./Elements";
+import { NoteView, Title, Subject, ClassesWrapper, Class, Content, ExitButton } from "./Elements";
+import FadeBackground from "../../shared/components/FadeBackground/FadeBackground";
 
 interface IProps {
 	note: FirestoreDocumentDataWithId<NoteType>;
@@ -14,7 +15,7 @@ const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote }) => {
 	const { title, subject, classes, content } = note;
 
 	return (
-		<Background>
+		<FadeBackground>
 			<NoteView open={open}>
 				<Title>{title}</Title>
 				<Subject>Subject: {subject}</Subject>
@@ -31,7 +32,7 @@ const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote }) => {
 					<CloseIcon />
 				</ExitButton>
 			</NoteView>
-		</Background>
+		</FadeBackground>
 	);
 };
 
