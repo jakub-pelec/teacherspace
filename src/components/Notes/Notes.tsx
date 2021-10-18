@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import moment from "moment";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
 import AddNoteView from "../AddNoteView/AddNoteView";
-import { Wrapper, Card, Title, Subject, ClassesWrapper, Class, Note, AddButton, CardGrid, ScrollContainer } from "./Elements";
+import { Wrapper, Row, Title, Subject, ClassesWrapper, Class, AddButton, CardGrid, ScrollContainer, DateContainer } from "./Elements";
 import { Helmet } from "react-helmet";
-import draftToHtml from "draftjs-to-html";
 import { AppState } from "../../typings/redux";
 import { NoteType } from "../../typings/wysiwyg";
 import ShowNoteView from "../ShowNoteView/ShowNoteView";
@@ -28,11 +28,18 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 				<h1>Notes</h1>
 				<ScrollContainer>
 					<CardGrid>
-						{notes.map(({ id, title, subject, classes, content }: FirestoreDocumentDataWithId<NoteType>) => (
-							<Card
+						{/* @ts-ignore */}
+						<Row title>
+							<Title>Title:</Title>
+							<Subject>Subject:</Subject>
+							<ClassesWrapper>Classes:</ClassesWrapper>
+							<DateContainer>Modified on:</DateContainer>
+						</Row>
+						{notes.map(({ id, title, subject, classes, content, dateModified }: FirestoreDocumentDataWithId<NoteType>) => (
+							<Row
 								id={id}
 								onClick={() => {
-									setShowNote({ id, title, subject, classes, content });
+									setShowNote({ id, title, subject, classes, content, dateModified });
 								}}
 							>
 								<Title>{title}</Title>
@@ -44,8 +51,8 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 										  })
 										: ""}
 								</ClassesWrapper>
-								<Note dangerouslySetInnerHTML={{ __html: draftToHtml(content) }} />
-							</Card>
+								<DateContainer>{moment(dateModified).format("DD-MM-YYYY")}</DateContainer>
+							</Row>
 						))}
 					</CardGrid>
 				</ScrollContainer>

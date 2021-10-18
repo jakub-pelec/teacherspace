@@ -21,7 +21,7 @@ const Router: React.FC<IProps> = ({ isLoggedIn, subscribeToAuthUserProps }) => {
 	return (
 		<BrowserRouter>
 			<Switch>
-				<Route exact path="/" component={LandingPage} />
+				<Route exact path="/" render={(props) => isLoggedIn ? <Dashboard {...props} /> : <LandingPage {...props} />} />
 				<Route exact path="/login" component={LoginPage} />
 				<Route exact path="/register" component={RegisterPage} />
 				<Route exact path="/second-stage" component={SignupSecondStage} />

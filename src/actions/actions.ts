@@ -10,7 +10,7 @@ import {
 	SWITCH_THEME,
 } from "./types";
 import { auth, apiPath, apiRoutes, firestore } from "../config/firebase";
-import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "@firebase/auth";
+import { signInWithEmailAndPassword, onAuthStateChanged, signOut, setPersistence, browserSessionPersistence } from "@firebase/auth";
 import { collection, onSnapshot, doc, addDoc } from "firebase/firestore";
 import { Dispatch } from "redux";
 import axios from "axios";
@@ -81,9 +81,11 @@ export const saveSignupData = (signupData: SignupData) => ({
 export const subscribeToAuthUser = () => async (dispatch: Dispatch) =>
 	onAuthStateChanged(auth, async (user) => {
 		if (user) {
+			setPersistence(auth, browserSessionPersistence);
 			const {
 				claims: { firestoreID },
 			} = await user.getIdTokenResult();
+			dispatch({ type: SAVE_USER_UUID, payload: firestoreID });
 			const userNotesRef = collection(firestore, `users/${firestoreID}/notes`);
 			const userDocRef = doc(firestore, `users/${firestoreID}`);
 			onSnapshot(userDocRef, (doc) => {
