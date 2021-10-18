@@ -15,9 +15,10 @@ interface IProps {
 	open: boolean;
 	setShowNote: Dispatch<SetStateAction<FirestoreDocumentDataWithId<NoteType> | undefined>>;
 	updateNoteProps: any;
+	handlePresentationOpen: () => void;
 }
 
-const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNoteProps }) => {
+const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNoteProps, handlePresentationOpen }) => {
 	const { title, subject, classes, content } = note;
 	const { enqueueSnackbar } = useSnackbar();
 	const [noteState, setNoteState] = useState<RawDraftContentState>(content);
@@ -33,6 +34,8 @@ const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNotePro
 		const finalCallback = () => {};
 		updateNoteProps({ ...note, content: noteState }, { successCallback, errorCallback, finalCallback });
 	};
+
+
 
 	return (
 		<FadeBackground>
@@ -52,6 +55,7 @@ const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNotePro
 					<CloseIcon />
 				</ExitButton>
 				<Button onClick={handleSubmit}>Save</Button>
+				<Button onClick={handlePresentationOpen}>Present</Button>
 			</NoteView>
 		</FadeBackground>
 	);
