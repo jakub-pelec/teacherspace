@@ -44,8 +44,7 @@ const Wrapper = styled.div`
 const ContentWrapper = styled.div`
 	height: 100%;
 	width: 100%;
-	padding: 1em;
-	padding-top: 5em;
+	padding: 5em 1em 0 1em;
 	overflow: hidden;
 `;
 

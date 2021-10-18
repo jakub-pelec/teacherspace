@@ -7,23 +7,30 @@ import { classOptions } from "../SignupSecondStage/options";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
 import { addNote } from "../../actions/actions";
-import { AppState } from "../../typings/redux";
 import FadeBackground from "../../shared/components/FadeBackground/FadeBackground";
-
+import { useSnackbar } from "notistack";
 import FormWysiwyg from "../../shared/form-components/FormWysiwyg/FormWysiwyg";
 
 interface IProps {
 	addNoteView: boolean;
 	setAddNoteView: any;
-	firestoreID: string;
+	addNoteProps: any;
 }
 
-const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, firestoreID }) => {
+const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNoteProps }) => {
 	const { control, handleSubmit } = useForm();
+	const { enqueueSnackbar } = useSnackbar();
 	const submitHandler = async (data: any) => {
 		const classes = data.classes.map(({ label, value }: Option) => ({ label, value }));
 		const note = { ...data, dateModified: Date.now(), classes };
-		addNote(note, firestoreID);
+		const successCallback = () => {
+			enqueueSnackbar("Note added!", { variant: "success" });
+		};
+		const errorCallback = () => {
+			enqueueSnackbar("Somethging went wrong. Please try again.", { variant: "error" });
+		};
+		const finalCallback = () => {};
+		addNoteProps(note, { successCallback, errorCallback, finalCallback });
 		setAddNoteView((prevState: boolean) => !prevState);
 	};
 
@@ -64,10 +71,5 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, firestoreI
 		</FadeBackground>
 	);
 };
-const mapStateToProps = (state: AppState) => {
-	return {
-		firestoreID: state.auth.firestoreID,
-	};
-};
 
-export default connect(mapStateToProps)(AddNoteView);
+export default connect(null, { addNoteProps: addNote })(AddNoteView);

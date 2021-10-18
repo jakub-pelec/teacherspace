@@ -11,7 +11,7 @@ import {
 } from "./types";
 import { auth, apiPath, apiRoutes, firestore } from "../config/firebase";
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut, setPersistence, browserSessionPersistence } from "@firebase/auth";
-import { collection, onSnapshot, doc, addDoc } from "firebase/firestore";
+import { collection, onSnapshot, doc, addDoc, updateDoc } from "firebase/firestore";
 import { Dispatch } from "redux";
 import axios from "axios";
 import { AppState } from "../typings/redux";
@@ -102,10 +102,43 @@ export const subscribeToAuthUser = () => async (dispatch: Dispatch) =>
 		}
 	});
 
-export const addNote = async (note: NoteType, firestoreID: string) => {
-	const noteRef = collection(firestore, "users", firestoreID, "notes");
-	await addDoc(noteRef, note);
-};
+export const addNote =
+	(note: NoteType, { successCallback, errorCallback, finalCallback }: PromiseCallback) =>
+	async (_: Dispatch, getState: () => AppState) => {
+		const { firestoreID } = getState().auth;
+		const noteRef = collection(firestore, "users", firestoreID, "notes");
+		try {
+			await addDoc(noteRef, note);
+			successCallback();
+		} catch (e) {
+			errorCallback();
+		} finally {
+			finalCallback();
+		}
+	};
+
+export const updateNote =
+	(note: FirestoreDocumentDataWithId<NoteType>, { successCallback, errorCallback, finalCallback }: PromiseCallback) =>
+	async (_: Dispatch, getState: () => AppState) => {
+		const { firestoreID } = getState().auth;
+		const noteRef = doc(firestore, "users", firestoreID, "notes", note.id);
+		const { title, classes, subject, content } = note;
+		const newNoteData = {
+			title,
+			classes,
+			subject,
+			dateModified: Date.now(),
+			content,
+		};
+		try {
+			await updateDoc(noteRef, newNoteData);
+			successCallback();
+		} catch (e) {
+			errorCallback();
+		} finally {
+			finalCallback();
+		}
+	};
 
 const clearStore = (dispatch: Dispatch) => {
 	dispatch({ type: CLEAR_THEME });

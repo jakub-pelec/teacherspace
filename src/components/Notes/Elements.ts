@@ -3,7 +3,7 @@ import { Button } from "@material-ui/core";
 
 export const Wrapper = styled.div`
 	position: relative;
-	height: 100%;
+	height: 90%;
 	padding-left: 2em;
 	h1 {
 		font-size: 3em;
@@ -61,7 +61,7 @@ export const Row = styled.div<{ title?: boolean }>`
 			? css`
 					&:hover {
 						cursor: pointer;
-						transform: scale(1.05);
+						transform: scale(1.02);
 						transition: transform 0.2s;
 					}
 			  `
