@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Button } from "@material-ui/core";
 
 export const Wrapper = styled.div`
 	position: relative;
-	height: 100%;
+	height: 90%;
 	padding-left: 2em;
 	h1 {
 		font-size: 3em;
@@ -16,8 +16,7 @@ export const ScrollContainer = styled.div`
 `;
 export const CardGrid = styled.div`
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	grid-row-gap: 4em;
+	grid-template-columns: repeat(1, 12fr);
 	padding-bottom: 1em;
 `;
 
@@ -43,38 +42,48 @@ export const AddButton = styled(Button)`
 	}
 `;
 
-export const Card = styled.div`
+export const Row = styled.div<{ title?: boolean }>`
+	padding: 1% 5%;
+	margin-bottom: 1.5em;
 	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
 	background-color: ${({ theme }) => theme.background};
-	border-radius: 1em;
-	padding: 1.5em;
-	width: 20em;
-	max-width: 20em;
-	height: 20em;
-	max-height: 20em;
-	div {
-		margin-bottom: 0.5em;
-	}
+	border-radius: 10px;
+	width: 100%;
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
 		rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 	overflow: hidden;
 	transition: transform 0.2s;
-	&:hover {
-		cursor: pointer;
-		transform: scale(1.05);
-		transition: transform 0.2s;
-	}
+	${({ title }) =>
+		!title
+			? css`
+					&:hover {
+						cursor: pointer;
+						transform: scale(1.02);
+						transition: transform 0.2s;
+					}
+			  `
+			: css`
+					background-color: #ffd4cf;
+					* {
+						font-weight: 700;
+						font-size: 1.5rem;
+					}
+			  `}
 `;
 
 export const Title = styled.div`
-	font-size: 2.5rem;
+	flex: 4;
+	font-size: 2rem;
 	text-transform: capitalize;
 	max-width: 15em;
+	font-weight: 600;
 `;
 
 export const Subject = styled.div`
+	flex: 2;
 	font-size: 1.5rem;
 	text-transform: capitalize;
 	max-width: 15em;
@@ -86,20 +95,23 @@ export const Class = styled.div`
 	border: 2px solid ${({ theme }) => theme.infoBorder};
 	background-color: ${({ theme }) => theme.infoBg};
 	width: fit-content;
-	padding: 0.2em 0.5em;
 	border-radius: 1em;
 	max-width: 15em;
 `;
 
 export const ClassesWrapper = styled.div`
+	flex: 2;
 	display: flex;
-	max-width: 15em;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
 `;
 
 export const Note = styled.div`
-	max-width: 100%;
-	max-height: 100%;
-	word-break: break-word;
 	font-size: 1.5em;
 	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 `;
+
+export const DateContainer = styled.div``;

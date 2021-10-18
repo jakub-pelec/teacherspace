@@ -3,12 +3,12 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
 import AddNoteView from "../AddNoteView/AddNoteView";
-import { Wrapper, Card, Title, Subject, ClassesWrapper, Class, Note, AddButton, CardGrid, ScrollContainer } from "./Elements";
+import { Wrapper, Row, Title, Subject, ClassesWrapper, AddButton, CardGrid, ScrollContainer, DateContainer } from "./Elements";
 import { Helmet } from "react-helmet";
-import draftToHtml from "draftjs-to-html";
 import { AppState } from "../../typings/redux";
 import { NoteType } from "../../typings/wysiwyg";
 import ShowNoteView from "../ShowNoteView/ShowNoteView";
+import NoteComponent from "./Note";
 
 interface IProps {
 	topLevelHistory: ReturnType<typeof useHistory>;
@@ -28,24 +28,15 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 				<h1>Notes</h1>
 				<ScrollContainer>
 					<CardGrid>
-						{notes.map(({ id, title, subject, classes, content }: FirestoreDocumentDataWithId<NoteType>) => (
-							<Card
-								id={id}
-								onClick={() => {
-									setShowNote({ id, title, subject, classes, content });
-								}}
-							>
-								<Title>{title}</Title>
-								<Subject>{subject}</Subject>
-								<ClassesWrapper>
-									{classes?.length
-										? classes.map(({ label }: Option) => {
-												return <Class>{label}</Class>;
-										  })
-										: ""}
-								</ClassesWrapper>
-								<Note dangerouslySetInnerHTML={{ __html: draftToHtml(content) }} />
-							</Card>
+						{/* @ts-ignore */}
+						<Row title>
+							<Title>Title:</Title>
+							<Subject>Subject:</Subject>
+							<ClassesWrapper>Classes:</ClassesWrapper>
+							<DateContainer>Modified on:</DateContainer>
+						</Row>
+						{notes.map((noteProps: FirestoreDocumentDataWithId<NoteType>) => (
+							<NoteComponent {...noteProps} setShowNote={setShowNote} />
 						))}
 					</CardGrid>
 				</ScrollContainer>

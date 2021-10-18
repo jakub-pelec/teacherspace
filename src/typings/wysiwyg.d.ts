@@ -5,4 +5,5 @@ interface NoteType {
 	title: string;
 	classes: Class[];
 	subject: Subject;
+	dateModified: number
 }
