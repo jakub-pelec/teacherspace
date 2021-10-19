@@ -1,9 +1,82 @@
 {
-	"login": "Login",
-	"password": "Password",
-	"email": "Email",
-	"confirmPassword": "Confirm password",
-	"firstName": "First Name",
-	"lastName": "Last Name",
-    "register": "Register"
+	"landingPage": {
+		"login": "Login",
+		"register": "Register page"
+	},
+	"loginPage": {
+		"title": "Please log in",
+		"email": "Email address",
+		"password": "Password",
+		"login": "Login"
+	},
+	"registerPage": {
+		"title": "Register",
+		"firstName": "First name",
+		"lastName": "Last name",
+		"email": "Email address",
+		"password": "Password",
+		"confirmPassword": "Confirm password",
+		"continue": "Continue"
+	},
+	"registerPageSecondStage": {
+		"title": "Let's get to know each other!",
+		"info": "Please select all classes and subjects that you are teaching!",
+		"subject": "Subject",
+		"class": "Class",
+		"register": "Register"
+	},
+	"profilePage": {
+		"name": "Name:",
+		"email": "Email:",
+		"classes": "Classes:",
+		"noClasses": "No classes to display. Please add at least 1 class.",
+		"subjects": "Subjects:",
+		"noSubjects": "No subjects to display. Please add at least 1 subject."
+	},
+	"notesPage": {
+		"title": "Notes",
+		"titleField": "Title:",
+		"subjectField": "Subject:",
+		"classesField": "Classes:",
+		"dateModified": "Modified on:"
+	},
+	"navBar": {
+		"homePath": "Home",
+		"profilePath": "Profile",
+		"notesPath": "Notes",
+		"logout": "Logout"
+	},
+	"homePage": {
+		"title": "Home"
+	},
+	"presentationMode": {
+		"close": "Close"
+	},
+	"showNoteView": {
+		"subject": "Subject:",
+		"classes": "Classes:",
+		"save": "Save",
+		"present": "Present"
+	}, 
+	"addNoteView": {
+		"title": "Title",
+		"subject": "Subject",
+		"classes": "Classes",
+		"note": "Note",
+		"add": "Add",
+		"cancel": "Cancel"
+	},
+	"snackbar": {
+		"errors": {
+			"default": "Oops, something went wrong! Please try again."
+		},
+		"success": {
+			"addNote": "Note added!",
+			"login": "Logged in!",
+			"logout": "Bye bye!",
+			"registerSecondStep": "Just one more step!",
+			"updateNote": "Note updates sucessfuly.",
+			"register": "Welcome!"
+		}
+	}
 }

@@ -9,15 +9,17 @@ import { register } from "../../actions/actions";
 import { useSnackbar } from "notistack";
 import { useHistory } from "react-router-dom";
 
-import { Wrapper, FormField, FormContainer, Title, ContentColumnRight, ContentColumnLeft, Background, Form } from "./Elements";
+import { Wrapper, FormField, FormContainer, Title, ContentColumnRight, ContentColumnLeft, Background, Form, Info } from "./Elements";
 import { CircularProgress } from "@material-ui/core";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 
 interface IProps extends RouteComponentProps {
 	registerProps: any;
 }
 
 const SignupSecondStage: React.FC<IProps> = ({ registerProps }) => {
+	const { t } = useTranslation();
 	const { push } = useHistory();
 	const { enqueueSnackbar } = useSnackbar();
 	const [loading, setLoading] = useState<boolean>(false);
@@ -30,11 +32,11 @@ const SignupSecondStage: React.FC<IProps> = ({ registerProps }) => {
 		setLoading(true);
 		const { classes, subjects } = formData;
 		const successCallback = () => {
-			enqueueSnackbar("Welcome!", { variant: "success" });
+			enqueueSnackbar(t('snackbar.success.register'), { variant: "success" });
 			push("/dashboard");
 		};
 		const errorCallback = () => {
-			enqueueSnackbar("Oops. Something went wrong!", { variant: "error" });
+			enqueueSnackbar(t("snackbar.errors.default"), { variant: "error" });
 		};
 		const finalCallback = () => {
 			setLoading(false);
@@ -52,7 +54,8 @@ const SignupSecondStage: React.FC<IProps> = ({ registerProps }) => {
 						<Background />
 					</ContentColumnRight>
 					<ContentColumnLeft>
-						<Title>Let's get to know each other!</Title>
+						<Title>{t("registerPageSecondStage.title")}</Title>
+						<Info>{t("registerPageSecondStage.info")}</Info>
 						<Form onSubmit={handleSubmit(submitHandler)}>
 							<FormField>
 								<FormSelectField
@@ -60,7 +63,7 @@ const SignupSecondStage: React.FC<IProps> = ({ registerProps }) => {
 									control={control}
 									name="subjects"
 									errored={errors.subject?.message}
-									placeholder="Subject"
+									placeholder={t("registerPageSecondStage.subject")}
 								/>
 							</FormField>
 							<FormField>
@@ -69,11 +72,11 @@ const SignupSecondStage: React.FC<IProps> = ({ registerProps }) => {
 									control={control}
 									name="classes"
 									errored={errors.class?.message}
-									placeholder="Class"
+									placeholder={t("registerPageSecondStage.class")}
 								/>
 							</FormField>
 							<Button type="submit" disabled={loading}>
-								{loading ? <CircularProgress size={23} /> : "Register"}
+								{loading ? <CircularProgress size={23} /> : t("registerPageSecondStage.register")}
 							</Button>
 						</Form>
 					</ContentColumnLeft>

@@ -9,6 +9,7 @@ import { Button } from "../../shared/components/Button/Button";
 import { RawDraftContentState } from "draft-js";
 import { updateNote } from "../../actions/actions";
 import { useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
 	note: FirestoreDocumentDataWithId<NoteType>;
@@ -19,31 +20,32 @@ interface IProps {
 }
 
 const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNoteProps, handlePresentationOpen }) => {
+	const { t } = useTranslation();
 	const { title, subject, classes, content } = note;
 	const { enqueueSnackbar } = useSnackbar();
 	const [noteState, setNoteState] = useState<RawDraftContentState>(content);
 
 	const handleSubmit = () => {
 		const successCallback = () => {
-			enqueueSnackbar("Note updates sucessfuly.", { variant: "success" });
+			enqueueSnackbar(t('snackbar.success.updateNote'), { variant: "success" });
 			setShowNote(undefined);
 		};
 		const errorCallback = () => {
-			enqueueSnackbar("Something went wrong. Please try again.", { variant: "error" });
+			enqueueSnackbar(t('snackbar.errors.default'), { variant: "error" });
 		};
 		const finalCallback = () => {};
 		updateNoteProps({ ...note, content: noteState }, { successCallback, errorCallback, finalCallback });
 	};
 
-
-
 	return (
 		<FadeBackground>
 			<NoteView open={open}>
 				<Title>{title}</Title>
-				<Subject>Subject: {subject}</Subject>
+				<Subject>
+					{t("showNoteView.subject")} {subject}
+				</Subject>
 				<ClassesWrapper>
-					Classes:
+					{t("showNoteView.classes")}
 					{classes?.length
 						? classes.map(({ label }: Option) => {
 								return <Class>{label}</Class>;
@@ -54,8 +56,8 @@ const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNotePro
 				<ExitButton role="button" onClick={() => setShowNote(undefined)}>
 					<CloseIcon />
 				</ExitButton>
-				<Button onClick={handleSubmit}>Save</Button>
-				<Button onClick={handlePresentationOpen}>Present</Button>
+				<Button onClick={handleSubmit}>{t("showNoteView.save")}</Button>
+				<Button onClick={handlePresentationOpen}>{t("showNoteView.present")}</Button>
 			</NoteView>
 		</FadeBackground>
 	);

@@ -12,6 +12,7 @@ import NoteComponent from "./Note";
 import draftToHtml from "draftjs-to-html";
 import PresentationView from "../PresentationView/PresentationView";
 import { RawDraftContentState } from "draft-js";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
 	topLevelHistory: ReturnType<typeof useHistory>;
@@ -19,6 +20,7 @@ interface IProps {
 }
 
 const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
+	const { t } = useTranslation();
 	const [addNoteView, setAddNoteView] = useState(false);
 	const [showNote, setShowNote] = useState<FirestoreDocumentDataWithId<NoteType>>();
 	const [presentationMode, togglePresentationMode] = useState<boolean>(false);
@@ -37,15 +39,15 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 				<title>Teacherspace - Notes</title>
 			</Helmet>
 			<Wrapper>
-				<h1>Notes</h1>
+				<h1>{t("notesPage.title")}</h1>
 				<ScrollContainer>
 					<CardGrid>
 						{/* @ts-ignore */}
 						<Row title>
-							<Title>Title:</Title>
-							<Subject>Subject:</Subject>
-							<ClassesWrapper>Classes:</ClassesWrapper>
-							<DateContainer>Modified on:</DateContainer>
+							<Title>{t("notesPage.titleField")}</Title>
+							<Subject>{t("notesPage.subjectField")}</Subject>
+							<ClassesWrapper>{t("notesPage.classesField")}</ClassesWrapper>
+							<DateContainer>{t("notesPage.dateModified")}</DateContainer>
 						</Row>
 						{notes.map((noteProps: FirestoreDocumentDataWithId<NoteType>) => (
 							<NoteComponent {...noteProps} setShowNote={setShowNote} />

@@ -10,6 +10,7 @@ import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
 	logoutProps: any;
@@ -17,16 +18,17 @@ interface IProps {
 }
 
 const NavigationBar: React.FC<IProps> = ({ logoutProps, topLevelHistory }) => {
+	const { t } = useTranslation();
 	const [expanded, setExpanded] = useState<boolean>(false);
 	const { enqueueSnackbar } = useSnackbar();
 	const theme: any = useTheme();
 	const handleLogout = () => {
 		const successCallback = () => {
-			enqueueSnackbar("Bye bye!", { variant: "success" });
+			enqueueSnackbar(t('snackbar.success.logout'), { variant: "success" });
 			topLevelHistory.push("/");
 		};
 		const errorCallback = () => {
-			enqueueSnackbar("Something went wrong. Please try again!", { variant: "error" });
+			enqueueSnackbar(t('snackbar.errors.default'), { variant: "error" });
 		};
 		const finalCallback = () => {};
 		logoutProps({ successCallback, errorCallback, finalCallback });
@@ -40,7 +42,7 @@ const NavigationBar: React.FC<IProps> = ({ logoutProps, topLevelHistory }) => {
 						<LogOut>
 							<HomeIcon fontSize="large" htmlColor={theme.background} />
 						</LogOut>
-						<Label expanded={expanded}>Home</Label>
+						<Label expanded={expanded}>{t("navBar.homePath")}</Label>
 					</NavOption>
 				</StyledLink>
 				<StyledLink to="/profile">
@@ -48,7 +50,7 @@ const NavigationBar: React.FC<IProps> = ({ logoutProps, topLevelHistory }) => {
 						<LogOut>
 							<AssignmentIndIcon fontSize="large" htmlColor={theme.background} />
 						</LogOut>
-						<Label expanded={expanded}>Profile</Label>
+						<Label expanded={expanded}>{t("navBar.profilePath")}</Label>
 					</NavOption>
 				</StyledLink>
 				<StyledLink to="/notes">
@@ -56,7 +58,7 @@ const NavigationBar: React.FC<IProps> = ({ logoutProps, topLevelHistory }) => {
 						<LogOut>
 							<NoteAltIcon fontSize="large" htmlColor={theme.background} />
 						</LogOut>
-						<Label expanded={expanded}>Notes</Label>
+						<Label expanded={expanded}>{t("navBar.notesPath")}</Label>
 					</NavOption>
 				</StyledLink>
 			</OptionWrapper>
@@ -64,7 +66,7 @@ const NavigationBar: React.FC<IProps> = ({ logoutProps, topLevelHistory }) => {
 				<LogOut role="button" onClick={() => handleLogout()}>
 					<ExitToAppIcon fontSize="large" htmlColor={theme.background} />
 				</LogOut>
-				<Label expanded={expanded}>Logout</Label>
+				<Label expanded={expanded}>{t("navBar.logout")}</Label>
 			</NavOption>
 			<ExpandButton expanded={expanded} onClick={() => setExpanded((prevState) => !prevState)}>
 				<ArrowBackIosNewIcon htmlColor={expanded ? theme.primary : theme.background} />

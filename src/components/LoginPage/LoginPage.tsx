@@ -13,6 +13,7 @@ import { CircularProgress } from "@material-ui/core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { PageWrapper, ContentColumnRight, ContentColumnLeft, FormField, Title, ColumnWrapper, Background } from "./Elements";
 import { AppState } from "../../typings/redux";
+import { useTranslation } from "react-i18next";
 
 interface IProps extends RouteComponentProps {
 	changeThemeProps: any;
@@ -22,6 +23,7 @@ interface IProps extends RouteComponentProps {
 
 const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps, history }) => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const { t } = useTranslation();
 	const { enqueueSnackbar } = useSnackbar();
 	const {
 		control,
@@ -32,11 +34,11 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps, hist
 	const submitHandler = (loginData: Credentials) => {
 		setIsLoading(true);
 		const successCallback = () => {
-			enqueueSnackbar("Logged in!", { variant: "success" });
+			enqueueSnackbar(t('snackbar.success.login'), { variant: "success" });
 			history.push("/dashboard");
 		};
 		const errorCallback = () => {
-			enqueueSnackbar("Something went wrong! Please try again.", { variant: "error" });
+			enqueueSnackbar(t('snackbar.errors.default'), { variant: "error" });
 		};
 		const finalCallback = () => {
 			setIsLoading(false);
@@ -54,14 +56,14 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps, hist
 						<Background />
 					</ContentColumnLeft>
 					<ContentColumnRight>
-						<Title>Let's get started</Title>
+						<Title>{t("loginPage.title")}</Title>
 						<form onSubmit={handleSubmit(submitHandler)}>
 							<FormField>
 								<FieldWithLabel
 									name="email"
 									control={control}
 									defaultValue=""
-									label="Email address"
+									label={t("loginPage.email")}
 									errorMessage={errors.email?.message}
 								/>
 							</FormField>
@@ -70,14 +72,14 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps, hist
 									name="password"
 									control={control}
 									defaultValue=""
-									label="Password"
+									label={t("loginPage.password")}
 									errorMessage={errors.password?.message}
 									inputProps={{ type: "password" }}
 								/>
 							</FormField>
 							<FormField>
 								<Button type="submit" disabled={isLoading}>
-									{isLoading ? <CircularProgress size={23} /> : "Login"}
+									{isLoading ? <CircularProgress size={23} /> : t("loginPage.login")}
 								</Button>
 							</FormField>
 						</form>

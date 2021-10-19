@@ -1,9 +1,82 @@
 {
-	"login": "Zaloguj się",
-	"password": "Hasło",
-	"email": "Email",
-	"confirmPassword": "Potwierdź hasło",
-	"firstName": "Imie",
-	"lastName": "Nazwisko",
-    "register": "Zarejestruj się"
+	"landingPage": {
+		"login": "Zaloguj",
+		"register": "Stwórz konto"
+	},
+	"loginPage": {
+		"title": "Zaloguj się",
+		"email": "Adres email",
+		"password": "Hasło",
+		"login": "Zaloguj"
+	},
+	"registerPage": {
+		"title": "Zarejestruj",
+		"firstName": "Imie",
+		"lastName": "Nazwisko",
+		"email": "Adres email",
+		"password": "Hasło",
+		"confirmPassword": "Potwierdź hasło",
+		"continue": "Dalej"
+	},
+	"registerPageSecondStage": {
+		"title": "Poznajmy się!",
+		"info": "Wybierz wszystkie klasy i przedmioty, których nauczasz!",
+		"subject": "Przedmioty",
+		"class": "Klasy",
+		"register": "Stwórz konto"
+	},
+	"profilePage": {
+		"name": "Imie i nazwisko:",
+		"email": "Adres email:",
+		"classes": "Klasy:",
+		"noClasses": "Brak klas do wyświetlenia. Dodaj przynajmniej 1 klasę.",
+		"subjects": "Przedmioty:",
+		"noSubjects": "Brak przedmiotów do wyświetlania. Dodaj przynajmniej 1 przedmiot."
+	},
+	"notesPage": {
+		"title": "Notatki",
+		"titleField": "Tytuł:",
+		"subjectField": "Przedmiot:",
+		"classesField": "Klasy:",
+		"dateModified": "Ostatnio zmodyfikowano:"
+	},
+	"navBar": {
+		"homePath": "Home",
+		"profilePath": "Mój profil",
+		"notesPath": "Notatki",
+		"logout": "Wyloguj"
+	},
+	"homePage": {
+		"title": "Home"
+	},
+	"presentationMode": {
+		"close": "Zamknij"
+	},
+	"showNoteView": {
+		"subject": "Przedmiot:",
+		"classes": "Klasy:",
+		"save": "Zapisz",
+		"present": "Prezentuj"
+	},
+	"addNoteView": {
+		"title": "Tytuł",
+		"subject": "Przedmiot",
+		"classes": "Klasy",
+		"note": "Notatka",
+		"add": "Zapisz",
+		"cancel": "Anuluj"
+	},
+	"snackbar": {
+		"errors": {
+			"default": "Ups, coś poszło nie tak, spróbuj ponownie."
+		},
+		"success": {
+			"addNote": "Notatka dodana!",
+			"login": "Zalogowano!",
+			"logout": "Dowidzenia!",
+			"registerSecondStep": "Jeszcze jeden krok!",
+			"updateNote": "Notatka zaktualizowana!",
+			"register": "Witaj!"
+		}
+	}
 }

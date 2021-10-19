@@ -10,6 +10,7 @@ import { addNote } from "../../actions/actions";
 import FadeBackground from "../../shared/components/FadeBackground/FadeBackground";
 import { useSnackbar } from "notistack";
 import FormWysiwyg from "../../shared/form-components/FormWysiwyg/FormWysiwyg";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
 	addNoteView: boolean;
@@ -18,16 +19,17 @@ interface IProps {
 }
 
 const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNoteProps }) => {
+	const { t } = useTranslation();
 	const { control, handleSubmit } = useForm();
 	const { enqueueSnackbar } = useSnackbar();
 	const submitHandler = async (data: any) => {
 		const classes = data.classes.map(({ label, value }: Option) => ({ label, value }));
 		const note = { ...data, dateModified: Date.now(), classes };
 		const successCallback = () => {
-			enqueueSnackbar("Note added!", { variant: "success" });
+			enqueueSnackbar(t('snackbar.success.addNote'), { variant: "success" });
 		};
 		const errorCallback = () => {
-			enqueueSnackbar("Somethging went wrong. Please try again.", { variant: "error" });
+			enqueueSnackbar(t('snackbar.errors.default'), { variant: "error" });
 		};
 		const finalCallback = () => {};
 		addNoteProps(note, { successCallback, errorCallback, finalCallback });
@@ -40,30 +42,30 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 				<Form onSubmit={handleSubmit(submitHandler)}>
 					<RowWrapper>
 						<OptionWrapper>
-							<Label>Title</Label>
+							<Label>{t("addNoteView.title")}</Label>
 							<FormTextField control={control} name="title" errored={false}></FormTextField>
 						</OptionWrapper>
 					</RowWrapper>
 					<RowWrapper>
 						<OptionWrapper>
-							<Label>Subject</Label>
+							<Label>{t("addNoteView.subject")}</Label>
 							<FormTextField control={control} name="subject" errored={false}></FormTextField>
 						</OptionWrapper>
 						<OptionWrapper>
-							<Label>Classes</Label>
+							<Label>{t("addNoteView.classes")}</Label>
 							<FormSelectField options={classOptions} control={control} name="classes" errored={false}></FormSelectField>
 						</OptionWrapper>
 					</RowWrapper>
 					<RowWrapper editor>
 						<OptionWrapper>
-							<Label>Note</Label>
+							<Label>{t("addNoteView.note")}</Label>
 							<FormWysiwyg control={control} name="content" errored={false} />
 						</OptionWrapper>
 					</RowWrapper>
 					<RowWrapper>
 						<ButtonWrapper>
-							<StyledButton onClick={() => setAddNoteView((prevState: boolean) => !prevState)}>Cancel</StyledButton>
-							<StyledButton type="submit">Add</StyledButton>
+							<StyledButton onClick={() => setAddNoteView((prevState: boolean) => !prevState)}>{t("addNoteView.cancel")}</StyledButton>
+							<StyledButton type="submit">{t("addNoteView.add")}</StyledButton>
 						</ButtonWrapper>
 					</RowWrapper>
 				</Form>

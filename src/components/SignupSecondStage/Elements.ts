@@ -54,6 +54,10 @@ export const FullNameContainer = styled.div`
 	}
 `;
 
+export const Info = styled.div`
+	margin-bottom: 5%;
+`;
+
 export const FormField = styled.div`
 	padding-bottom: 0.5em;
 `;
