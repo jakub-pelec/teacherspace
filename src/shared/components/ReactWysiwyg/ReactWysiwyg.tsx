@@ -45,6 +45,7 @@ const styles: Styles = {
         border: '1px solid #F6725E',
         backgroundColor: '#ffe4e0',
         padding: '0 20px',
+		maxHeight: '400px'
     },
 	toolbarStyle: {
         border: '1px solid #F6725E'

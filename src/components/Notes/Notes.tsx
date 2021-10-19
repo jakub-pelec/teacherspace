@@ -9,6 +9,9 @@ import { AppState } from "../../typings/redux";
 import { NoteType } from "../../typings/wysiwyg";
 import ShowNoteView from "../ShowNoteView/ShowNoteView";
 import NoteComponent from "./Note";
+import draftToHtml from "draftjs-to-html";
+import PresentationView from "../PresentationView/PresentationView";
+import { RawDraftContentState } from "draft-js";
 
 interface IProps {
 	topLevelHistory: ReturnType<typeof useHistory>;
@@ -18,6 +21,15 @@ interface IProps {
 const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 	const [addNoteView, setAddNoteView] = useState(false);
 	const [showNote, setShowNote] = useState<FirestoreDocumentDataWithId<NoteType>>();
+	const [presentationMode, togglePresentationMode] = useState<boolean>(false);
+
+	const handlePresentationOpen = () => {
+		togglePresentationMode(true);
+	};
+
+	const handleClose = () => {
+		togglePresentationMode(false);
+	};
 
 	return (
 		<>
@@ -44,7 +56,21 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 					<AddIcon fontSize="large" />
 				</AddButton>
 				{addNoteView && <AddNoteView addNoteView={addNoteView} setAddNoteView={setAddNoteView} />}
-				{showNote?.id && <ShowNoteView note={showNote} open={showNote?.id ? true : false} setShowNote={setShowNote} />}
+				{showNote?.id && (
+					<ShowNoteView
+						note={showNote}
+						open={showNote?.id ? true : false}
+						setShowNote={setShowNote}
+						handlePresentationOpen={handlePresentationOpen}
+					/>
+				)}
+				{presentationMode && (
+					<PresentationView
+						html={draftToHtml(showNote?.content as RawDraftContentState)}
+						title={showNote?.title as string}
+						handleClose={handleClose}
+					/>
+				)}
 			</Wrapper>
 		</>
 	);
