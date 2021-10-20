@@ -9,8 +9,9 @@ import { registerSchema } from "../../schemas/registerSchema";
 import { useSnackbar } from "notistack";
 import { saveSignupData } from "../../actions/actions";
 import { useHistory } from "react-router";
-import { Helmet } from 'react-helmet'; 
+import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
+import FormTextField from "../../shared/form-components/FormTextField/FormTextField";
 
 interface IProps {
 	saveSignupDataProps: typeof saveSignupData;
@@ -29,7 +30,7 @@ const RegisterPage: React.FC<IProps> = ({ saveSignupDataProps }) => {
 	const submitHandler = (formData: any) => {
 		const { firstName, lastName, password, email } = formData;
 		saveSignupDataProps({ firstName, lastName, password, email });
-		enqueueSnackbar(t('snackbar.success.registerSecondStep'), { variant: "success" });
+		enqueueSnackbar(t("snackbar.success.registerSecondStep"), { variant: "success" });
 		push("/second-stage");
 	};
 	return (
@@ -40,38 +41,58 @@ const RegisterPage: React.FC<IProps> = ({ saveSignupDataProps }) => {
 			<Wrapper>
 				<FormContainer>
 					<ContentColumnLeft>
-						<Title>{t('registerPage.title')}</Title>
+						<Title>{t("registerPage.title")}</Title>
 						<form onSubmit={handleSubmit(submitHandler)}>
 							<FullNameContainer>
 								<FormField>
-									<FieldWithLabel name="firstName" label={t('registerPage.firstName')} control={control} errorMessage={errors.firstName?.message} />
+									<FieldWithLabel label={t("registerPage.firstName")} errorMessage={errors.firstName?.message}>
+										<FormTextField
+											name="firstName"
+											control={control}
+											defaultValue=""
+											errored={Boolean(errors.firstName?.message)}
+										/>
+									</FieldWithLabel>
 								</FormField>
 								<FormField>
-									<FieldWithLabel name="lastName" label={t('registerPage.lastName')} control={control} errorMessage={errors.lastName?.message} />
+									<FieldWithLabel label={t("registerPage.lastName")} errorMessage={errors.lastName?.message}>
+										<FormTextField
+											name="lastName"
+											control={control}
+											defaultValue=""
+											errored={Boolean(errors.lastName?.message)}
+										/>
+									</FieldWithLabel>
 								</FormField>
 							</FullNameContainer>
 							<FormField>
-								<FieldWithLabel name="email" label={t('registerPage.email')} control={control} errorMessage={errors.email?.message} />
+								<FieldWithLabel label={t("registerPage.email")} errorMessage={errors.email?.message}>
+									<FormTextField name="email" control={control} defaultValue="" errored={Boolean(errors.email?.message)} />
+								</FieldWithLabel>
 							</FormField>
 							<FormField>
-								<FieldWithLabel
-									name="password"
-									label={t('registerPage.password')}
-									control={control}
-									inputProps={{ type: "password" }}
-									errorMessage={errors.password?.message}
-								/>
+								<FieldWithLabel label={t("registerPage.password")} errorMessage={errors.password?.message}>
+									<FormTextField
+										name="password"
+										control={control}
+										defaultValue=""
+										errored={Boolean(errors.password?.message)}
+										inputProps={{ type: "password" }}
+									/>
+								</FieldWithLabel>
 							</FormField>
 							<FormField>
-								<FieldWithLabel
-									name="confirmPassword"
-									label={t('registerPage.confirmPassword')}
-									control={control}
-									inputProps={{ type: "password" }}
-									errorMessage={errors.confirmPassword?.message}
-								/>
+								<FieldWithLabel label={t("registerPage.confirmPassword")} errorMessage={errors.confirmPassword?.message}>
+									<FormTextField
+										inputProps={{ type: "password" }}
+										name="confirmPassword"
+										control={control}
+										defaultValue=""
+										errored={Boolean(errors.confirmPassword?.message)}
+									/>
+								</FieldWithLabel>
 							</FormField>
-							<Button type="submit">{t('registerPage.continue')}</Button>
+							<Button type="submit">{t("registerPage.continue")}</Button>
 						</form>
 					</ContentColumnLeft>
 					<ContentColumnRight>

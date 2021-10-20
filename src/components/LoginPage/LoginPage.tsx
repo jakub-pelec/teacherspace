@@ -14,6 +14,7 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { PageWrapper, ContentColumnRight, ContentColumnLeft, FormField, Title, ColumnWrapper, Background } from "./Elements";
 import { AppState } from "../../typings/redux";
 import { useTranslation } from "react-i18next";
+import FormTextField from "../../shared/form-components/FormTextField/FormTextField";
 
 interface IProps extends RouteComponentProps {
 	changeThemeProps: any;
@@ -34,11 +35,11 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps, hist
 	const submitHandler = (loginData: Credentials) => {
 		setIsLoading(true);
 		const successCallback = () => {
-			enqueueSnackbar(t('snackbar.success.login'), { variant: "success" });
+			enqueueSnackbar(t("snackbar.success.login"), { variant: "success" });
 			history.push("/dashboard");
 		};
 		const errorCallback = () => {
-			enqueueSnackbar(t('snackbar.errors.default'), { variant: "error" });
+			enqueueSnackbar(t("snackbar.errors.default"), { variant: "error" });
 		};
 		const finalCallback = () => {
 			setIsLoading(false);
@@ -59,23 +60,20 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps, hist
 						<Title>{t("loginPage.title")}</Title>
 						<form onSubmit={handleSubmit(submitHandler)}>
 							<FormField>
-								<FieldWithLabel
-									name="email"
-									control={control}
-									defaultValue=""
-									label={t("loginPage.email")}
-									errorMessage={errors.email?.message}
-								/>
+								<FieldWithLabel label={t("loginPage.email")} errorMessage={errors.email?.message}>
+									<FormTextField name="email" control={control} defaultValue="" errored={Boolean(errors.email?.message)} />
+								</FieldWithLabel>
 							</FormField>
 							<FormField>
-								<FieldWithLabel
-									name="password"
-									control={control}
-									defaultValue=""
-									label={t("loginPage.password")}
-									errorMessage={errors.password?.message}
-									inputProps={{ type: "password" }}
-								/>
+								<FieldWithLabel label={t("loginPage.password")} errorMessage={errors.password?.message}>
+									<FormTextField
+										name="password"
+										control={control}
+										defaultValue=""
+										errored={Boolean(errors.password?.message)}
+										inputProps={{ type: "password" }}
+									/>
+								</FieldWithLabel>
 							</FormField>
 							<FormField>
 								<Button type="submit" disabled={isLoading}>

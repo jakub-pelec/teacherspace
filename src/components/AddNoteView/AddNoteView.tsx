@@ -11,6 +11,8 @@ import FadeBackground from "../../shared/components/FadeBackground/FadeBackgroun
 import { useSnackbar } from "notistack";
 import FormWysiwyg from "../../shared/form-components/FormWysiwyg/FormWysiwyg";
 import { useTranslation } from "react-i18next";
+import { noteSchema } from "../../schemas/noteSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 interface IProps {
 	addNoteView: boolean;
@@ -20,7 +22,11 @@ interface IProps {
 
 const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNoteProps }) => {
 	const { t } = useTranslation();
-	const { control, handleSubmit } = useForm();
+	const {
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({ resolver: yupResolver(noteSchema) });
 	const { enqueueSnackbar } = useSnackbar();
 	const submitHandler = async (data: any) => {
 		const classes = data.classes.map(({ label, value }: Option) => ({ label, value }));
@@ -43,23 +49,23 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 					<RowWrapper>
 						<OptionWrapper>
 							<Label>{t("addNoteView.title")}</Label>
-							<FormTextField control={control} name="title" errored={false}></FormTextField>
+							<FormTextField control={control} name="title" errored={errors.title?.message}></FormTextField>
 						</OptionWrapper>
 					</RowWrapper>
 					<RowWrapper>
 						<OptionWrapper>
 							<Label>{t("addNoteView.subject")}</Label>
-							<FormTextField control={control} name="subject" errored={false}></FormTextField>
+							<FormTextField control={control} name="subject" errored={errors.subject?.message}></FormTextField>
 						</OptionWrapper>
 						<OptionWrapper>
 							<Label>{t("addNoteView.classes")}</Label>
-							<FormSelectField options={classOptions} control={control} name="classes" errored={false}></FormSelectField>
+							<FormSelectField options={classOptions} control={control} name="classes" errored={errors.classes?.message}></FormSelectField>
 						</OptionWrapper>
 					</RowWrapper>
 					<RowWrapper editor>
 						<OptionWrapper>
 							<Label>{t("addNoteView.note")}</Label>
-							<FormWysiwyg control={control} name="content" errored={false} />
+							<FormWysiwyg control={control} name="content" errored={errors.content?.message} />
 						</OptionWrapper>
 					</RowWrapper>
 					<RowWrapper>
