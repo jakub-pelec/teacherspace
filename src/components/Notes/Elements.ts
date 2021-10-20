@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
 	position: relative;
 	height: 90%;
 	padding-left: 2em;
+	min-width: 800px;
 	h1 {
 		font-size: 3em;
 	}

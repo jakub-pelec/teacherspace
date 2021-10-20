@@ -13,6 +13,7 @@ export const ContentWrapper = styled.div`
 	align-items: center;
 	padding: 5% 0;
 	text-align: center;
+	min-width: 800px;
 `;
 
 export const Grid = styled.div`
