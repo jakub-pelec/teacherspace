@@ -4,8 +4,8 @@ import { StyledSelect } from './Elements';
 
 interface IProps extends Select.CreatableProps<any, any, any> {
 	options: Option[];
-	ref: React.Ref<any>;
-	error: boolean;
+	ref?: React.Ref<any>;
+	error?: boolean;
 }
 
 const CreatableSelect: React.FC<IProps> = (props) => {

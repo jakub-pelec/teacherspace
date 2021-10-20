@@ -11,11 +11,12 @@ import {
 } from "./types";
 import { auth, apiPath, apiRoutes, firestore } from "../config/firebase";
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut, setPersistence, browserSessionPersistence } from "@firebase/auth";
-import { collection, onSnapshot, doc, addDoc, updateDoc } from "firebase/firestore";
+import { collection, onSnapshot, doc, addDoc, updateDoc, DocumentData, arrayUnion } from "firebase/firestore";
 import { Dispatch } from "redux";
 import axios from "axios";
 import { AppState } from "../typings/redux";
 import { NoteType } from "../typings/wysiwyg";
+import { convertFromHTML, convertToRaw, ContentState } from "draft-js";
 
 interface RegisterResponseData {
 	code: string;
@@ -95,7 +96,16 @@ export const subscribeToAuthUser = () => async (dispatch: Dispatch) =>
 			onSnapshot(userNotesRef, (snapshot) => {
 				const notes: FirestoreDocumentDataWithId<NoteType>[] = [];
 				snapshot.docs.forEach((doc) => {
-					notes.push({ ...(doc.data() as NoteType), id: doc.id });
+					const docData: DocumentData = doc.data();
+					const blocksFromHTML = convertFromHTML(docData.content);
+					const state = ContentState.createFromBlockArray(blocksFromHTML.contentBlocks, blocksFromHTML.entityMap);
+					//@ts-ignore
+					const documentToSave: FirestoreDocumentDataWithId<NoteType> = {
+						...docData,
+						content: convertToRaw(state),
+						id: doc.id,
+					};
+					notes.push(documentToSave);
 				});
 				dispatch({ type: SAVE_NOTES, payload: notes });
 			});
@@ -132,6 +142,22 @@ export const updateNote =
 		};
 		try {
 			await updateDoc(noteRef, newNoteData);
+			successCallback();
+		} catch (e) {
+			errorCallback();
+		} finally {
+			finalCallback();
+		}
+	};
+
+export const updateUserProperties =
+	(payload: Option[], type: "class" | "subject", { successCallback, errorCallback, finalCallback }: PromiseCallback) =>
+	async (_: Dispatch, getState: () => AppState) => {
+		try {
+			const { firestoreID } = getState().auth;
+			const userDocRef = doc(firestore, "users", firestoreID);
+			const field = type === "class" ? "classes" : "subjects";
+			await updateDoc(userDocRef, { [field]: arrayUnion(...payload) });
 			successCallback();
 		} catch (e) {
 			errorCallback();

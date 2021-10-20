@@ -3,7 +3,7 @@ import { RouteComponentProps } from "react-router";
 import FormSelectField from "../../shared/form-components/FormSelectField/FormSelectField";
 import { useForm } from "react-hook-form";
 import { Button } from "../../shared/components/Button/Button";
-import { subjectOptions, classOptions } from "./options";
+import { subjectOptions, classOptions } from "../../constants/options";
 import { connect } from "react-redux";
 import { register } from "../../actions/actions";
 import { useSnackbar } from "notistack";

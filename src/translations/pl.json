@@ -76,7 +76,8 @@
 			"logout": "Dowidzenia!",
 			"registerSecondStep": "Jeszcze jeden krok!",
 			"updateNote": "Notatka zaktualizowana!",
-			"register": "Witaj!"
+			"register": "Witaj!",
+			"updateUserProp": "{{property}} zaktualizowane!"
 		}
 	}
 }

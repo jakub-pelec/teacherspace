@@ -3,17 +3,18 @@ import { AddNoteView as AddNoteViewStyling, OptionWrapper, ButtonWrapper, Form, 
 import FormTextField from "../../shared/form-components/FormTextField/FormTextField";
 import FormSelectField from "../../shared/form-components/FormSelectField/FormSelectField";
 import { Button as StyledButton } from "../../shared/components/Button/Button";
-import { classOptions } from "../SignupSecondStage/options";
+import { classOptions } from "../../constants/options";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
 import { addNote } from "../../actions/actions";
-import FadeBackground from "../../shared/components/FadeBackground/FadeBackground";
+import Modal from "../../shared/components/Modal/Modal";
 import { useSnackbar } from "notistack";
 import FormWysiwyg from "../../shared/form-components/FormWysiwyg/FormWysiwyg";
 import { useTranslation } from "react-i18next";
 import { noteSchema } from "../../schemas/noteSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FieldWithLabelAndError from "../../shared/form-components/FieldWithLabel/FieldWithLabelAndError";
+import draftToHtml from "draftjs-to-html";
 
 interface IProps {
 	addNoteView: boolean;
@@ -31,7 +32,7 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 	const { enqueueSnackbar } = useSnackbar();
 	const submitHandler = async (data: any) => {
 		const classes = data.classes.map(({ label, value }: Option) => ({ label, value }));
-		const note = { ...data, dateModified: Date.now(), classes };
+		const note = { ...data, dateModified: Date.now(), classes, content: draftToHtml(data.content) };
 		const successCallback = () => {
 			enqueueSnackbar(t("snackbar.success.addNote"), { variant: "success" });
 		};
@@ -44,7 +45,7 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 	};
 
 	return (
-		<FadeBackground>
+		<Modal open={!!addNoteView}>
 			<AddNoteViewStyling visible={addNoteView}>
 				<Form onSubmit={handleSubmit(submitHandler)}>
 					<RowWrapper>
@@ -86,7 +87,7 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 					</RowWrapper>
 				</Form>
 			</AddNoteViewStyling>
-		</FadeBackground>
+		</Modal>
 	);
 };
 

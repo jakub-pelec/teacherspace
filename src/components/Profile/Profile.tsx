@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { Wrapper, Logo, LogoWrapper, Grid, InfoSection, Information, Label, ListElement } from "./Elements";
+import { Wrapper, Logo, LogoWrapper, Grid, InfoSection, Information, Label, ListElement, ContentWrapper, AddMoreButton } from "./Elements";
 import { Helmet } from "react-helmet";
 import { AppState } from "../../typings/redux";
 import { useTranslation } from "react-i18next";
+import AddPropertyComponent from "./AddPropery";
 
 interface IProps {
 	topLevelHistory: ReturnType<typeof useHistory>;
@@ -12,6 +13,8 @@ interface IProps {
 }
 
 const Profile: React.FC<IProps> = ({ userData: { firstName, lastName, email, classes, subjects }, topLevelHistory }) => {
+	const [addClassOpen, toggleAddClass] = useState<boolean>(false);
+	const [addSubjectOpen, toggleAddSubject] = useState<boolean>(false);
 	const { t } = useTranslation();
 	return (
 		<>
@@ -19,47 +22,69 @@ const Profile: React.FC<IProps> = ({ userData: { firstName, lastName, email, cla
 				<title>Teacherspace - Profile</title>
 			</Helmet>
 			<Wrapper>
-				<LogoWrapper>
-					<Logo>
-						{firstName[0]}
-						{lastName[0]}
-					</Logo>
-				</LogoWrapper>
-				<Grid>
-					<InfoSection>
-						<Label>{t("profilePage.name")}</Label>
-						<Information>{`${firstName} ${lastName}`}</Information>
-					</InfoSection>
+				<ContentWrapper>
+					<LogoWrapper>
+						<Logo>
+							{firstName[0]}
+							{lastName[0]}
+						</Logo>
+					</LogoWrapper>
+					<Grid>
+						<InfoSection>
+							<Label>{t("profilePage.name")}</Label>
+							<Information>{`${firstName} ${lastName}`}</Information>
+						</InfoSection>
 
-					<InfoSection>
-						<Label>{t("profilePage.email")}</Label>
-						<Information>{email}</Information>
-					</InfoSection>
-					<InfoSection>
-						<Label>{t("profilePage.classes")}</Label>
-						<Information>
-							{classes.length ? (
-								classes.map(({ label }: Option, index: number) => {
-									return <ListElement key={index}>{label}</ListElement>;
-								})
-							) : (
-								<ListElement>{t("profilePage.noClasses")}</ListElement>
-							)}
-						</Information>
-					</InfoSection>
-					<InfoSection>
-						<Label>{t("profilePage.subjects")}</Label>
-						<Information>
-							{subjects.length ? (
-								subjects.map(({ label }: Option, index: number) => {
-									return <ListElement key={index}>{label}</ListElement>;
-								})
-							) : (
-								<div>{t("profilePage.noSubjects")}</div>
-							)}
-						</Information>
-					</InfoSection>
-				</Grid>
+						<InfoSection>
+							<Label>{t("profilePage.email")}</Label>
+							<Information>{email}</Information>
+						</InfoSection>
+						<InfoSection>
+							<AddMoreButton onClick={() => toggleAddClass(true)}>+</AddMoreButton>
+							<Label>{t("profilePage.classes")}</Label>
+							<Information>
+								{classes.length ? (
+									classes.map(({ label }: Option, index: number) => {
+										return <ListElement key={index}>{label}</ListElement>;
+									})
+								) : (
+									<ListElement>{t("profilePage.noClasses")}</ListElement>
+								)}
+							</Information>
+						</InfoSection>
+						<InfoSection>
+							<AddMoreButton onClick={() => toggleAddSubject(true)}>+</AddMoreButton>
+							<Label>{t("profilePage.subjects")}</Label>
+							<Information>
+								{subjects.length ? (
+									subjects.map(({ label }: Option, index: number) => {
+										return <ListElement key={index}>{label}</ListElement>;
+									})
+								) : (
+									<div>{t("profilePage.noSubjects")}</div>
+								)}
+							</Information>
+						</InfoSection>
+					</Grid>
+				</ContentWrapper>
+				{addClassOpen && (
+					<AddPropertyComponent
+						title="Add classes"
+						open={addClassOpen}
+						toggleModal={toggleAddClass}
+						type="class"
+						firestoreValues={classes}
+					/>
+				)}
+				{addSubjectOpen && (
+					<AddPropertyComponent
+						title="Add subjects"
+						open={addSubjectOpen}
+						toggleModal={toggleAddSubject}
+						type="subject"
+						firestoreValues={subjects}
+					/>
+				)}
 			</Wrapper>
 		</>
 	);
