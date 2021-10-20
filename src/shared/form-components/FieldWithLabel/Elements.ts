@@ -10,12 +10,12 @@ export const ErrorMessage = styled.div`
 	font-size: 0.7em;
 	font-weight: 500;
 	color: ${({ theme }) => theme.error};
-    position: absolute;
-    bottom: -15px;
-    left: 0;
+	position: absolute;
+	bottom: -15px;
+	left: 0;
 `;
 
 export const FieldWrapper = styled.div`
-    position: relative;
-    margin-bottom: 18px;
-`
+	position: relative;
+	height: 100%;
+`;

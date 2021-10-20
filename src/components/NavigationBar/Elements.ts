@@ -22,7 +22,7 @@ export const NavBar = styled.nav<ExpandProps>`
 	display: flex;
 	flex-direction: column;
 	height: calc(100% - 1em);
-	width: ${({ expanded }) => (expanded ? "10em" : "6em")};
+	width: ${({ expanded }) => (expanded ? "11em" : "6em")};
 	background-color: ${({ theme }) => theme.primary};
 	border-radius: 1em;
 	margin-top: 0.5em;

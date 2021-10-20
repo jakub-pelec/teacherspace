@@ -19,8 +19,8 @@ export const NoteView = styled.div<StyledProps>`
 	top: 50%;
 	left: 50%;
 	background-color: ${({ theme }) => theme.background};
-	height: 80%;
-	width: 40%;
+	height: 90%;
+	width: 90%;
 	border-radius: 1em;
 	padding: 1em;
 	overflow: hidden;

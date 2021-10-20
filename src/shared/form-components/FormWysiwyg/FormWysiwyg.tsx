@@ -15,9 +15,7 @@ const FormWysiwyg: React.FC<IProps> = ({ control, name, defaultValue, errored })
 			name={name}
 			control={control}
 			defaultValue={defaultValue || ""}
-			render={({ field: { onChange, onBlur, ref } }) => (
-				<Wysiwyg onChange={onChange} onBlur={onBlur} editorRef={ref} error={errored} />
-			)}
+			render={({ field: { onChange, onBlur, ref } }) => <Wysiwyg onChange={onChange} onBlur={onBlur} editorRef={ref} error={errored} />}
 		/>
 	);
 };

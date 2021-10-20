@@ -53,8 +53,6 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 								<FormTextField control={control} name="title" errored={errors.title?.message}></FormTextField>
 							</FieldWithLabelAndError>
 						</OptionWrapper>
-					</RowWrapper>
-					<RowWrapper>
 						<OptionWrapper>
 							<FieldWithLabelAndError label={t("addNoteView.subject")} errorMessage={errors.subject?.message}>
 								<FormTextField control={control} name="subject" errored={errors.subject?.message}></FormTextField>

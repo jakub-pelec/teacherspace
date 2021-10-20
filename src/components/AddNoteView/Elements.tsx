@@ -16,6 +16,7 @@ export const ButtonWrapper = styled.div`
 
 export const OptionWrapper = styled.div`
 	height: 100%;
+	width: 100%;
 `;
 export const Label = styled.div`
 	font-weight: 700;
@@ -23,8 +24,8 @@ export const Label = styled.div`
 
 export const AddNoteView = styled.div<StyledProps>`
 	position: absolute;
-	width: 60%;
-	height: 80%;
+	width: 90%;
+	height: 90%;
 	background-color: ${({ theme }) => theme.background};
 	border-radius: 1em;
 	top: 50%;
@@ -38,6 +39,7 @@ export const AddNoteView = styled.div<StyledProps>`
 
 export const Form = styled.form`
 	height: 100%;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
@@ -52,13 +54,15 @@ export const RowWrapper = styled.div<{ editor?: boolean }>`
 	justify-content: space-evenly;
 	align-items: center;
 	flex-direction: row;
-	max-height: 70%;
 	flex: ${({ editor }) => (editor ? 5 : 1)};
 	${({ editor }) =>
 		editor &&
 		css`
-			* {
-				align-self: flex-start;
+			height: 100%;
+
+			.rdw-wrapper-555 {
+				min-width: 100%;
+				min-height: 100%;
 			}
 		`}
 `;

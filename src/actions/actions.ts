@@ -107,10 +107,12 @@ export const addNote =
 	async (_: Dispatch, getState: () => AppState) => {
 		const { firestoreID } = getState().auth;
 		const noteRef = collection(firestore, "users", firestoreID, "notes");
+		console.log(note.content);
 		try {
 			await addDoc(noteRef, note);
 			successCallback();
 		} catch (e) {
+			console.log(e);
 			errorCallback();
 		} finally {
 			finalCallback();
