@@ -76,7 +76,8 @@
 			"logout": "Bye bye!",
 			"registerSecondStep": "Just one more step!",
 			"updateNote": "Note updates sucessfuly.",
-			"register": "Welcome!"
+			"register": "Welcome!",
+			"updateUserProp": "{{property}} updates succesfully!"
 		}
 	}
 }

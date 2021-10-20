@@ -63,7 +63,7 @@ export const Label = styled.div`
 export const Information = styled.div`
 	border-radius: 1em;
 	width: fit-content;
-	padding: .5em;
+	padding: 0.5em;
 	min-width: 20rem;
 	font-size: 1.5rem;
 `;
@@ -94,6 +94,46 @@ export const AddMoreButton = styled(Button)`
 	left: -20px;
 	width: 10px !important;
 	height: 10px !important;
+	border-radius: 25px !important;
+	padding: 5% !important;
+	min-width: unset !important;
+`;
+
+export const AddPropertyWrapper = styled.div`
+	background-color: white;
+	width: 50%;
+	height: 50%;
+	transform: translate(50%, 50%);
 	border-radius: 20px;
-	padding: 0 !important;
+`;
+
+export const AddPropertyContentWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+`
+
+export const AddPropertyButton = styled(Button)`
+	width: 40% !important;
+`;
+
+export const CloseModal = styled(Button)`
+	position: fixed;
+	top: 10%;
+	left: 85%;
+	width: 10px !important;
+	height: 10px !important;
+	border-radius: 25px !important;
+	padding: 3% !important;
+	min-width: unset !important;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+export const Title = styled.div`
+	font-size: 32px;
 `

@@ -3,14 +3,14 @@ import { connect } from "react-redux";
 import { NoteType } from "../../typings/wysiwyg";
 import CloseIcon from "@mui/icons-material/Close";
 import { NoteView, Title, Subject, ClassesWrapper, Class, ExitButton } from "./Elements";
-import FadeBackground from "../../shared/components/FadeBackground/FadeBackground";
+import Modal from "../../shared/components/Modal/Modal";
 import ReacyWysiwyg from "../../shared/components/ReactWysiwyg/ReactWysiwyg";
 import { Button } from "../../shared/components/Button/Button";
 import { RawDraftContentState } from "draft-js";
 import { updateNote } from "../../actions/actions";
 import { useSnackbar } from "notistack";
 import { useTranslation } from "react-i18next";
-import draftToHtml  from 'draftjs-to-html';
+import draftToHtml from "draftjs-to-html";
 
 interface IProps {
 	note: FirestoreDocumentDataWithId<NoteType>;
@@ -19,7 +19,7 @@ interface IProps {
 	updateNoteProps: any;
 	handlePresentationOpen: () => void;
 	onChange: (value: RawDraftContentState) => void;
-	content: RawDraftContentState
+	content: RawDraftContentState;
 }
 
 const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNoteProps, handlePresentationOpen, onChange, content }) => {
@@ -29,18 +29,18 @@ const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNotePro
 
 	const handleSubmit = () => {
 		const successCallback = () => {
-			enqueueSnackbar(t('snackbar.success.updateNote'), { variant: "success" });
+			enqueueSnackbar(t("snackbar.success.updateNote"), { variant: "success" });
 			setShowNote(undefined);
 		};
 		const errorCallback = () => {
-			enqueueSnackbar(t('snackbar.errors.default'), { variant: "error" });
+			enqueueSnackbar(t("snackbar.errors.default"), { variant: "error" });
 		};
 		const finalCallback = () => {};
 		updateNoteProps({ ...note, content: draftToHtml(content) }, { successCallback, errorCallback, finalCallback });
 	};
 
 	return (
-		<FadeBackground>
+		<Modal open={open}>
 			<NoteView open={open}>
 				<Title>{title}</Title>
 				<Subject>
@@ -61,7 +61,7 @@ const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNotePro
 				<Button onClick={handleSubmit}>{t("showNoteView.save")}</Button>
 				<Button onClick={handlePresentationOpen}>{t("showNoteView.present")}</Button>
 			</NoteView>
-		</FadeBackground>
+		</Modal>
 	);
 };
 

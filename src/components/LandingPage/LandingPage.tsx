@@ -3,7 +3,7 @@ import { RouteComponentProps } from "react-router";
 import { Button } from "../../shared/components/Button/Button";
 import { Helmet } from "react-helmet";
 import Select from "../../shared/components/Select/Select";
-import { languageOptions } from "../../constants/languageOptions";
+import { languageOptions } from "../../constants/options";
 import { useTranslation } from "react-i18next";
 
 import { Wrapper } from "./Elements";

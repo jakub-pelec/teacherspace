@@ -3,11 +3,11 @@ import { AddNoteView as AddNoteViewStyling, OptionWrapper, ButtonWrapper, Form, 
 import FormTextField from "../../shared/form-components/FormTextField/FormTextField";
 import FormSelectField from "../../shared/form-components/FormSelectField/FormSelectField";
 import { Button as StyledButton } from "../../shared/components/Button/Button";
-import { classOptions } from "../SignupSecondStage/options";
+import { classOptions } from "../../constants/options";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
 import { addNote } from "../../actions/actions";
-import FadeBackground from "../../shared/components/FadeBackground/FadeBackground";
+import Modal from "../../shared/components/Modal/Modal";
 import { useSnackbar } from "notistack";
 import FormWysiwyg from "../../shared/form-components/FormWysiwyg/FormWysiwyg";
 import { useTranslation } from "react-i18next";
@@ -45,7 +45,7 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 	};
 
 	return (
-		<FadeBackground>
+		<Modal open={!!addNoteView}>
 			<AddNoteViewStyling visible={addNoteView}>
 				<Form onSubmit={handleSubmit(submitHandler)}>
 					<RowWrapper>
@@ -87,7 +87,7 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 					</RowWrapper>
 				</Form>
 			</AddNoteViewStyling>
-		</FadeBackground>
+		</Modal>
 	);
 };
 
