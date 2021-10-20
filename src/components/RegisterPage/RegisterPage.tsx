@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import FieldWithLabel from "../../shared/form-components/FieldWithLabel/FieldWithLabel";
+import FieldWithLabel from "../../shared/form-components/FieldWithLabel/FieldWithLabelAndError";
 import { Button } from "../../shared/components/Button/Button";
 import { Wrapper, FormField, FormContainer, Title, FullNameContainer, ContentColumnRight, ContentColumnLeft, Background } from "./Elements";
 import { registerSchema } from "../../schemas/registerSchema";

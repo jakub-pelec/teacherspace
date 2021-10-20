@@ -8,7 +8,7 @@ import { useSnackbar } from "notistack";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../schemas/loginSchema";
 import { login } from "../../actions/actions";
-import FieldWithLabel from "../../shared/form-components/FieldWithLabel/FieldWithLabel";
+import FieldWithLabel from "../../shared/form-components/FieldWithLabel/FieldWithLabelAndError";
 import { CircularProgress } from "@material-ui/core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { PageWrapper, ContentColumnRight, ContentColumnLeft, FormField, Title, ColumnWrapper, Background } from "./Elements";

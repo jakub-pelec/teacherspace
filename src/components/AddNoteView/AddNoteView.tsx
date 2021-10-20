@@ -1,5 +1,5 @@
 import React from "react";
-import { AddNoteView as AddNoteViewStyling, Label, OptionWrapper, ButtonWrapper, Form, RowWrapper } from "./Elements";
+import { AddNoteView as AddNoteViewStyling, OptionWrapper, ButtonWrapper, Form, RowWrapper } from "./Elements";
 import FormTextField from "../../shared/form-components/FormTextField/FormTextField";
 import FormSelectField from "../../shared/form-components/FormSelectField/FormSelectField";
 import { Button as StyledButton } from "../../shared/components/Button/Button";
@@ -13,6 +13,7 @@ import FormWysiwyg from "../../shared/form-components/FormWysiwyg/FormWysiwyg";
 import { useTranslation } from "react-i18next";
 import { noteSchema } from "../../schemas/noteSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import FieldWithLabelAndError from "../../shared/form-components/FieldWithLabel/FieldWithLabelAndError";
 
 interface IProps {
 	addNoteView: boolean;
@@ -32,10 +33,10 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 		const classes = data.classes.map(({ label, value }: Option) => ({ label, value }));
 		const note = { ...data, dateModified: Date.now(), classes };
 		const successCallback = () => {
-			enqueueSnackbar(t('snackbar.success.addNote'), { variant: "success" });
+			enqueueSnackbar(t("snackbar.success.addNote"), { variant: "success" });
 		};
 		const errorCallback = () => {
-			enqueueSnackbar(t('snackbar.errors.default'), { variant: "error" });
+			enqueueSnackbar(t("snackbar.errors.default"), { variant: "error" });
 		};
 		const finalCallback = () => {};
 		addNoteProps(note, { successCallback, errorCallback, finalCallback });
@@ -48,24 +49,33 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 				<Form onSubmit={handleSubmit(submitHandler)}>
 					<RowWrapper>
 						<OptionWrapper>
-							<Label>{t("addNoteView.title")}</Label>
-							<FormTextField control={control} name="title" errored={errors.title?.message}></FormTextField>
+							<FieldWithLabelAndError label={t("addNoteView.title")}>
+								<FormTextField control={control} name="title" errored={errors.title?.message}></FormTextField>
+							</FieldWithLabelAndError>
 						</OptionWrapper>
 					</RowWrapper>
 					<RowWrapper>
 						<OptionWrapper>
-							<Label>{t("addNoteView.subject")}</Label>
-							<FormTextField control={control} name="subject" errored={errors.subject?.message}></FormTextField>
+							<FieldWithLabelAndError label={t("addNoteView.subject")}>
+								<FormTextField control={control} name="subject" errored={errors.subject?.message}></FormTextField>
+							</FieldWithLabelAndError>
 						</OptionWrapper>
 						<OptionWrapper>
-							<Label>{t("addNoteView.classes")}</Label>
-							<FormSelectField options={classOptions} control={control} name="classes" errored={errors.classes?.message}></FormSelectField>
+							<FieldWithLabelAndError label={t("addNoteView.classes")}>
+								<FormSelectField
+									options={classOptions}
+									control={control}
+									name="classes"
+									errored={errors.classes?.message}
+								></FormSelectField>
+							</FieldWithLabelAndError>
 						</OptionWrapper>
 					</RowWrapper>
 					<RowWrapper editor>
 						<OptionWrapper>
-							<Label>{t("addNoteView.note")}</Label>
-							<FormWysiwyg control={control} name="content" errored={errors.content?.message} />
+							<FieldWithLabelAndError label={t("addNoteView.note")}>
+								<FormWysiwyg control={control} name="content" errored={errors.content?.message} />
+							</FieldWithLabelAndError>
 						</OptionWrapper>
 					</RowWrapper>
 					<RowWrapper>
