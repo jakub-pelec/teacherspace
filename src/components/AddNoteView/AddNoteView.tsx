@@ -49,19 +49,19 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 				<Form onSubmit={handleSubmit(submitHandler)}>
 					<RowWrapper>
 						<OptionWrapper>
-							<FieldWithLabelAndError label={t("addNoteView.title")}>
+							<FieldWithLabelAndError label={t("addNoteView.title")} errorMessage={errors.title?.message}>
 								<FormTextField control={control} name="title" errored={errors.title?.message}></FormTextField>
 							</FieldWithLabelAndError>
 						</OptionWrapper>
 					</RowWrapper>
 					<RowWrapper>
 						<OptionWrapper>
-							<FieldWithLabelAndError label={t("addNoteView.subject")}>
+							<FieldWithLabelAndError label={t("addNoteView.subject")} errorMessage={errors.subject?.message}>
 								<FormTextField control={control} name="subject" errored={errors.subject?.message}></FormTextField>
 							</FieldWithLabelAndError>
 						</OptionWrapper>
 						<OptionWrapper>
-							<FieldWithLabelAndError label={t("addNoteView.classes")}>
+							<FieldWithLabelAndError label={t("addNoteView.classes")} errorMessage={errors.classes?.message}>
 								<FormSelectField
 									options={classOptions}
 									control={control}
@@ -73,7 +73,7 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 					</RowWrapper>
 					<RowWrapper editor>
 						<OptionWrapper>
-							<FieldWithLabelAndError label={t("addNoteView.note")}>
+							<FieldWithLabelAndError label={t("addNoteView.note")} errorMessage={errors.content?.message}>
 								<FormWysiwyg control={control} name="content" errored={errors.content?.message} />
 							</FieldWithLabelAndError>
 						</OptionWrapper>

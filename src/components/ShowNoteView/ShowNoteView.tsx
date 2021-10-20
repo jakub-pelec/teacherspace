@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { connect } from "react-redux";
 import { NoteType } from "../../typings/wysiwyg";
 import CloseIcon from "@mui/icons-material/Close";
@@ -17,13 +17,14 @@ interface IProps {
 	setShowNote: Dispatch<SetStateAction<FirestoreDocumentDataWithId<NoteType> | undefined>>;
 	updateNoteProps: any;
 	handlePresentationOpen: () => void;
+	onChange: (value: RawDraftContentState) => void;
+	content: RawDraftContentState
 }
 
-const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNoteProps, handlePresentationOpen }) => {
+const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNoteProps, handlePresentationOpen, onChange, content }) => {
 	const { t } = useTranslation();
-	const { title, subject, classes, content } = note;
+	const { title, subject, classes } = note;
 	const { enqueueSnackbar } = useSnackbar();
-	const [noteState, setNoteState] = useState<RawDraftContentState>(content);
 
 	const handleSubmit = () => {
 		const successCallback = () => {
@@ -34,7 +35,7 @@ const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNotePro
 			enqueueSnackbar(t('snackbar.errors.default'), { variant: "error" });
 		};
 		const finalCallback = () => {};
-		updateNoteProps({ ...note, content: noteState }, { successCallback, errorCallback, finalCallback });
+		updateNoteProps({ ...note, content }, { successCallback, errorCallback, finalCallback });
 	};
 
 	return (
@@ -52,7 +53,7 @@ const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNotePro
 						  })
 						: ""}
 				</ClassesWrapper>
-				<ReacyWysiwyg initialContentState={noteState} onChange={setNoteState} />
+				<ReacyWysiwyg initialContentState={content} onChange={onChange} />
 				<ExitButton role="button" onClick={() => setShowNote(undefined)}>
 					<CloseIcon />
 				</ExitButton>

@@ -21,9 +21,10 @@ interface IProps {
 
 const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 	const { t } = useTranslation();
-	const [addNoteView, setAddNoteView] = useState(false);
+	const [addNoteView, setAddNoteView] = useState<boolean>(false);
 	const [showNote, setShowNote] = useState<FirestoreDocumentDataWithId<NoteType>>();
 	const [presentationMode, togglePresentationMode] = useState<boolean>(false);
+	const [newContent, setNewContent] = useState(showNote?.content);
 
 	const handlePresentationOpen = () => {
 		togglePresentationMode(true);
@@ -64,11 +65,13 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 						open={showNote?.id ? true : false}
 						setShowNote={setShowNote}
 						handlePresentationOpen={handlePresentationOpen}
+						onChange={(value: RawDraftContentState) => setNewContent(value)}
+						content={(newContent || showNote?.content) as RawDraftContentState}
 					/>
 				)}
 				{presentationMode && (
 					<PresentationView
-						html={draftToHtml(showNote?.content as RawDraftContentState)}
+						html={draftToHtml(newContent as RawDraftContentState)}
 						title={showNote?.title as string}
 						handleClose={handleClose}
 					/>
