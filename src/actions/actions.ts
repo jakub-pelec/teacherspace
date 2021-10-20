@@ -11,11 +11,12 @@ import {
 } from "./types";
 import { auth, apiPath, apiRoutes, firestore } from "../config/firebase";
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut, setPersistence, browserSessionPersistence } from "@firebase/auth";
-import { collection, onSnapshot, doc, addDoc, updateDoc } from "firebase/firestore";
+import { collection, onSnapshot, doc, addDoc, updateDoc, DocumentData } from "firebase/firestore";
 import { Dispatch } from "redux";
 import axios from "axios";
 import { AppState } from "../typings/redux";
 import { NoteType } from "../typings/wysiwyg";
+import { convertFromHTML, convertToRaw, ContentState } from "draft-js";
 
 interface RegisterResponseData {
 	code: string;
@@ -95,7 +96,16 @@ export const subscribeToAuthUser = () => async (dispatch: Dispatch) =>
 			onSnapshot(userNotesRef, (snapshot) => {
 				const notes: FirestoreDocumentDataWithId<NoteType>[] = [];
 				snapshot.docs.forEach((doc) => {
-					notes.push({ ...(doc.data() as NoteType), id: doc.id });
+					const docData: DocumentData = doc.data();
+					const blocksFromHTML = convertFromHTML(docData.content);
+					const state = ContentState.createFromBlockArray(blocksFromHTML.contentBlocks, blocksFromHTML.entityMap);
+					//@ts-ignore
+					const documentToSave: FirestoreDocumentDataWithId<NoteType> = {
+						...docData,
+						content: convertToRaw(state),
+						id: doc.id,
+					};
+					notes.push(documentToSave);
 				});
 				dispatch({ type: SAVE_NOTES, payload: notes });
 			});

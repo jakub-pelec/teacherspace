@@ -10,6 +10,7 @@ import { RawDraftContentState } from "draft-js";
 import { updateNote } from "../../actions/actions";
 import { useSnackbar } from "notistack";
 import { useTranslation } from "react-i18next";
+import draftToHtml  from 'draftjs-to-html';
 
 interface IProps {
 	note: FirestoreDocumentDataWithId<NoteType>;
@@ -35,7 +36,7 @@ const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNotePro
 			enqueueSnackbar(t('snackbar.errors.default'), { variant: "error" });
 		};
 		const finalCallback = () => {};
-		updateNoteProps({ ...note, content }, { successCallback, errorCallback, finalCallback });
+		updateNoteProps({ ...note, content: draftToHtml(content) }, { successCallback, errorCallback, finalCallback });
 	};
 
 	return (
