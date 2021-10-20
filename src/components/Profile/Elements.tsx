@@ -1,9 +1,26 @@
 import styled from "styled-components";
+import { Button } from "../../shared/components/Button/Button";
+
+export const ContentWrapper = styled.div`
+	width: 90%;
+	height: 90%;
+	background-color: white;
+	border-radius: 25px;
+	box-shadow: 0px 11px 26px -15px ${({ theme }) => theme.primary}, 0px 31px 26px -15px rgba(0, 0, 0, 1);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	padding: 5% 0;
+	text-align: center;
+	min-width: 800px;
+`;
 
 export const Grid = styled.div`
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(2, 6fr);
 	grid-gap: 2em;
+	flex: 3;
 `;
 
 export const Wrapper = styled.div`
@@ -28,6 +45,7 @@ export const Logo = styled.div`
 	text-align: center;
 	font-family: "Roboto Mono";
 	box-shadow: 0px 11px 26px -15px ${({ theme }) => theme.primary}, 0px 31px 26px -15px rgba(0, 0, 0, 1);
+	flex: 1;
 `;
 
 export const LogoWrapper = styled.div`
@@ -46,13 +64,18 @@ export const Label = styled.div`
 export const Information = styled.div`
 	border-radius: 1em;
 	width: fit-content;
-	padding: .5em;
+	padding: 0.5em;
 	min-width: 20rem;
 	font-size: 1.5rem;
 `;
 
 export const InfoSection = styled.div`
 	margin-bottom: 3em;
+	border: 2px solid ${({ theme }) => theme.primary};
+	box-shadow: 0px 11px 26px -15px ${({ theme }) => theme.primary}, 0px 31px 26px -15px ${({ theme }) => theme.primary};
+	max-height: 250px;
+	overflow: auto;
+	padding: 5% 0;
 `;
 
 export const ListElement = styled.div`
@@ -64,4 +87,54 @@ export const ListElement = styled.div`
 	margin-bottom: 4%;
 	font-weight: 700;
 	box-shadow: 0px 10px 30px -10px white;
-	`;
+`;
+
+export const AddMoreButton = styled(Button)`
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	width: 10px !important;
+	height: 10px !important;
+	border-radius: 25px !important;
+	padding: 5% !important;
+	min-width: unset !important;
+`;
+
+export const AddPropertyWrapper = styled.div`
+	background-color: white;
+	width: 50%;
+	height: 50%;
+	transform: translate(50%, 50%);
+	border-radius: 20px;
+`;
+
+export const AddPropertyContentWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+`
+
+export const AddPropertyButton = styled(Button)`
+	width: 40% !important;
+`;
+
+export const CloseModal = styled(Button)`
+	position: fixed;
+	top: 10%;
+	left: 85%;
+	width: 10px !important;
+	height: 10px !important;
+	border-radius: 25px !important;
+	padding: 3% !important;
+	min-width: unset !important;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+export const Title = styled.div`
+	font-size: 32px;
+`

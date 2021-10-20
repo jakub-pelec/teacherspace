@@ -16,7 +16,7 @@ export const ColumnWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	border-radius: 1em;
-	min-width: 50vw;
+	min-width: 800px;
 	height: 60%;
 	overflow: hidden;
 	filter: blur(0px);

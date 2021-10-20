@@ -16,19 +16,20 @@ export const Label = styled.div<ExpandProps>`
 	margin: 0 0.5em;
 	transition: all 0.3s ease-out;
 	color: ${({ theme }) => theme.background};
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 `;
 export const NavBar = styled.nav<ExpandProps>`
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	height: calc(100% - 1em);
-	width: ${({ expanded }) => (expanded ? "11em" : "6em")};
+	width: ${({ expanded }) => (expanded ? "14em" : "6em")};
 	background-color: ${({ theme }) => theme.primary};
 	border-radius: 1em;
-	margin-top: 0.5em;
-	margin-left: 0.5em;
-	padding-top: 1em;
-	padding-left: 1.1em;
+	padding: 1em;
+	margin: 0.5em;
 	align-items: flex-start;
 	justify-content: space-between;
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
