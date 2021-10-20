@@ -1,7 +1,8 @@
 {
 	"landingPage": {
 		"login": "Login",
-		"register": "Register page"
+		"register": "Register",
+		"title": "Welcome!"
 	},
 	"loginPage": {
 		"title": "Please log in",
