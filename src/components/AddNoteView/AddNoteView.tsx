@@ -34,9 +34,7 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 	const { enqueueSnackbar } = useSnackbar();
 	const submitHandler = async (data: any) => {
 		const classes = data.classes.map(({ label, value }: Option) => ({ label, value }));
-		const subject = data.subject;
-		console.log(data);
-		const note = { ...data, dateModified: Date.now(), subject, classes, content: draftToHtml(data.content) };
+		const note = { ...data, dateModified: Date.now(), classes, content: draftToHtml(data.content) };
 		const successCallback = () => {
 			enqueueSnackbar(t("snackbar.success.addNote"), { variant: "success" });
 		};
