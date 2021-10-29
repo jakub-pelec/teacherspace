@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 import { AppState } from "../../typings/redux";
 import { useTranslation } from "react-i18next";
 import AddPropertyComponent from "./AddPropery";
+import AddIcon from "@mui/icons-material/Add";
 
 interface IProps {
 	topLevelHistory: ReturnType<typeof useHistory>;
@@ -40,8 +41,10 @@ const Profile: React.FC<IProps> = ({ userData: { firstName, lastName, email, cla
 							<Information>{email}</Information>
 						</InfoSection>
 						<InfoSection>
-							<AddMoreButton onClick={() => toggleAddClass(true)}>+</AddMoreButton>
 							<Label>{t("profilePage.classes")}</Label>
+							<AddMoreButton onClick={() => toggleAddClass(true)}>
+								<AddIcon />
+							</AddMoreButton>
 							<Information>
 								{classes.length ? (
 									classes.map(({ label }: Option, index: number) => {
@@ -53,8 +56,10 @@ const Profile: React.FC<IProps> = ({ userData: { firstName, lastName, email, cla
 							</Information>
 						</InfoSection>
 						<InfoSection>
-							<AddMoreButton onClick={() => toggleAddSubject(true)}>+</AddMoreButton>
 							<Label>{t("profilePage.subjects")}</Label>
+							<AddMoreButton onClick={() => toggleAddSubject(true)}>
+								<AddIcon />
+							</AddMoreButton>
 							<Information>
 								{subjects.length ? (
 									subjects.map(({ label }: Option, index: number) => {

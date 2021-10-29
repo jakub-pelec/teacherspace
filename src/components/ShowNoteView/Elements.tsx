@@ -37,6 +37,19 @@ export const Title = styled.h1`
 export const Subject = styled.h2`
 	margin-bottom: 0.5em;
 `;
+
+export const ButtonContainer = styled.div`
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-evenly;
+	align-items: center;
+	width: 50%;
+	align-self: center;
+	button {
+		max-width: 20rem;
+	}
+`;
+
 export const ClassesWrapper = styled.div`
 	display: flex;
 	max-width: 15em;
