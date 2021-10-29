@@ -22,7 +22,7 @@ const NoteComponent: React.FC<IProps> = ({ id, title, subject, classes, content,
 			}}
 		>
 			<Title>{title}</Title>
-			<Subject>{subject}</Subject>
+			<Subject>{subject.label}</Subject>
 			<ClassesWrapper>
 				{classes?.length
 					? classes.map(({ label }: Option) => {

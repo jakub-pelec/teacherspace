@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from "react";
 import { connect } from "react-redux";
 import { NoteType } from "../../typings/wysiwyg";
 import CloseIcon from "@mui/icons-material/Close";
-import { NoteView, Title, Subject, ClassesWrapper, Class, ExitButton } from "./Elements";
+import { NoteView, Title, Subject, ClassesWrapper, Class, ExitButton, ButtonContainer } from "./Elements";
 import Modal from "../../shared/components/Modal/Modal";
 import ReacyWysiwyg from "../../shared/components/ReactWysiwyg/ReactWysiwyg";
 import { Button } from "../../shared/components/Button/Button";
@@ -44,7 +44,7 @@ const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNotePro
 			<NoteView open={open}>
 				<Title>{title}</Title>
 				<Subject>
-					{t("showNoteView.subject")} {subject}
+					{t("showNoteView.subject")} {subject.label}
 				</Subject>
 				<ClassesWrapper>
 					{t("showNoteView.classes")}
@@ -58,8 +58,10 @@ const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNotePro
 				<ExitButton role="button" onClick={() => setShowNote(undefined)}>
 					<CloseIcon />
 				</ExitButton>
-				<Button onClick={handleSubmit}>{t("showNoteView.save")}</Button>
-				<Button onClick={handlePresentationOpen}>{t("showNoteView.present")}</Button>
+				<ButtonContainer>
+					<Button onClick={handleSubmit}>{t("showNoteView.save")}</Button>
+					<Button onClick={handlePresentationOpen}>{t("showNoteView.present")}</Button>
+				</ButtonContainer>
 			</NoteView>
 		</Modal>
 	);

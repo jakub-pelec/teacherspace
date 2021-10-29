@@ -24,11 +24,11 @@ const NavigationBar: React.FC<IProps> = ({ logoutProps, topLevelHistory }) => {
 	const theme: any = useTheme();
 	const handleLogout = () => {
 		const successCallback = () => {
-			enqueueSnackbar(t('snackbar.success.logout'), { variant: "success" });
+			enqueueSnackbar(t("snackbar.success.logout"), { variant: "success" });
 			topLevelHistory.push("/");
 		};
 		const errorCallback = () => {
-			enqueueSnackbar(t('snackbar.errors.default'), { variant: "error" });
+			enqueueSnackbar(t("snackbar.errors.default"), { variant: "error" });
 		};
 		const finalCallback = () => {};
 		logoutProps({ successCallback, errorCallback, finalCallback });
@@ -36,7 +36,7 @@ const NavigationBar: React.FC<IProps> = ({ logoutProps, topLevelHistory }) => {
 	return (
 		<NavBar expanded={expanded}>
 			<Logo />
-			<OptionWrapper>
+			<OptionWrapper expanded={expanded}>
 				<StyledLink to="home">
 					<NavOption>
 						<LogOut>

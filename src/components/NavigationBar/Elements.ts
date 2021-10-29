@@ -13,7 +13,7 @@ export const StyledLink = styled(Link)`
 export const Label = styled.div<ExpandProps>`
 	display: ${({ expanded }) => (expanded ? "block" : "none")};
 	opacity: ${({ expanded }) => (expanded ? 1 : 0)};
-	margin: 0 0.5em;
+	margin: 0 0.5rem;
 	transition: all 0.3s ease-out;
 	color: ${({ theme }) => theme.background};
 	white-space: nowrap;
@@ -28,7 +28,7 @@ export const NavBar = styled.nav<ExpandProps>`
 	width: ${({ expanded }) => (expanded ? "14em" : "6em")};
 	background-color: ${({ theme }) => theme.primary};
 	border-radius: 1em;
-	padding: 1em;
+	padding: 1rem;
 	margin: 0.5em;
 	align-items: flex-start;
 	justify-content: space-between;
@@ -43,15 +43,18 @@ export const Logo = styled.div`
 	background-color: ${({ theme }) => theme.background};
 `;
 
-export const OptionWrapper = styled.div``;
+export const OptionWrapper = styled.div<ExpandProps>`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	align-items: ${({ expanded }) => (expanded ? "flex-start" : "center")}; ;
+`;
 
 export const NavOption = styled(Button)`
 	&& {
-		display: flex;
-		align-items: center;
-		justify-content: center;
 		border-radius: 1em;
 		text-transform: none;
+		width: 100%;
 		min-width: 0px;
 		border: 3px solid rgba(0, 0, 0, 0);
 		&:hover {

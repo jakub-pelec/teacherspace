@@ -6,7 +6,7 @@ interface ModalProps {
 
 export const Modal = styled.div<ModalProps>`
 	position: fixed;
-	widht: 100%;
+	width: 100%;
 	height: 100%;
 	top: 0;
 	left: 0;

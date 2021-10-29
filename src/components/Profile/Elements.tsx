@@ -39,6 +39,7 @@ export const Logo = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	text-align: center;
 	font-size: 3rem;
 	color: white;
 	letter-spacing: 0.5rem;
@@ -67,6 +68,8 @@ export const Information = styled.div`
 	padding: 0.5em;
 	min-width: 20rem;
 	font-size: 1.5rem;
+	max-height: 60%;
+	overflow-y: auto;
 `;
 
 export const InfoSection = styled.div`
@@ -74,7 +77,7 @@ export const InfoSection = styled.div`
 	border: 2px solid ${({ theme }) => theme.primary};
 	box-shadow: 0px 11px 26px -15px ${({ theme }) => theme.primary}, 0px 31px 26px -15px ${({ theme }) => theme.primary};
 	max-height: 250px;
-	overflow: auto;
+	overflow: hidden;
 	padding: 5% 0;
 `;
 
@@ -90,21 +93,21 @@ export const ListElement = styled.div`
 `;
 
 export const AddMoreButton = styled(Button)`
-	position: absolute;
-	top: -20px;
-	left: -20px;
-	width: 10px !important;
-	height: 10px !important;
-	border-radius: 25px !important;
-	padding: 5% !important;
-	min-width: unset !important;
+	&& {
+		height: 2rem;
+		width: 2rem;
+		min-width: unset;
+	}
 `;
 
 export const AddPropertyWrapper = styled.div`
+	position: relative;
+	top: 50%;
+	left: 50%;
 	background-color: white;
-	width: 50%;
-	height: 50%;
-	transform: translate(50%, 50%);
+	width: 40%;
+	height: 40%;
+	transform: translate(-50%, -50%);
 	border-radius: 20px;
 `;
 
@@ -115,26 +118,29 @@ export const AddPropertyContentWrapper = styled.div`
 	align-items: center;
 	width: 100%;
 	height: 100%;
-`
+`;
 
 export const AddPropertyButton = styled(Button)`
 	width: 40% !important;
 `;
 
 export const CloseModal = styled(Button)`
-	position: fixed;
-	top: 10%;
-	left: 85%;
-	width: 10px !important;
-	height: 10px !important;
-	border-radius: 25px !important;
-	padding: 3% !important;
-	min-width: unset !important;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	&& {
+		position: absolute;
+		top: 0.5rem;
+		right: 0.5rem;
+		max-width: 0.5rem !important;
+		max-height: 0.5rem !important;
+		border-radius: 25px;
+		padding: 3%;
+		min-width: unset;
+		min-height: unset;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 `;
 
 export const Title = styled.div`
 	font-size: 32px;
-`
+`;
