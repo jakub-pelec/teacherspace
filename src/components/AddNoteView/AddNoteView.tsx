@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
 import { addNote } from "../../actions/actions";
 import Modal from "../../shared/components/Modal/Modal";
+
 import { useSnackbar } from "notistack";
 import FormWysiwyg from "../../shared/form-components/FormWysiwyg/FormWysiwyg";
 import { useTranslation } from "react-i18next";

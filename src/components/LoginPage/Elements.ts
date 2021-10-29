@@ -34,6 +34,9 @@ export const ContentColumnRight = styled.div`
 	background-color: ${({ theme }) => theme.background};
 	form {
 		width: 100%;
+		button {
+			margin-top: 1rem;
+		}
 	}
 `;
 
