@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
 import { addNote } from "../../actions/actions";
 import Modal from "../../shared/components/Modal/Modal";
-
 import { useSnackbar } from "notistack";
 import FormWysiwyg from "../../shared/form-components/FormWysiwyg/FormWysiwyg";
 import { useTranslation } from "react-i18next";
@@ -16,6 +15,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import FieldWithLabelAndError from "../../shared/form-components/FieldWithLabel/FieldWithLabelAndError";
 import draftToHtml from "draftjs-to-html";
 import { AppState } from "../../typings/redux";
+import FormSelectNoInput from "../../shared/form-components/FormSelectNoInput/FormSelecNoInput";
 
 interface IProps {
 	addNoteView: boolean;
@@ -34,7 +34,9 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 	const { enqueueSnackbar } = useSnackbar();
 	const submitHandler = async (data: any) => {
 		const classes = data.classes.map(({ label, value }: Option) => ({ label, value }));
-		const note = { ...data, dateModified: Date.now(), classes, content: draftToHtml(data.content) };
+		const subject = data.subject;
+		console.log(data);
+		const note = { ...data, dateModified: Date.now(), subject, classes, content: draftToHtml(data.content) };
 		const successCallback = () => {
 			enqueueSnackbar(t("snackbar.success.addNote"), { variant: "success" });
 		};
@@ -45,6 +47,8 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 		addNoteProps(note, { successCallback, errorCallback, finalCallback });
 		setAddNoteView((prevState: boolean) => !prevState);
 	};
+
+	const subjects = userData.subjects.map((el) => el);
 
 	return (
 		<Modal open={!!addNoteView}>
@@ -58,7 +62,7 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 						</OptionWrapper>
 						<OptionWrapper>
 							<FieldWithLabelAndError label={t("addNoteView.subject")} errorMessage={errors.subject?.message}>
-								<FormTextField control={control} name="subject" errored={errors.subject?.message}></FormTextField>
+								<FormSelectNoInput control={control} name="subject" options={subjects}></FormSelectNoInput>
 							</FieldWithLabelAndError>
 						</OptionWrapper>
 						<OptionWrapper>

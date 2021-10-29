@@ -44,7 +44,7 @@ const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNotePro
 			<NoteView open={open}>
 				<Title>{title}</Title>
 				<Subject>
-					{t("showNoteView.subject")} {subject}
+					{t("showNoteView.subject")} {subject.label}
 				</Subject>
 				<ClassesWrapper>
 					{t("showNoteView.classes")}
