@@ -96,6 +96,7 @@ export const AddMoreButton = styled(Button)`
 	&& {
 		height: 2rem;
 		width: 2rem;
+		margin: 0.5rem;
 		min-width: unset;
 	}
 `;
