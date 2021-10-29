@@ -3,7 +3,6 @@ import { AddNoteView as AddNoteViewStyling, OptionWrapper, ButtonWrapper, Form, 
 import FormTextField from "../../shared/form-components/FormTextField/FormTextField";
 import FormSelectField from "../../shared/form-components/FormSelectField/FormSelectField";
 import { Button as StyledButton } from "../../shared/components/Button/Button";
-import { classOptions } from "../../constants/options";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
 import { addNote } from "../../actions/actions";
@@ -15,14 +14,16 @@ import { noteSchema } from "../../schemas/noteSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FieldWithLabelAndError from "../../shared/form-components/FieldWithLabel/FieldWithLabelAndError";
 import draftToHtml from "draftjs-to-html";
+import { AppState } from "../../typings/redux";
 
 interface IProps {
 	addNoteView: boolean;
 	setAddNoteView: any;
 	addNoteProps: any;
+	userData: UserData;
 }
 
-const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNoteProps }) => {
+const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNoteProps, userData }) => {
 	const { t } = useTranslation();
 	const {
 		control,
@@ -62,7 +63,7 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 						<OptionWrapper>
 							<FieldWithLabelAndError label={t("addNoteView.classes")} errorMessage={errors.classes?.message}>
 								<FormSelectField
-									options={classOptions}
+									options={userData.classes}
 									control={control}
 									name="classes"
 									errored={errors.classes?.message}
@@ -89,4 +90,8 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 	);
 };
 
-export default connect(null, { addNoteProps: addNote })(AddNoteView);
+const mapStateToProps = (state: AppState) => {
+	return { userData: state.fetch.userData };
+};
+
+export default connect(mapStateToProps, { addNoteProps: addNote })(AddNoteView);
