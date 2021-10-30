@@ -13,6 +13,7 @@ import draftToHtml from "draftjs-to-html";
 import PresentationView from "../PresentationView/PresentationView";
 import { RawDraftContentState } from "draft-js";
 import { useTranslation } from "react-i18next";
+import { TextField } from "../../shared/components/TextInput/TextInput";
 
 interface IProps {
 	topLevelHistory: ReturnType<typeof useHistory>;
@@ -25,6 +26,7 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 	const [showNote, setShowNote] = useState<FirestoreDocumentDataWithId<NoteType>>();
 	const [presentationMode, togglePresentationMode] = useState<boolean>(false);
 	const [newContent, setNewContent] = useState(showNote?.content);
+	const [filteredNotes, setFilteredNotes] = useState<FirestoreDocumentDataWithId<NoteType>[] | undefined>(undefined);
 
 	const handlePresentationOpen = () => {
 		togglePresentationMode(true);
@@ -34,6 +36,26 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 		togglePresentationMode(false);
 	};
 
+	const searchByTitle = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+		const search = event.target.value || "";
+		setFilteredNotes(
+			// eslint-disable-next-line array-callback-return
+			notes.filter((note: FirestoreDocumentDataWithId<NoteType>) => {
+				if (search === "") {
+					return note;
+				} else if (
+					note.title.toLowerCase().includes(search.toLowerCase().trim()) ||
+					note.title.toLowerCase().replace(/\s/g, "").includes(search.toLowerCase().trim())
+				) {
+					return note;
+				}
+			})
+		);
+		if (search.trim() === "") {
+			setFilteredNotes(undefined);
+		}
+	};
+
 	return (
 		<>
 			<Helmet>
@@ -41,6 +63,9 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 			</Helmet>
 			<Wrapper>
 				<h1>{t("notesPage.title")}</h1>
+				<div>
+					<TextField placeholder="Search by title" onChange={(event) => searchByTitle(event)} />
+				</div>
 				<ScrollContainer>
 					<CardGrid>
 						{/* @ts-ignore */}
@@ -50,9 +75,13 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 							<ClassesWrapper>{t("notesPage.classesField")}</ClassesWrapper>
 							<DateContainer>{t("notesPage.dateModified")}</DateContainer>
 						</Row>
-						{notes.map((noteProps: FirestoreDocumentDataWithId<NoteType>) => (
-							<NoteComponent {...noteProps} setShowNote={setShowNote} />
-						))}
+						{filteredNotes
+							? filteredNotes.map((noteProps: FirestoreDocumentDataWithId<NoteType>) => (
+									<NoteComponent {...noteProps} setShowNote={setShowNote} />
+							  ))
+							: notes.map((noteProps: FirestoreDocumentDataWithId<NoteType>) => (
+									<NoteComponent {...noteProps} setShowNote={setShowNote} />
+							  ))}
 					</CardGrid>
 				</ScrollContainer>
 				<AddButton onClick={() => setAddNoteView((prevState) => !prevState)}>

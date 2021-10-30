@@ -21,11 +21,11 @@ const Router: React.FC<IProps> = ({ isLoggedIn, subscribeToAuthUserProps }) => {
 	return (
 		<BrowserRouter>
 			<Switch>
-				<Route exact path="/" render={(props) => isLoggedIn ? <Dashboard {...props} /> : <LandingPage {...props} />} />
+				<Route exact path="/" render={(props) => (isLoggedIn ? <Dashboard {...props} /> : <LandingPage {...props} />)} />
 				<Route exact path="/login" component={LoginPage} />
 				<Route exact path="/register" component={RegisterPage} />
 				<Route exact path="/second-stage" component={SignupSecondStage} />
-				<Route exact path="/dashboard" render={(props) => isLoggedIn ? <Dashboard {...props} /> : <Redirect to='/' />} />
+				<Route exact path="/dashboard" render={(props) => (isLoggedIn ? <Dashboard {...props} /> : <Redirect to="/" />)} />
 			</Switch>
 		</BrowserRouter>
 	);
