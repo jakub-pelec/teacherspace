@@ -4,8 +4,8 @@ import { Button } from "@material-ui/core";
 export const Wrapper = styled.div`
 	position: relative;
 	height: 90%;
-	padding-left: 2em;
-	min-width: 800px;
+	min-width: 700px;
+	max-width: 100%;
 	h1 {
 		font-size: 3em;
 	}

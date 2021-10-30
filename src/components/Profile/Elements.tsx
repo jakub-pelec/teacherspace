@@ -24,7 +24,8 @@ export const Grid = styled.div`
 `;
 
 export const Wrapper = styled.div`
-	height: 100%;
+	max-height: 100%;
+	max-width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;

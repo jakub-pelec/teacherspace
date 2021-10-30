@@ -26,7 +26,7 @@ const Router: React.FC<IProps> = ({ isLoggedIn, subscribeToAuthUserProps }) => {
 		<BrowserRouter>
 			{isMobile ? (
 				<Switch>
-					<Route exact path="/" render={MobileScreenInfo} />
+					<Route path="/" render={MobileScreenInfo} />
 				</Switch>
 			) : (
 				<Switch>
