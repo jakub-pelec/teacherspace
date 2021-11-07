@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
@@ -34,27 +34,34 @@ interface IProps {
 	userData: UserData;
 }
 
-interface IfilterOptions {
-	title: string | undefined;
-	subject: string | undefined;
-	className: string | undefined;
+interface IFilters {
+	title: (n: NoteType) => boolean;
+	subject: (n: NoteType) => boolean;
+	classes: (n: NoteType) => boolean;
 }
 
 const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 	const { t } = useTranslation();
-	const [addNoteView, setAddNoteView] = useState<boolean>(false);
-	const [showNote, setShowNote] = useState<FirestoreDocumentDataWithId<NoteType>>();
-	const [presentationMode, togglePresentationMode] = useState<boolean>(false);
-	const [newContent, setNewContent] = useState(showNote?.content);
-	const [filteredNotes, setFilteredNotes] = useState<FirestoreDocumentDataWithId<NoteType>[] | undefined>(undefined);
-	const [filterOptions, setFilterOptions] = useState<IfilterOptions>({
-		title: undefined,
-		subject: undefined,
-		className: undefined,
+	const [filters, setFilters] = useState<IFilters>({
+		title: () => true,
+		subject: () => true,
+		classes: () => true,
 	});
+	const [filteredNotes, setFilteredNotes] = useState<FirestoreDocumentDataWithId<NoteType>[]>([]);
+	const [showNote, setShowNote] = useState<FirestoreDocumentDataWithId<NoteType>>();
+	const [newContent, setNewContent] = useState(showNote?.content);
 
-	const subjects = userData.subjects.map((el) => el);
-	const classes = userData.classes.map((el) => el);
+	const [presentationMode, togglePresentationMode] = useState<boolean>(false);
+	const [addNoteView, setAddNoteView] = useState<boolean>(false);
+
+	useEffect(() => {
+		setFilteredNotes(notes);
+	}, [setFilteredNotes, notes]);
+
+	useEffect(() => {
+		const ffNotes = notes.filter(filters.title).filter(filters.subject).filter(filters.classes);
+		setFilteredNotes(ffNotes);
+	}, [filters, notes]);
 
 	const handlePresentationOpen = () => {
 		togglePresentationMode(true);
@@ -62,64 +69,6 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 
 	const handleClose = () => {
 		togglePresentationMode(false);
-	};
-
-	const filter = () => {
-		const defaultState = notes;
-		const { title, subject, className } = filterOptions;
-		let tempNotes = notes;
-
-		if (title?.trim() === "" || (title === undefined && subject === undefined && className === undefined)) {
-			setFilteredNotes(undefined);
-		}
-
-		// eslint-disable-next-line array-callback-return
-		tempNotes = tempNotes.filter((note: FirestoreDocumentDataWithId<NoteType>) => {
-			if (title === undefined) {
-				return note;
-			} else if (
-				note.title.toLowerCase().includes(title.toLowerCase().trim()) ||
-				note.title.toLowerCase().replace(/\s/g, "").includes(title.toLowerCase().trim())
-			) {
-				return note;
-			}
-		});
-
-		// eslint-disable-next-line array-callback-return
-		tempNotes = tempNotes.filter((note: FirestoreDocumentDataWithId<NoteType>) => {
-			if (subject === undefined) {
-				return note;
-			} else if (note.subject.label === subject) {
-				return note;
-			}
-		});
-
-		// eslint-disable-next-line array-callback-return
-		tempNotes = tempNotes.filter((note: FirestoreDocumentDataWithId<NoteType>) => {
-			if (className === undefined) {
-				return note;
-			} else if (note.classes.map((el) => el.label === className)) {
-				return note;
-			}
-		});
-		console.log(tempNotes);
-		setFilteredNotes(tempNotes);
-	};
-
-	const filterByTitle = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-		const search = event.target.value || undefined;
-		setFilterOptions({ ...filterOptions, title: search });
-		filter();
-	};
-
-	const filterBySubject = (option: any) => {
-		setFilterOptions({ ...filterOptions, subject: option.label });
-		filter();
-	};
-
-	const filterByClass = (option: any) => {
-		setFilterOptions({ ...filterOptions, className: option.label });
-		filter();
 	};
 
 	return (
@@ -132,15 +81,33 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 				<FilterOptions>
 					<FilterOption>
 						Title:
-						<TextField placeholder="Search by title" onChange={(event) => filterByTitle(event)} />
+						<TextField
+							placeholder="Search by title"
+							onChange={({ target: { value } }) =>
+								setFilters({
+									...filters,
+									title: (note) =>
+										note.title.toLowerCase().includes(value.toLowerCase().trim()) ||
+										note.title.toLowerCase().replace(/\s/g, "").includes(value.toLowerCase().trim()),
+								})
+							}
+						/>
 					</FilterOption>
 					<FilterOption>
 						Subject:
-						<Select options={subjects} onChange={(option) => filterBySubject(option)}></Select>
+						<Select
+							options={userData.subjects}
+							onChange={(option) => setFilters({ ...filters, subject: (note) => note.subject.value === (option as Option).value })}
+						></Select>
 					</FilterOption>
 					<FilterOption>
 						Class:
-						<Select options={classes} onChange={(option) => filterByClass(option)}></Select>
+						<Select
+							options={userData.classes}
+							onChange={(option) =>
+								setFilters({ ...filters, classes: (note) => note.classes?.some((s) => s.value === (option as Option).value) })
+							}
+						></Select>
 					</FilterOption>
 				</FilterOptions>
 				<ScrollContainer>
@@ -152,23 +119,19 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 							<ClassesWrapper>{t("notesPage.classesField")}</ClassesWrapper>
 							<DateContainer>{t("notesPage.dateModified")}</DateContainer>
 						</Row>
-						{filteredNotes
-							? filteredNotes.map((noteProps: FirestoreDocumentDataWithId<NoteType>) => (
-									<NoteComponent {...noteProps} setShowNote={setShowNote} />
-							  ))
-							: notes.map((noteProps: FirestoreDocumentDataWithId<NoteType>) => (
-									<NoteComponent {...noteProps} setShowNote={setShowNote} />
-							  ))}
+						{filteredNotes.map((noteProps: FirestoreDocumentDataWithId<NoteType>) => (
+							<NoteComponent {...noteProps} setShowNote={setShowNote} />
+						))}
 					</CardGrid>
 				</ScrollContainer>
-				<AddButton onClick={() => setAddNoteView((prevState) => !prevState)}>
+				<AddButton onClick={() => setAddNoteView(!addNoteView)}>
 					<AddIcon fontSize="large" />
 				</AddButton>
 				{addNoteView && <AddNoteView addNoteView={addNoteView} setAddNoteView={setAddNoteView} />}
 				{showNote?.id && (
 					<ShowNoteView
 						note={showNote}
-						open={showNote?.id ? true : false}
+						open={!!showNote?.id}
 						setShowNote={setShowNote}
 						handlePresentationOpen={handlePresentationOpen}
 						onChange={(value: RawDraftContentState) => setNewContent(value)}
