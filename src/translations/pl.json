@@ -2,7 +2,27 @@
 	"landingPage": {
 		"login": "Zaloguj",
 		"register": "Stwórz konto",
-		"title": "Witaj!"
+		"title": "Witaj!",
+		"section1": {
+			"header": "Teacherspace - zróbmy to razem!",
+			"subheader": "Dzielenie się wiedzą ze swoimi uczniami nigdy nie było prostsze!"
+		},
+		"section2": {
+			"header": "Co jest naszą misją?",
+			"subheader": "Staramy się popchnąć system szkolnictwa w strone przyszłości. Uczniowie to najważniejsi ludzie, ponieważ będą tworzyć przyszły świat, dlatego staramy się pomóc organizować ich pracę tak, żeby zmaksymalizowac produktywność i efektywność. Pandemia COVID-19 pokazała, że sektor edukacyjny jest daleko w tyle w konktekście innowacji i integracji z obecną technologią oraz musiał przezwyciężyć mnóstwo problemów, aby osiągnąc codzienny przepływ pracy. I tutaj wchodzimy my!"
+		},
+		"section3": {
+			"header": "Dlaczego my?",
+			"subheader": "Poniżej prezentujemy listę funkcjonalności które obecnie dostarcza aplikacja. Co więcej, uchylamy też rąbka tajemnicy odnośnie planów na przyszłość!"
+		},
+		"contactSection": {
+			"header": "Kontakt",
+			"subheader": "Jeżeli masz jakiekolwiek pytania odnośnie działania aplikacji, skieruj je na podany adres email:",
+			"blocks": {
+				"mail": "Email:",
+				"phone": "Phone:"
+			}
+		}
 	},
 	"loginPage": {
 		"title": "Zaloguj się",

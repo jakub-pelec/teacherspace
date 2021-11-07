@@ -18,6 +18,7 @@ export const PageWrapper = styled.div`
 `;
 
 export const Navbar = styled.nav`
+	padding: 1% 0;
 	width: 100%;
 	height: 5rem;
 	background-color: ${({ theme }) => theme.primary};
@@ -26,19 +27,21 @@ export const Navbar = styled.nav`
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-	div {
-		width: 100px;
-		height: 50px;
-	}
 `;
 
-export const Section = styled.section<{ row?: boolean; column?: boolean }>`
-	width: 90%;
+export const Section = styled.section<{ row?: boolean; column?: boolean; colored?: boolean }>`
+	width: 100%;
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
 	flex-direction: ${({ row, column }) => (row ? "row" : column ? "column" : "initial")};
-	margin: 5% 0;
+	padding: 10% 0;
+	background-color: ${({ theme, colored }) => (colored ? `${theme.primary} !important` : "initial")};
+	color: ${({ colored }) => (colored ? "white !important" : "initial")};
+
+	:nth-of-type(2n) {
+		background-color: ${({ theme }) => theme.primaryWithOpacity};
+	}
 `;
 
 export const FeaturesTable = styled.div`
@@ -105,5 +108,33 @@ export const ButtonContainer = styled.div`
 export const Button = styled(RawButton)`
 	:hover {
 		background-color: white !important;
+	}
+`;
+
+export const SelectContainer = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
+`;
+
+export const ContactUs = styled.div`
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	width: 80%;
+	justify-content: space-evenly;
+`;
+
+export const Block = styled.p`
+	background-color: white;
+	color: black;
+	margin: 5% 0;
+	padding: 3%;
+	border-radius: 5px;
+	font-weight: 600;
+	a {
+		text-decoration: none;
+		color: ${({ theme }) => theme.primary};
 	}
 `;
