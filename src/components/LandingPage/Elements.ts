@@ -80,7 +80,6 @@ export const FeaturesTableItemCell = styled.div`
 
 export const FeaturesTableCellTitle = styled(FeaturesTableItemCell)<{ status?: "future-plan" | "in-progress" | "ready" }>`
 	flex: 1;
-	border-right: 2px solid ${({ theme }) => theme.primary};
 	flex-basis: 25%;
 	text-align: center;
 	font-weight: 700;
@@ -91,6 +90,7 @@ export const FeaturesTableCellTitle = styled(FeaturesTableItemCell)<{ status?: "
 export const FeaturesTableCellDescription = styled(FeaturesTableItemCell)`
 	flex: 5;
 	border-right: 2px solid ${({ theme }) => theme.primary};
+	border-left: 2px solid ${({ theme }) => theme.primary};
 	flex-basis: 60%;
 `;
 export const FeaturesTableCellStatus = styled(FeaturesTableItemCell)<{ status?: "future-plan" | "in-progress" | "ready" }>`
