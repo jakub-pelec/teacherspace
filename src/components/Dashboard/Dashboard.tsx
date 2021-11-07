@@ -16,7 +16,7 @@ const Dashboard: React.FC<IProps> = ({ history }) => {
 				<ContentWrapper>
 					<Switch>
 						<Route exact path="/">
-							<Redirect to="/home" />3
+							<Redirect to="/home" />
 						</Route>
 						<Route path="/home">
 							<Home topLevelHistory={history} />
