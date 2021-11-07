@@ -1,10 +1,10 @@
 import React from "react";
 import NavigationBar from "../NavigationBar/NavigationBar";
-import styled from "styled-components";
 import { HashRouter, Switch, Route, Redirect, RouteComponentProps } from "react-router-dom";
 import Home from "../Home/Home";
 import Profile from "../Profile/Profile";
 import Notes from "../Notes/Notes";
+import { Wrapper, ContentWrapper } from './Elements';
 
 interface IProps extends RouteComponentProps {}
 
@@ -34,18 +34,6 @@ const Dashboard: React.FC<IProps> = ({ history }) => {
 	);
 };
 
-const Wrapper = styled.div`
-	display: flex;
-	width: 100%;
-	height: 100%;
-	background-color: ${({ theme }) => theme.bluredBg};
-`;
 
-const ContentWrapper = styled.div`
-	height: 100%;
-	width: 100%;
-	padding: 5em 1em 0 1em;
-	overflow: hidden;
-`;
 
 export default Dashboard;

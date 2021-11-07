@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import { Button as RawButton } from "../../shared/components/Button/Button";
 
+interface SectionProps {
+	row?: boolean;
+	column?: boolean;
+	colored?: boolean;
+}
+
 export const HeaderContainer = styled.div`
 	width: 90%;
 `;
@@ -29,7 +35,7 @@ export const Navbar = styled.nav`
 	align-items: center;
 `;
 
-export const Section = styled.section<{ row?: boolean; column?: boolean; colored?: boolean }>`
+export const Section = styled.section<SectionProps>`
 	width: 100%;
 	display: flex;
 	justify-content: space-evenly;
@@ -78,7 +84,7 @@ export const FeaturesTableItemCell = styled.div`
 	padding: 2%;
 `;
 
-export const FeaturesTableCellTitle = styled(FeaturesTableItemCell)<{ status?: "future-plan" | "in-progress" | "ready" }>`
+export const FeaturesTableCellTitle = styled(FeaturesTableItemCell)<{ status?: FeatureStatus }>`
 	flex: 1;
 	flex-basis: 25%;
 	text-align: center;
@@ -93,7 +99,7 @@ export const FeaturesTableCellDescription = styled(FeaturesTableItemCell)`
 	border-left: 2px solid ${({ theme }) => theme.primary};
 	flex-basis: 60%;
 `;
-export const FeaturesTableCellStatus = styled(FeaturesTableItemCell)<{ status?: "future-plan" | "in-progress" | "ready" }>`
+export const FeaturesTableCellStatus = styled(FeaturesTableItemCell)<{ status?: FeatureStatus }>`
 	flex: 1;
 	flex-basis: 15%;
 	text-align: center;
