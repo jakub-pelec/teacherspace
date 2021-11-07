@@ -115,7 +115,7 @@ export const Note = styled.div`
 	white-space: nowrap;
 `;
 
-export const FilterOptions = styled.div`
+export const FilterOptions = styled.form`
 	display: flex;
 	background-color: ${({ theme }) => theme.background};
 	border-radius: 0.5em;
@@ -125,6 +125,9 @@ export const FilterOptions = styled.div`
 `;
 export const FilterOption = styled.div`
 	width: 30%;
+`;
+export const FilterButton = styled.div`
+	width: 5em;
 `;
 
 export const DateContainer = styled.div``;

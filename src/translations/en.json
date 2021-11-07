@@ -39,7 +39,12 @@
 		"titleField": "Title:",
 		"subjectField": "Subject:",
 		"classesField": "Classes:",
-		"dateModified": "Modified on:"
+		"dateModified": "Modified on:",
+		"fieldTitle": "Title:",
+		"subjectSelect": "Subject:",
+		"classSelect": "Class:",
+		"clearButton": "Clear Filters",
+		"pageHelmet": "Teacherspace - Notes"
 	},
 	"navBar": {
 		"homePath": "Home",
@@ -58,7 +63,7 @@
 		"classes": "Classes:",
 		"save": "Save",
 		"present": "Present"
-	}, 
+	},
 	"addNoteView": {
 		"title": "Title",
 		"subject": "Subject",

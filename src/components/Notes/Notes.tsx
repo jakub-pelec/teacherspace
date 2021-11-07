@@ -15,6 +15,7 @@ import {
 	DateContainer,
 	FilterOptions,
 	FilterOption,
+	FilterButton,
 } from "./Elements";
 import { Helmet } from "react-helmet";
 import { AppState } from "../../typings/redux";
@@ -27,6 +28,7 @@ import { RawDraftContentState } from "draft-js";
 import { useTranslation } from "react-i18next";
 import { TextField } from "../../shared/components/TextInput/TextInput";
 import Select from "../../shared/components/Select/Select";
+import { Button } from "../../shared/components/Button/Button";
 
 interface IProps {
 	topLevelHistory: ReturnType<typeof useHistory>;
@@ -53,6 +55,10 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 
 	const [presentationMode, togglePresentationMode] = useState<boolean>(false);
 	const [addNoteView, setAddNoteView] = useState<boolean>(false);
+	const [selectValues, setSelectValues] = useState<any>({
+		subjectValue: null,
+		classesValue: null,
+	});
 
 	useEffect(() => {
 		setFilteredNotes(notes);
@@ -74,13 +80,13 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 	return (
 		<>
 			<Helmet>
-				<title>Teacherspace - Notes</title>
+				<title>{t("notesPage.pageHelmet")}</title>
 			</Helmet>
 			<Wrapper>
 				<h1>{t("notesPage.title")}</h1>
 				<FilterOptions>
 					<FilterOption>
-						Title:
+						{t("notesPage.fieldTitle")}
 						<TextField
 							placeholder="Search by title"
 							onChange={({ target: { value } }) =>
@@ -94,21 +100,41 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 						/>
 					</FilterOption>
 					<FilterOption>
-						Subject:
+						{t("notesPage.subjectSelect")}
 						<Select
+							value={selectValues.subjectValue}
 							options={userData.subjects}
-							onChange={(option) => setFilters({ ...filters, subject: (note) => note.subject.value === (option as Option).value })}
+							onChange={(option) => {
+								setFilters({ ...filters, subject: (note) => note.subject.value === (option as Option).value });
+								setSelectValues({ ...selectValues, subjectValue: option });
+							}}
 						></Select>
 					</FilterOption>
 					<FilterOption>
-						Class:
+						{t("notesPage.classSelect")}
 						<Select
+							value={selectValues.classesValue}
 							options={userData.classes}
-							onChange={(option) =>
-								setFilters({ ...filters, classes: (note) => note.classes?.some((s) => s.value === (option as Option).value) })
-							}
+							onChange={(option) => {
+								setFilters({ ...filters, classes: (note) => note.classes?.some((s) => s.value === (option as Option).value) });
+								setSelectValues({ ...selectValues, classesValue: option });
+							}}
 						></Select>
 					</FilterOption>
+					<FilterButton>
+						<Button
+							type="reset"
+							onClick={() => {
+								setFilteredNotes(notes);
+								setSelectValues({
+									subjectValue: null,
+									classesValue: null,
+								});
+							}}
+						>
+							{t("notesPage.clearButton")}
+						</Button>
+					</FilterButton>
 				</FilterOptions>
 				<ScrollContainer>
 					<CardGrid>
