@@ -47,7 +47,6 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 	};
 
 	const subjects = userData.subjects.map((el) => el);
-
 	return (
 		<Modal open={!!addNoteView}>
 			<AddNoteViewStyling visible={addNoteView}>
