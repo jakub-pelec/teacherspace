@@ -84,7 +84,7 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 					<FilterOption>
 						{t("notesPage.fieldTitle")}
 						<TextField
-							placeholder="Search by title"
+							placeholder={t("notesPage.inputPlaceholder")}
 							onChange={({ target: { value } }) =>
 								setFilters({
 									...filters,

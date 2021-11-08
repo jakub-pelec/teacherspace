@@ -44,7 +44,8 @@
 		"subjectSelect": "Subject:",
 		"classSelect": "Class:",
 		"clearButton": "Clear Filters",
-		"pageHelmet": "Teacherspace - Notes"
+		"pageHelmet": "Teacherspace - Notes",
+		"inputPlaceholder": "Search by title"
 	},
 	"navBar": {
 		"homePath": "Home",
