@@ -8,6 +8,8 @@ import LandingPage from "../LandingPage/LandingPage";
 import { subscribeToAuthUser } from "../../actions/actions";
 import { useEffect } from "react";
 import { AppState } from "../../typings/redux";
+import { useMediaQuery } from "react-responsive";
+import MobileScreenInfo from "../MobileScreenInfo/MobileScreenInfo";
 
 interface IProps {
 	isLoggedIn: boolean;
@@ -18,15 +20,23 @@ const Router: React.FC<IProps> = ({ isLoggedIn, subscribeToAuthUserProps }) => {
 	useEffect(() => {
 		subscribeToAuthUserProps();
 	}, [subscribeToAuthUserProps]);
+
+	const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
 	return (
 		<BrowserRouter>
-			<Switch>
-				<Route exact path="/" render={(props) => (isLoggedIn ? <Dashboard {...props} /> : <LandingPage {...props} />)} />
-				<Route exact path="/login" component={LoginPage} />
-				<Route exact path="/register" component={RegisterPage} />
-				<Route exact path="/second-stage" component={SignupSecondStage} />
-				<Route exact path="/dashboard" render={(props) => (isLoggedIn ? <Dashboard {...props} /> : <Redirect to="/" />)} />
-			</Switch>
+			{isMobile ? (
+				<Switch>
+					<Route path="/" render={MobileScreenInfo} />
+				</Switch>
+			) : (
+				<Switch>
+					<Route exact path="/" render={(props) => (isLoggedIn ? <Dashboard {...props} /> : <LandingPage {...props} />)} />
+					<Route exact path="/login" component={LoginPage} />
+					<Route exact path="/register" component={RegisterPage} />
+					<Route exact path="/second-stage" component={SignupSecondStage} />
+					<Route exact path="/dashboard" render={(props) => (isLoggedIn ? <Dashboard {...props} /> : <Redirect to="/" />)} />
+				</Switch>
+			)}
 		</BrowserRouter>
 	);
 };

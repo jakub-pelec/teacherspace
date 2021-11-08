@@ -24,7 +24,8 @@ export const Grid = styled.div`
 `;
 
 export const Wrapper = styled.div`
-	height: 100%;
+	max-height: 100%;
+	max-width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -96,6 +97,7 @@ export const AddMoreButton = styled(Button)`
 	&& {
 		height: 2rem;
 		width: 2rem;
+		margin: 0.5rem;
 		min-width: unset;
 	}
 `;
