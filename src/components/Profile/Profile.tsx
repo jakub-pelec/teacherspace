@@ -38,7 +38,6 @@ const Profile: React.FC<IProps> = ({ userData: { firstName, lastName, email, cla
 
 	const removeProperty = async (value: string, type: "class" | "subject") => {
 		const reducedOptions = type === "class" ? classes.filter((el) => el.value !== value) : subjects.filter((el) => el.value !== value);
-		console.log(reducedOptions);
 		const successCallback = () => {
 			enqueueSnackbar(t("snackbar.success.removeUserProp", { property: type === "class" ? "Class" : "Subject" }), { variant: "success" });
 		};
