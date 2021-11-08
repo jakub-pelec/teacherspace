@@ -44,6 +44,7 @@ export const AddButton = styled(Button)`
 `;
 
 export const Row = styled.div<{ title?: boolean }>`
+	position: relative;
 	padding: 1% 5%;
 	margin-bottom: 1.5em;
 	display: flex;
@@ -116,3 +117,10 @@ export const Note = styled.div`
 `;
 
 export const DateContainer = styled.div``;
+export const ButtonWrapper = styled.div`
+	position: absolute;
+	right: 1rem;
+	button {
+		min-width: 0;
+	}
+`;

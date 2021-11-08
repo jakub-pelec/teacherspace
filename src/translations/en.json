@@ -58,7 +58,7 @@
 		"classes": "Classes:",
 		"save": "Save",
 		"present": "Present"
-	}, 
+	},
 	"addNoteView": {
 		"title": "Title",
 		"subject": "Subject",
@@ -78,7 +78,9 @@
 			"registerSecondStep": "Just one more step!",
 			"updateNote": "Note updates sucessfuly.",
 			"register": "Welcome!",
-			"updateUserProp": "{{property}} updates succesfully!"
+			"updateUserProp": "{{property}} updates succesfully!",
+			"removeNote": "Note deleted sucessfuly",
+			"removeUserProp": "{{property}} removed succesfully!"
 		}
 	}
 }

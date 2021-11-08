@@ -44,14 +44,14 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 				<ScrollContainer>
 					<CardGrid>
 						{/* @ts-ignore */}
-						<Row title>
+						<Row title key="main">
 							<Title>{t("notesPage.titleField")}</Title>
 							<Subject>{t("notesPage.subjectField")}</Subject>
 							<ClassesWrapper>{t("notesPage.classesField")}</ClassesWrapper>
 							<DateContainer>{t("notesPage.dateModified")}</DateContainer>
 						</Row>
 						{notes.map((noteProps: FirestoreDocumentDataWithId<NoteType>) => (
-							<NoteComponent {...noteProps} setShowNote={setShowNote} />
+							<NoteComponent key={noteProps.id} {...noteProps} setShowNote={setShowNote} />
 						))}
 					</CardGrid>
 				</ScrollContainer>

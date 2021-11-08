@@ -11,7 +11,7 @@ import {
 } from "./types";
 import { auth, apiPath, apiRoutes, firestore } from "../config/firebase";
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut, setPersistence, browserSessionPersistence } from "@firebase/auth";
-import { collection, onSnapshot, doc, addDoc, updateDoc, DocumentData, arrayUnion } from "firebase/firestore";
+import { collection, onSnapshot, doc, addDoc, updateDoc, DocumentData, arrayUnion, deleteDoc } from "firebase/firestore";
 import { Dispatch } from "redux";
 import axios from "axios";
 import { AppState } from "../typings/redux";
@@ -150,6 +150,21 @@ export const updateNote =
 		}
 	};
 
+export const deleteNote =
+	(id: string, { successCallback, errorCallback, finalCallback }: PromiseCallback) =>
+	async (_: Dispatch, getState: () => AppState) => {
+		const { firestoreID } = getState().auth;
+		const noteRef = doc(firestore, "users", firestoreID, "notes", id);
+		try {
+			await deleteDoc(noteRef);
+			successCallback();
+		} catch (e) {
+			errorCallback();
+		} finally {
+			finalCallback();
+		}
+	};
+
 export const updateUserProperties =
 	(payload: Option[], type: "class" | "subject", { successCallback, errorCallback, finalCallback }: PromiseCallback) =>
 	async (_: Dispatch, getState: () => AppState) => {
@@ -158,6 +173,22 @@ export const updateUserProperties =
 			const userDocRef = doc(firestore, "users", firestoreID);
 			const field = type === "class" ? "classes" : "subjects";
 			await updateDoc(userDocRef, { [field]: arrayUnion(...payload) });
+			successCallback();
+		} catch (e) {
+			errorCallback();
+		} finally {
+			finalCallback();
+		}
+	};
+
+export const removeUserProperties =
+	(payload: Option[], type: "class" | "subject", { successCallback, errorCallback, finalCallback }: PromiseCallback) =>
+	async (_: Dispatch, getState: () => AppState) => {
+		try {
+			const { firestoreID } = getState().auth;
+			const userDocRef = doc(firestore, "users", firestoreID);
+			const field = type === "class" ? "classes" : "subjects";
+			await updateDoc(userDocRef, { [field]: payload });
 			successCallback();
 		} catch (e) {
 			errorCallback();

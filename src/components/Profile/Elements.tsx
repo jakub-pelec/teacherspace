@@ -83,6 +83,7 @@ export const InfoSection = styled.div`
 `;
 
 export const ListElement = styled.div`
+	position: relative;
 	background-color: ${({ theme }) => theme.primary};
 	border-radius: 5px;
 	border: 2px solid white;
@@ -145,4 +146,13 @@ export const CloseModal = styled(Button)`
 
 export const Title = styled.div`
 	font-size: 32px;
+`;
+
+export const ButtonWrapper = styled.div`
+	position: absolute;
+	top: 0;
+	right: 0rem;
+	button {
+		min-width: 0;
+	}
 `;
