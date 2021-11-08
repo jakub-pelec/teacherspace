@@ -49,7 +49,7 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 		subject: () => true,
 		classes: () => true,
 	});
-	const [filteredNotes, setFilteredNotes] = useState<FirestoreDocumentDataWithId<NoteType>[]>([]);
+	const [filteredNotes, setFilteredNotes] = useState<FirestoreDocumentDataWithId<NoteType>[]>(notes);
 	const [showNote, setShowNote] = useState<FirestoreDocumentDataWithId<NoteType>>();
 	const [newContent, setNewContent] = useState(showNote?.content);
 
@@ -61,13 +61,9 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 	});
 
 	useEffect(() => {
-		setFilteredNotes(notes);
-	}, [setFilteredNotes, notes]);
-
-	useEffect(() => {
 		const ffNotes = notes.filter(filters.title).filter(filters.subject).filter(filters.classes);
 		setFilteredNotes(ffNotes);
-	}, [filters, notes]);
+	}, [filters, notes, selectValues]);
 
 	const handlePresentationOpen = () => {
 		togglePresentationMode(true);
@@ -126,6 +122,7 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 							type="reset"
 							onClick={() => {
 								setFilteredNotes(notes);
+								setFilters({ title: () => true, subject: () => true, classes: () => true });
 								setSelectValues({
 									subjectValue: null,
 									classesValue: null,
