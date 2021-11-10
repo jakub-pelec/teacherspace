@@ -111,7 +111,13 @@
 		"titleField": "Tytuł:",
 		"subjectField": "Przedmiot:",
 		"classesField": "Klasy:",
-		"dateModified": "Ostatnio zmodyfikowano:"
+		"dateModified": "Ostatnio zmodyfikowano:",
+		"fieldTitle": "Tytuł:",
+		"subjectSelect": "Przedmiot:",
+		"classSelect": "Klasa:",
+		"clearButton": "Wyczyść filtrowanie",
+		"pageHelmet": "Teacherspace - Notes",
+		"inputPlaceholder": "Wyszukaj po tytule"
 	},
 	"navBar": {
 		"homePath": "Home",

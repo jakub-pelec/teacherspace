@@ -136,7 +136,13 @@
 		"titleField": "Title:",
 		"subjectField": "Subject:",
 		"classesField": "Classes:",
-		"dateModified": "Modified on:"
+		"dateModified": "Modified on:",
+		"fieldTitle": "Title:",
+		"subjectSelect": "Subject:",
+		"classSelect": "Class:",
+		"clearButton": "Clear Filters",
+		"pageHelmet": "Teacherspace - Notes",
+		"inputPlaceholder": "Search by title"
 	},
 	"navBar": {
 		"homePath": "Home",
