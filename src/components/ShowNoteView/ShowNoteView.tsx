@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 import { connect } from "react-redux";
 import { NoteType } from "../../typings/wysiwyg";
 import CloseIcon from "@mui/icons-material/Close";
@@ -38,6 +38,10 @@ const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNotePro
 		const finalCallback = () => {};
 		updateNoteProps({ ...note, content: draftToHtml(content) }, { successCallback, errorCallback, finalCallback });
 	};
+
+	useEffect(() => {
+		return () => setShowNote(undefined);
+	}, [setShowNote]);
 
 	return (
 		<Modal open={open}>

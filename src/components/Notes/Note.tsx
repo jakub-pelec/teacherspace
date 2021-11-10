@@ -5,7 +5,7 @@ import { Row, Title, Subject, ClassesWrapper, DateContainer, Class } from "./Ele
 
 interface IProps {
 	id: string;
-	setShowNote: (s: FirestoreDocumentDataWithId<NoteType>) => void;
+	setShowNote: (s: FirestoreDocumentDataWithId<NoteType> | undefined) => void;
 	title: string;
 	classes: Option[];
 	content: any;

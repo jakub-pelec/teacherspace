@@ -8,12 +8,21 @@ interface SectionProps {
 }
 
 export const HeaderContainer = styled.div`
-	width: 90%;
+	width: 100%;
 `;
 
-export const Header = styled.h1``;
+export const Header = styled.h1`
+	@media (max-width: ${({ theme }) => theme.mobileMax}) {
+		margin-bottom: 5%;
+	}
+`;
 
-export const Subheader = styled.h3``;
+export const Subheader = styled.h3`
+	@media (max-width: ${({ theme }) => theme.mobileMax}) {
+		font-size: 14px;
+		margin-bottom: 5%;
+	}
+`;
 
 export const PageWrapper = styled.div`
 	height: 100vh;
@@ -21,33 +30,42 @@ export const PageWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	@media (max-width: ${({ theme }) => theme.mobileMax}) {
+		margin-top: 5rem;
+	}
 `;
 
-export const Navbar = styled.nav`
+export const Navbar = styled.nav<{ orange: boolean }>`
 	padding: 1% 0;
 	width: 100%;
 	height: 5rem;
-	background-color: ${({ theme }) => theme.primary};
-	position: sticky;
+	background-color: ${({ theme, orange }) => (orange ? theme.primary : "white")};
+	position: fixed;
 	top: 0;
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
+	transition: background-color 0.2s ease-in-out;
 `;
 
 export const Section = styled.section<SectionProps>`
 	width: 100%;
+	padding: 10%;
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
 	flex-direction: ${({ row, column }) => (row ? "row" : column ? "column" : "initial")};
-	padding: 10% 0;
 	background-color: ${({ theme, colored }) => (colored ? `${theme.primary} !important` : "initial")};
 	color: ${({ colored }) => (colored ? "white !important" : "initial")};
-
 	:nth-of-type(2n) {
-		background-color: ${({ theme }) => theme.primaryWithOpacity};
+		background-color: ${({ theme }) => theme.primary};
+		color: white;
 	}
+`;
+
+export const ImageWrapper = styled.div`
+	width: 40%;
+	margin: 0 1%;
 `;
 
 export const FeaturesTable = styled.div`
@@ -55,7 +73,7 @@ export const FeaturesTable = styled.div`
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	width: 60%;
+	width: 100%;
 	border: 1px solid ${({ theme }) => theme.primary};
 	margin: 2% 0;
 	background-color: ${({ theme }) => theme.primaryWithOpacity};
@@ -73,15 +91,25 @@ export const FeaturesTableItem = styled.div`
 	:last-child {
 		border-bottom: none;
 	}
+
+	@media (max-width: ${({ theme }) => theme.mobileMax}) {
+		flex-direction: column;
+	}
 `;
 
 export const FeaturesTableHeader = styled(FeaturesTableItem)`
 	font-weight: 600;
 	text-align: center;
+	@media (max-width: ${({ theme }) => theme.mobileMax}) {
+		display: none;
+	}
 `;
 
 export const FeaturesTableItemCell = styled.div`
 	padding: 2%;
+	@media (max-width: ${({ theme }) => theme.mobileMax}) {
+		padding: 5%;
+	}
 `;
 
 export const FeaturesTableCellTitle = styled(FeaturesTableItemCell)<{ status?: FeatureStatus }>`
@@ -98,6 +126,11 @@ export const FeaturesTableCellDescription = styled(FeaturesTableItemCell)`
 	border-right: 2px solid ${({ theme }) => theme.primary};
 	border-left: 2px solid ${({ theme }) => theme.primary};
 	flex-basis: 60%;
+
+	@media (max-width: ${({ theme }) => theme.mobileMax}) {
+		border: none;
+		margin: 0 5%;
+	}
 `;
 export const FeaturesTableCellStatus = styled(FeaturesTableItemCell)<{ status?: FeatureStatus }>`
 	flex: 1;

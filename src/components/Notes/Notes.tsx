@@ -22,7 +22,7 @@ interface IProps {
 const Notes: React.FC<IProps> = ({ topLevelHistory, notes }) => {
 	const { t } = useTranslation();
 	const [addNoteView, setAddNoteView] = useState<boolean>(false);
-	const [showNote, setShowNote] = useState<FirestoreDocumentDataWithId<NoteType>>();
+	const [showNote, setShowNote] = useState<FirestoreDocumentDataWithId<NoteType> | undefined>(undefined);
 	const [presentationMode, togglePresentationMode] = useState<boolean>(false);
 	const [newContent, setNewContent] = useState(showNote?.content);
 
