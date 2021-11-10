@@ -34,6 +34,11 @@ const NoteComponent: React.FC<IProps> = ({ id, title, subject, classes, content,
 		deleteNoteProps(id, { successCallback, errorCallback, finalCallback });
 	};
 
+	const removeHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+		event.stopPropagation();
+		deleteNote(id);
+	};
+
 	return (
 		<Row
 			id={id}
@@ -52,12 +57,7 @@ const NoteComponent: React.FC<IProps> = ({ id, title, subject, classes, content,
 			</ClassesWrapper>
 			<DateContainer>{moment(dateModified).format("DD-MM-YYYY")}</DateContainer>
 			<ButtonWrapper>
-				<Button
-					onClick={async (event) => {
-						event.stopPropagation();
-						deleteNote(id);
-					}}
-				>
+				<Button onClick={removeHandler}>
 					<DeleteIcon />
 				</Button>
 			</ButtonWrapper>
