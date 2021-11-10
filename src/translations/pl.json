@@ -156,7 +156,9 @@
 			"registerSecondStep": "Jeszcze jeden krok!",
 			"updateNote": "Notatka zaktualizowana!",
 			"register": "Witaj!",
-			"updateUserProp": "{{property}} zaktualizowane!"
+			"updateUserProp": "{{property}} zaktualizowane!",
+			"removeNote": "Notatka usunięta!",
+			"removeUserProp": "{{property}} usunięte pomyślnie!"
 		}
 	}
 }

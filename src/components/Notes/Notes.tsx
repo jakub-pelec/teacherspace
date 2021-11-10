@@ -136,7 +136,7 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 				<ScrollContainer>
 					<CardGrid>
 						{/* @ts-ignore */}
-						<Row title>
+						<Row title key="main">
 							<Title>{t("notesPage.titleField")}</Title>
 							<Subject>{t("notesPage.subjectField")}</Subject>
 							<ClassesWrapper>{t("notesPage.classesField")}</ClassesWrapper>

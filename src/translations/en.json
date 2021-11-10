@@ -8,31 +8,6 @@
 			"subheader": "Sharing the knowledge with your students have never been easier!"
 		},
 		"section2": {
-			"landingPage": {
-				"login": "Login",
-				"register": "Register",
-				"title": "Welcome!",
-				"section1": {
-					"header": "Teacherspace - let's do it together!",
-					"subheader": "Sharing the knowledge with your students have never been easier!"
-				},
-				"section2": {
-					"header": "What is our mission?",
-					"subheader": "We are trying to push teaching further into the future. Students are the most important people out there, as they will build future world, so we are trying to organize their work as efficiently as it is possible. COVID-19 outbreak has shown, that the educational sector is far behind in terms of innovation and had to overcome a lot of problems to achieve it's normal flow of work. That's where we come in!"
-				},
-				"section3": {
-					"header": "Why us?",
-					"subheader": "Here is a list of amenities we are currently providing, and, what's more, sneak peek of upcomming features."
-				},
-				"contactSection": {
-					"header": "Contact",
-					"subheader": "If you have any concerns or questions regarding the app, please contact us at:",
-					"blocks": {
-						"mail": "Email:",
-						"phone": "Phone:"
-					}
-				}
-			},
 			"header": "What is our mission?",
 			"subheader": "We are trying to push teaching further into the future. Students are the most important people out there, as they will build future world, so we are trying to organize their work as efficiently as it is possible. COVID-19 outbreak has shown, that the educational sector is far behind in terms of innovation and had to overcome a lot of problems to achieve it's normal flow of work. That's where we come in!"
 		},
@@ -181,7 +156,9 @@
 			"registerSecondStep": "Just one more step!",
 			"updateNote": "Note updates sucessfuly.",
 			"register": "Welcome!",
-			"updateUserProp": "{{property}} updates succesfully!"
+			"updateUserProp": "{{property}} updates succesfully!",
+			"removeNote": "Note deleted sucessfuly",
+			"removeUserProp": "{{property}} removed succesfully!"
 		}
 	}
 }
