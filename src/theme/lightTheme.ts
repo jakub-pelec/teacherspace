@@ -10,4 +10,6 @@ export const lightTheme = {
 	infoBg: "#FCFAFB",
 	infoBorder: "#F5F5F5",
 	bluredBg: "#F89F92",
+	white: 'white',
+	mobileMax: '768px'
 };

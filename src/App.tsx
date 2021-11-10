@@ -13,6 +13,7 @@ const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 function App() {
 	return (
+		<>
 		<ReduxProvider store={store}>
 			<>
 				<ThemeProvider>
@@ -22,6 +23,7 @@ function App() {
 				</ThemeProvider>
 			</>
 		</ReduxProvider>
+		</>
 	);
 }
 

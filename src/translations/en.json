@@ -2,7 +2,104 @@
 	"landingPage": {
 		"login": "Login",
 		"register": "Register",
-		"title": "Welcome!"
+		"title": "Welcome!",
+		"section1": {
+			"header": "Teacherspace - let's do it together!",
+			"subheader": "Sharing the knowledge with your students have never been easier!"
+		},
+		"section2": {
+			"landingPage": {
+				"login": "Login",
+				"register": "Register",
+				"title": "Welcome!",
+				"section1": {
+					"header": "Teacherspace - let's do it together!",
+					"subheader": "Sharing the knowledge with your students have never been easier!"
+				},
+				"section2": {
+					"header": "What is our mission?",
+					"subheader": "We are trying to push teaching further into the future. Students are the most important people out there, as they will build future world, so we are trying to organize their work as efficiently as it is possible. COVID-19 outbreak has shown, that the educational sector is far behind in terms of innovation and had to overcome a lot of problems to achieve it's normal flow of work. That's where we come in!"
+				},
+				"section3": {
+					"header": "Why us?",
+					"subheader": "Here is a list of amenities we are currently providing, and, what's more, sneak peek of upcomming features."
+				},
+				"contactSection": {
+					"header": "Contact",
+					"subheader": "If you have any concerns or questions regarding the app, please contact us at:",
+					"blocks": {
+						"mail": "Email:",
+						"phone": "Phone:"
+					}
+				}
+			},
+			"header": "What is our mission?",
+			"subheader": "We are trying to push teaching further into the future. Students are the most important people out there, as they will build future world, so we are trying to organize their work as efficiently as it is possible. COVID-19 outbreak has shown, that the educational sector is far behind in terms of innovation and had to overcome a lot of problems to achieve it's normal flow of work. That's where we come in!"
+		},
+		"section3": {
+			"header": "Why us?",
+			"subheader": "Here is a list of amenities we are currently providing, and, what's more, sneak peek of upcomming features."
+		},
+		"contactSection": {
+			"header": "Contact",
+			"subheader": "If you have any concerns or questions regarding the app, please contact us at:",
+			"blocks": {
+				"mail": "Email:",
+				"phone": "Phone:"
+			}
+		},
+		"features": [
+			{
+				"title": "notes",
+				"description": "Create rich-text notes for your students. You can add, edit or delete them anytime, anywhere! Simple as that.",
+				"status": "ready"
+			},
+			{
+				"title": "presentation mode",
+				"description": "Do you want to give a presentation for your students? No problem. Simply choose the note and you can easily display it's content for the viewers",
+				"status": "ready"
+			},
+			{
+				"title": "languages",
+				"description": "Currently supported languages: Polish and English",
+				"status": "ready"
+			},
+			{
+				"title": "classes",
+				"description": "Do you teach many classes at the same time? You can assign given note to the class to find it easier earlier!",
+				"status": "ready"
+			},
+			{
+				"title": "lesson subjects",
+				"description": "Select which subjects are you teaching during signup stage. You can always update them in your profile page!",
+				"status": "ready"
+			},
+			{
+				"title": "account",
+				"description": "Sign-in with your personal account to which only you have access",
+				"status": "ready"
+			},
+			{
+				"title": "images",
+				"description": "Do you want to include images in your note to make them more appealing? You will be able to do this!",
+				"status": "in-progress"
+			},
+			{
+				"title": "emails",
+				"description": "Do you want to send given note to your students via email? Nothing simpler than that!",
+				"status": "in-progress"
+			},
+			{
+				"title": "student accounts",
+				"description": "We are going to provide separate \"Student\" account, which you will be able to join one of your classes and get access to all of class related notes!",
+				"status": "future-plan"
+			},
+			{
+				"title": "homeworks",
+				"description": "We are planning on adding \"Homeworks\" section for your students, so you can plan them before the lesson and even mark the in the app! How cool is that!",
+				"status": "future-plan"
+			}
+		]
 	},
 	"loginPage": {
 		"title": "Please log in",
