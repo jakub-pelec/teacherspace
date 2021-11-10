@@ -47,7 +47,6 @@ const LandingPage: React.FC<IProps> = ({ history: { push } }) => {
 		}
 
 		if (scrollPos > heights[1] && scrollPos < heights[2] && navbarStyle) {
-			console.log("invoked");
 			setNavbarStyle(false);
 		}
 
