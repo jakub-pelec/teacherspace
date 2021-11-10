@@ -47,4 +47,5 @@ export const PresentationContent = styled.div`
     padding: 5%;
     overflow: auto;
     height: 96vh;
+    font-size: 16px;
 `

@@ -55,15 +55,11 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 
 	const [presentationMode, togglePresentationMode] = useState<boolean>(false);
 	const [addNoteView, setAddNoteView] = useState<boolean>(false);
-	const [selectValues, setSelectValues] = useState<any>({
-		subjectValue: null,
-		classesValue: null,
-	});
 
 	useEffect(() => {
 		const ffNotes = notes.filter(filters.title).filter(filters.subject).filter(filters.classes);
 		setFilteredNotes(ffNotes);
-	}, [filters, notes, selectValues]);
+	}, [filters, notes]);
 
 	const handlePresentationOpen = () => {
 		togglePresentationMode(true);
@@ -98,22 +94,18 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 					<FilterOption>
 						{t("notesPage.subjectSelect")}
 						<Select
-							value={selectValues.subjectValue}
 							options={userData.subjects}
 							onChange={(option) => {
 								setFilters({ ...filters, subject: (note) => note.subject.value === (option as Option).value });
-								setSelectValues({ ...selectValues, subjectValue: option });
 							}}
 						></Select>
 					</FilterOption>
 					<FilterOption>
 						{t("notesPage.classSelect")}
 						<Select
-							value={selectValues.classesValue}
 							options={userData.classes}
 							onChange={(option) => {
 								setFilters({ ...filters, classes: (note) => note.classes?.some((s) => s.value === (option as Option).value) });
-								setSelectValues({ ...selectValues, classesValue: option });
 							}}
 						></Select>
 					</FilterOption>
@@ -123,10 +115,6 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 							onClick={() => {
 								setFilteredNotes(notes);
 								setFilters({ title: () => true, subject: () => true, classes: () => true });
-								setSelectValues({
-									subjectValue: null,
-									classesValue: null,
-								});
 							}}
 						>
 							{t("notesPage.clearButton")}
@@ -156,6 +144,7 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 						note={showNote}
 						open={!!showNote?.id}
 						setShowNote={setShowNote}
+						setNewContent={setNewContent}
 						handlePresentationOpen={handlePresentationOpen}
 						onChange={(value: RawDraftContentState) => setNewContent(value)}
 						content={(newContent || showNote?.content) as RawDraftContentState}
@@ -163,7 +152,7 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 				)}
 				{presentationMode && (
 					<PresentationView
-						html={draftToHtml(newContent as RawDraftContentState)}
+						html={draftToHtml((newContent || showNote!.content) as RawDraftContentState)}
 						title={showNote?.title as string}
 						handleClose={handleClose}
 					/>

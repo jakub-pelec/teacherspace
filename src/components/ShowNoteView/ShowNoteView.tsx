@@ -20,9 +20,10 @@ interface IProps {
 	handlePresentationOpen: () => void;
 	onChange: (value: RawDraftContentState) => void;
 	content: RawDraftContentState;
+	setNewContent: (s: any) => void;
 }
 
-const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNoteProps, handlePresentationOpen, onChange, content }) => {
+const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNoteProps, handlePresentationOpen, onChange, content, setNewContent }) => {
 	const { t } = useTranslation();
 	const { title, subject, classes } = note;
 	const { enqueueSnackbar } = useSnackbar();
@@ -40,8 +41,8 @@ const ShowNoteView: React.FC<IProps> = ({ note, open, setShowNote, updateNotePro
 	};
 
 	useEffect(() => {
-		return () => setShowNote(undefined);
-	}, [setShowNote]);
+		return () => setNewContent(undefined);
+	}, [setNewContent]);
 
 	return (
 		<Modal open={open}>

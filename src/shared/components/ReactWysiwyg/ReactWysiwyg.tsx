@@ -45,7 +45,7 @@ const styles: Styles = {
 		border: "1px solid #F6725E",
 		backgroundColor: "#ffe4e0",
 		padding: "0 20px",
-
+		fontSize: "16px",
 		maxHeight: "60vh",
 	},
 	toolbarStyle: {
