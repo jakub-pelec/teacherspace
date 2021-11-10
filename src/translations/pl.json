@@ -22,7 +22,59 @@
 				"mail": "Email:",
 				"phone": "Phone:"
 			}
-		}
+		},
+		"features": [
+			{
+				"title": "notatki",
+				"description": "Stwórz notatki z bogatym tektem dla Twoich uczniów. Możesz dodać, edytować lub usunąć je w każdym momencie! To takie proste!",
+				"status": "ready"
+			},
+			{
+				"title": "tryb prezentacji",
+				"description": "Chcesz zaprezentować dla swoich uczniów? Żaden problem. Wybierz notatke i możesz bez problemu pokazać ją klikając przycisk prezentacji!",
+				"status": "ready"
+			},
+			{
+				"title": "języki",
+				"description": "Obecnie wspieramy języki: Polski oraz Angielski",
+				"status": "ready"
+			},
+			{
+				"title": "klasy",
+				"description": "Uczysz kilku klas na raz? Możesz przypisac konkretną notatkę do klasy, żeby łatwiej ją znaleźć!",
+				"status": "ready"
+			},
+			{
+				"title": "przedmioty",
+				"description": "Wybierz, jakich przedmiotów uczysz, podczas rejestracji. Możesz zawsze dodać je lub usunąć w panelu użytkownika!",
+				"status": "ready"
+			},
+			{
+				"title": "konto",
+				"description": "Stwórz i loguj się na swoje własne konto, do którego tylko ty masz dostęp!",
+				"status": "ready"
+			},
+			{
+				"title": "obrazki",
+				"description": "Chcesz stworzyć piękną notatke i uwzględnić w niej obrazki? Niedługo bedziesz mógl to zrobić!",
+				"status": "in-progress"
+			},
+			{
+				"title": "maile",
+				"description": "Chcesz wysyłać materiały swoim uczniom drogą elektroniczną? Pracujemy nad tym!",
+				"status": "in-progress"
+			},
+			{
+				"title": "konta uczniowskie",
+				"description": "Planujemy stworzyć konta dedytkowane dla poszczególnych uczniów, dzięki którym wymiana informacji będzie jeszcze łatwiejsza!",
+				"status": "future-plan"
+			},
+			{
+				"title": "zadania domowe",
+				"description": "Planujemy stworzyć sekcje \"Zadania domowe\", dzięki której bedziesz mógł w łatwy sposób zadać prace, a nawet sprawdzić ją i ocenić!",
+				"status": "future-plan"
+			}
+		]
 	},
 	"loginPage": {
 		"title": "Zaloguj się",
