@@ -5,7 +5,7 @@ import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
 // eslint-disable-next-line 
-const firebaseConfigDev = {
+const firebaseConfig = {
 	apiKey: "AIzaSyCDLbozeo3JH-hY4idncBm9_-NGG4slT3A",
 	authDomain: "teacherspace-dev.firebaseapp.com",
 	projectId: "teacherspace-dev",
@@ -15,7 +15,7 @@ const firebaseConfigDev = {
 	measurementId: "G-WKFH50K9T4",
 };
 
-const firebaseConfig = {
+const firebaseProdConfig = {
 	apiKey: "AIzaSyDOWwCNyItoV-nm3X2q6NkvWYX4XlvOasA",
 	authDomain: "teacherspace-57d5c.firebaseapp.com",
 	projectId: "teacherspace-57d5c",
@@ -30,8 +30,8 @@ export const auth = getAuth(app);
 export const firestore = getFirestore(app);
 export const analytics = getAnalytics(app);
 export const storage = getStorage(app);
-export const apiPathDev = "https://us-central1-teacherspace-dev.cloudfunctions.net/api/v1";
-export const apiPath = "https://us-central1-teacherspace-57d5c.cloudfunctions.net/api/v1";
+export const apiPath = "https://us-central1-teacherspace-dev.cloudfunctions.net/api/v1";
+export const apiPathProd = "https://us-central1-teacherspace-57d5c.cloudfunctions.net/api/v1";
 export const apiRoutes = {
 	createAccount: "/create_account",
 };

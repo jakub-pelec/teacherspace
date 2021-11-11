@@ -147,7 +147,8 @@
 	},
 	"snackbar": {
 		"errors": {
-			"default": "Ups, coś poszło nie tak, spróbuj ponownie."
+			"default": "Ups, coś poszło nie tak, spróbuj ponownie.",
+			"resetPassword": "Coś poszło nie tak. Sprawdź czy podałeś poprawny adres email."
 		},
 		"success": {
 			"addNote": "Notatka dodana!",
@@ -158,7 +159,8 @@
 			"register": "Witaj!",
 			"updateUserProp": "{{property}} zaktualizowane!",
 			"removeNote": "Notatka usunięta!",
-			"removeUserProp": "{{property}} usunięte pomyślnie!"
+			"removeUserProp": "{{property}} usunięte pomyślnie!",
+			"resetPassword": "Link do zmiany hasła został wysłany na podany adres email."
 		}
 	}
 }

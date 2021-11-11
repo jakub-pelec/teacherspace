@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { Button } from "../../shared/components/Button/Button";
-import { changeTheme } from "../../actions/actions";
+import { changeTheme, resetAuthPassword } from "../../actions/actions";
 import { useForm } from "react-hook-form";
 import { useSnackbar } from "notistack";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -30,6 +30,7 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps, hist
 		control,
 		handleSubmit,
 		formState: { errors },
+		getValues,
 	} = useForm({ resolver: yupResolver(loginSchema) });
 
 	const submitHandler = (loginData: Credentials) => {
@@ -45,6 +46,18 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps, hist
 			setIsLoading(false);
 		};
 		loginProps({ ...loginData, successCallback, errorCallback, finalCallback });
+	};
+
+	const resetPassword = () => {
+		const successCallback = () => {
+			enqueueSnackbar(t("snackbar.success.resetPassword"), { variant: "success" });
+		};
+		const errorCallback = () => {
+			enqueueSnackbar(t("snackbar.errors.resetPassword"), { variant: "error" });
+		};
+		const finalCallback = () => {};
+		const email = getValues().email;
+		resetAuthPassword(email, { successCallback, errorCallback, finalCallback });
 	};
 	return (
 		<>
@@ -75,6 +88,7 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps, hist
 									/>
 								</FieldWithLabel>
 							</FormField>
+							<Button onClick={resetPassword}>Forgot password?</Button>
 							<FormField>
 								<Button type="submit" disabled={isLoading}>
 									{isLoading ? <CircularProgress size={23} /> : t("loginPage.login")}

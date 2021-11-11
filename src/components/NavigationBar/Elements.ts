@@ -78,6 +78,8 @@ export const LogOut = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	align-self: flex-end;
+	flex-direction: row;
 `;
 
 export const ExpandButton = styled.div<ExpandProps>`
@@ -97,3 +99,11 @@ export const ExpandButton = styled.div<ExpandProps>`
 	transform: rotate(${({ expanded }) => (expanded ? "0deg" : "180deg")});
 	transition: all 0.3s ease-out;
 `;
+
+export const BottomWrapper = styled.div``
+
+export const Version = styled.div`
+	color: white;
+	font-weight: 600;
+	transform: translateY(100%);
+`

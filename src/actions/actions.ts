@@ -10,7 +10,14 @@ import {
 	SWITCH_THEME,
 } from "./types";
 import { auth, apiPath, apiRoutes, firestore } from "../config/firebase";
-import { signInWithEmailAndPassword, onAuthStateChanged, signOut, setPersistence, browserSessionPersistence } from "@firebase/auth";
+import {
+	signInWithEmailAndPassword,
+	onAuthStateChanged,
+	signOut,
+	setPersistence,
+	browserSessionPersistence,
+	sendPasswordResetEmail,
+} from "@firebase/auth";
 import { collection, onSnapshot, doc, addDoc, updateDoc, DocumentData, arrayUnion, deleteDoc } from "firebase/firestore";
 import { Dispatch } from "redux";
 import axios from "axios";
@@ -196,6 +203,17 @@ export const removeUserProperties =
 			finalCallback();
 		}
 	};
+
+export const resetAuthPassword = async (email: string, {successCallback, errorCallback, finalCallback}: PromiseCallback) => {
+	try {
+		await sendPasswordResetEmail(auth, email);
+		successCallback();
+	} catch(e) {
+		errorCallback();
+	} finally {
+		finalCallback();
+	}
+};
 
 const clearStore = (dispatch: Dispatch) => {
 	dispatch({ type: CLEAR_THEME });

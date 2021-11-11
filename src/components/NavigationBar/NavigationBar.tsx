@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { logout } from "../../actions/actions";
 import { useTheme } from "styled-components";
 import HomeIcon from "@mui/icons-material/Home";
-import { NavBar, Logo, OptionWrapper, NavOption, Label, ExpandButton, StyledLink, LogOut } from "./Elements";
+import { NavBar, Logo, OptionWrapper, NavOption, Label, ExpandButton, StyledLink, LogOut, Version, BottomWrapper } from "./Elements";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -63,10 +63,13 @@ const NavigationBar: React.FC<IProps> = ({ logoutProps, topLevelHistory }) => {
 				</StyledLink>
 			</OptionWrapper>
 			<NavOption>
-				<LogOut role="button" onClick={() => handleLogout()}>
-					<ExitToAppIcon fontSize="large" htmlColor={theme.background} />
-				</LogOut>
-				<Label expanded={expanded}>{t("navBar.logout")}</Label>
+				<BottomWrapper>
+					<LogOut role="button" onClick={() => handleLogout()}>
+						<ExitToAppIcon fontSize="large" htmlColor={theme.background} />
+					</LogOut>
+					<Label expanded={expanded}>{t("navBar.logout")}</Label>
+					<Version>{process.env.REACT_APP_VERSION}</Version>
+				</BottomWrapper>
 			</NavOption>
 			<ExpandButton expanded={expanded} onClick={() => setExpanded((prevState) => !prevState)}>
 				<ArrowBackIosNewIcon htmlColor={expanded ? theme.primary : theme.background} />

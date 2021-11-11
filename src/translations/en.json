@@ -147,7 +147,8 @@
 	},
 	"snackbar": {
 		"errors": {
-			"default": "Oops, something went wrong! Please try again."
+			"default": "Oops, something went wrong! Please try again.",
+			"resetPassword": "Something went wrong. Please check if your email address is correct."
 		},
 		"success": {
 			"addNote": "Note added!",
@@ -158,7 +159,8 @@
 			"register": "Welcome!",
 			"updateUserProp": "{{property}} updates succesfully!",
 			"removeNote": "Note deleted sucessfuly",
-			"removeUserProp": "{{property}} removed succesfully!"
+			"removeUserProp": "{{property}} removed succesfully!",
+			"resetPassword": "Email reset link has been sent to the provided email address."
 		}
 	}
 }
