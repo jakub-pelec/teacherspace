@@ -14,6 +14,7 @@ export const ScrollContainer = styled.div`
 	padding: 3em;
 	height: 100%;
 	overflow-y: auto;
+	padding-top: 2em;
 `;
 export const CardGrid = styled.div`
 	display: grid;
@@ -123,6 +124,8 @@ export const FilterOptions = styled.form`
 	align-items: center;
 	justify-content: space-between;
 	padding: 1em;
+	margin: 0 3em;
+	margin-top: 1em;
 `;
 export const FilterOption = styled.div`
 	width: 30%;
