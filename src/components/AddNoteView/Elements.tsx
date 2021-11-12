@@ -14,9 +14,9 @@ export const ButtonWrapper = styled.div`
 	}
 `;
 
-export const OptionWrapper = styled.div`
+export const OptionWrapper = styled.div<{ input?: boolean }>`
 	height: 100%;
-	width: 100%;
+	width: ${({ input }) => (input ? "30%" : "100%")};
 `;
 export const Label = styled.div`
 	font-weight: 700;
