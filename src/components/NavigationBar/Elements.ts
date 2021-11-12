@@ -100,10 +100,21 @@ export const ExpandButton = styled.div<ExpandProps>`
 	transition: all 0.3s ease-out;
 `;
 
-export const BottomWrapper = styled.div``
+export const BottomWrapper = styled.div``;
 
-export const Version = styled.div`
+export const VersionWrapper = styled.div`
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+`;
+
+export const Version = styled.div<ExpandProps>`
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	color: white;
 	font-weight: 600;
-	transform: translateY(100%);
-`
+	transition: all 0.3s ease-out;
+	padding-bottom: 0.5em;
+`;
