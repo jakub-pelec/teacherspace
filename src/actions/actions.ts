@@ -38,6 +38,7 @@ export const register =
 		try {
 			const userDocument = { firstName, lastName, email, password, subjects: subjects || [], classes: classes || [] };
 			const resp: Response<RegisterResponseData> = await axios.post(`${apiPath}${apiRoutes.createAccount}`, userDocument);
+			await signInWithEmailAndPassword(auth, email, password);
 			const { firestoreID } = resp.data;
 			dispatch({ type: SAVE_USER_UUID, payload: firestoreID });
 			successCallback();

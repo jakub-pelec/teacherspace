@@ -92,6 +92,7 @@ export const ListElement = styled.div`
 	margin-bottom: 4%;
 	font-weight: 700;
 	box-shadow: 0px 10px 30px -10px white;
+	max-width: 300px;
 `;
 
 export const AddMoreButton = styled(Button)`

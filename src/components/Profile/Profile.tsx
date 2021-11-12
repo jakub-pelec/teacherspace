@@ -81,7 +81,7 @@ const Profile: React.FC<IProps> = ({ userData: { firstName, lastName, email, cla
 									classes.map(({ label, value }: Option, index: number) => {
 										return (
 											<ListElement key={index}>
-												{label}{" "}
+												{label}
 												<ButtonWrapper>
 													<Button onClick={() => removeProperty(value, "class")}>
 														<DeleteIcon />
@@ -115,7 +115,7 @@ const Profile: React.FC<IProps> = ({ userData: { firstName, lastName, email, cla
 										);
 									})
 								) : (
-									<div>{t("profilePage.noSubjects")}</div>
+									<ListElement>{t("profilePage.noSubjects")}</ListElement>
 								)}
 							</Information>
 						</InfoSection>

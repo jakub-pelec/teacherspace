@@ -30,9 +30,11 @@ const SignupSecondStage: React.FC<IProps> = ({ registerProps }) => {
 	} = useForm();
 	const submitHandler = (formData: any) => {
 		setLoading(true);
-		const { classes, subjects } = formData;
+		const { classes: rawClasses, subjects: rawSubjects } = formData;
+		const classes = (rawClasses || []).map(({ value, label }: Option) => ({ value, label }));
+		const subjects = (rawSubjects || []).map(({ value, label }: Option) => ({ value, label }));
 		const successCallback = () => {
-			enqueueSnackbar(t('snackbar.success.register'), { variant: "success" });
+			enqueueSnackbar(t("snackbar.success.register"), { variant: "success" });
 			push("/dashboard");
 		};
 		const errorCallback = () => {
