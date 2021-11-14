@@ -10,6 +10,8 @@ export const MobileScreen = styled.div`
 	align-items: center;
 	font-size: 1rem;
 	background-color: ${({ theme }) => theme.primary};
+	padding: 10%;
+	text-align: center;
 `;
 
 export const FirsLine = styled.div`

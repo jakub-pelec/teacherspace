@@ -55,6 +55,11 @@
 				"status": "ready"
 			},
 			{
+				"title": "design",
+				"description": "We know that our design has few flaws, and we are working on it with professionals!",
+				"status": "in-progress"
+			},
+			{
 				"title": "images",
 				"description": "Do you want to include images in your note to make them more appealing? You will be able to do this!",
 				"status": "in-progress"

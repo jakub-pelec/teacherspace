@@ -55,6 +55,11 @@
 				"status": "ready"
 			},
 			{
+				"title": "design",
+				"description": "Wiemy, że wygląd naszej aplikacji ma pare niedociągnięć i pracujemy nad tym z profesjonalistami w tej dziedzinie!",
+				"status": "in-progress"
+			},
+			{
 				"title": "obrazki",
 				"description": "Chcesz stworzyć piękną notatke i uwzględnić w niej obrazki? Niedługo bedziesz mógl to zrobić!",
 				"status": "in-progress"
