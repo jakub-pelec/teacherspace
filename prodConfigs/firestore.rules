@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{documentID} {
+    	allow read, update: if
+      		isOwner(documentID, request.auth.token) && isLoggedIn(request);
+    }
+    match /users/{documentID}/{doc=**} {
+    	allow read, update, write: if
+      		isOwner(documentID, request.auth.token) && isLoggedIn(request);
+    }
+  }
+}
+
+function isOwner(docID, claims) {
+	return claims.firestoreID == docID;
+}
+
+function isLoggedIn(req) {
+	return req.auth != null;
+}
