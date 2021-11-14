@@ -42,12 +42,23 @@ interface IFilters {
 	classes: (n: NoteType) => boolean;
 }
 
+interface IFilterValues {
+	title: string | null;
+	subject: Option | null;
+	classes: Option | null;
+}
+
 const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 	const { t } = useTranslation();
 	const [filters, setFilters] = useState<IFilters>({
 		title: () => true,
 		subject: () => true,
 		classes: () => true,
+	});
+	const [filterValues, setFilterValues] = useState<IFilterValues>({
+		title: "",
+		subject: null,
+		classes: null,
 	});
 	const [filteredNotes, setFilteredNotes] = useState<FirestoreDocumentDataWithId<NoteType>[]>(notes);
 	const [showNote, setShowNote] = useState<FirestoreDocumentDataWithId<NoteType>>();
@@ -69,6 +80,12 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 		togglePresentationMode(false);
 	};
 
+	const clearFilters = () => {
+		setFilteredNotes(notes);
+		setFilters({ title: () => true, subject: () => true, classes: () => true });
+		setFilterValues({ title: "", classes: null, subject: null });
+	};
+
 	return (
 		<>
 			<Helmet>
@@ -81,21 +98,25 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 						{t("notesPage.fieldTitle")}
 						<TextField
 							placeholder={t("notesPage.inputPlaceholder")}
-							onChange={({ target: { value } }) =>
+							value={filterValues.title}
+							onChange={({ target: { value } }) => {
+								setFilterValues({ ...filterValues, title: value });
 								setFilters({
 									...filters,
 									title: (note) =>
 										note.title.toLowerCase().includes(value.toLowerCase().trim()) ||
 										note.title.toLowerCase().replace(/\s/g, "").includes(value.toLowerCase().trim()),
-								})
-							}
+								});
+							}}
 						/>
 					</FilterOption>
 					<FilterOption>
 						{t("notesPage.subjectSelect")}
 						<Select
 							options={userData.subjects}
+							value={filterValues.subject}
 							onChange={(option) => {
+								setFilterValues({ ...filterValues, subject: option as Option });
 								setFilters({ ...filters, subject: (note) => note.subject.value === (option as Option).value });
 							}}
 						></Select>
@@ -103,20 +124,16 @@ const Notes: React.FC<IProps> = ({ topLevelHistory, notes, userData }) => {
 					<FilterOption>
 						{t("notesPage.classSelect")}
 						<Select
+							value={filterValues.classes}
 							options={userData.classes}
 							onChange={(option) => {
+								setFilterValues({ ...filterValues, classes: option as Option });
 								setFilters({ ...filters, classes: (note) => note.classes?.some((s) => s.value === (option as Option).value) });
 							}}
 						></Select>
 					</FilterOption>
 					<FilterButton>
-						<Button
-							type="reset"
-							onClick={() => {
-								setFilteredNotes(notes);
-								setFilters({ title: () => true, subject: () => true, classes: () => true });
-							}}
-						>
+						<Button type="reset" onClick={clearFilters}>
 							{t("notesPage.clearButton")}
 						</Button>
 					</FilterButton>
