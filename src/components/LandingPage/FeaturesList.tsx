@@ -26,7 +26,7 @@ const FeaturesList = () => {
 	const getStatusIcon = (status: FeatureStatus) => {
 		if (status === "ready") return <CheckIcon htmlColor="#0e8c00" />;
 		if (status === "in-progress") return <AccessTimeIcon htmlColor="#F6725E" />;
-		return <CloseIcon htmlColor="#8c0000" />;
+		return <CloseIcon htmlColor="#ff0000" />;
 	};
 	return (
 		<FeaturesTable>

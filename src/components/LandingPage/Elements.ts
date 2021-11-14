@@ -74,8 +74,9 @@ export const FeaturesTable = styled.div`
 	align-items: center;
 	flex-direction: column;
 	width: 100%;
+	max-width: 1000px;
 	border: 1px solid ${({ theme }) => theme.primary};
-	margin: 2% 0;
+	margin: 5% 0;
 	background-color: ${({ theme }) => theme.primaryWithOpacity};
 `;
 
@@ -118,7 +119,7 @@ export const FeaturesTableCellTitle = styled(FeaturesTableItemCell)<{ status?: F
 	text-align: center;
 	font-weight: 700;
 	color: ${({ theme, status }) =>
-		status === "ready" ? "#0e8c00" : status === "in-progress" ? theme.primary : status === "future-plan" ? "#8c0000" : "black"};
+		status === "ready" ? "#0e8c00" : status === "in-progress" ? theme.primary : status === "future-plan" ? "#ff0000" : "black"};
 `;
 
 export const FeaturesTableCellDescription = styled(FeaturesTableItemCell)`
