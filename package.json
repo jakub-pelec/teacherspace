@@ -20,6 +20,7 @@
     "@types/react-dom": "^17.0.9",
     "@types/react-helmet": "^6.1.4",
     "axios": "^0.23.0",
+    "cli-confirm": "^1.0.1",
     "country-flag-icons": "^1.4.11",
     "cross-env": "^7.0.3",
     "draft-js": "^0.11.7",
@@ -55,6 +56,8 @@
     "start:prod": "cross-env REACT_APP_STAGE=PROD REACT_APP_VERSION=$npm_package_version react-scripts start",
     "build:prod": "cross-env REACT_APP_STAGE=PROD REACT_APP_VERSION=$npm_package_version react-scripts build",
     "build:dev": "cross-env REACT_APP_STAGE=DEV REACT_APP_VERSION=$npm_package_version react-scripts build",
+    "deploy:dev": "firebase use dev && npm run build:dev && firebase deploy",
+    "deploy:prod": "cli-confirm \"You are going to deploy to production. Do you want to continue? (y/n) \" && firebase use prod && npm run build:prod && firebase deploy",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
