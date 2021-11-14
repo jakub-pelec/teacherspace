@@ -11,6 +11,13 @@
           "teacherspace"
         ]
       }
+    },
+    "teacherspace-dev": {
+      "hosting": {
+        "teacherspace": [
+          "teacherspace-dev"
+        ]
+      }
     }
   }
 }

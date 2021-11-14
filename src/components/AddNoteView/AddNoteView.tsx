@@ -13,7 +13,6 @@ import { useTranslation } from "react-i18next";
 import { noteSchema } from "../../schemas/noteSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FieldWithLabelAndError from "../../shared/form-components/FieldWithLabel/FieldWithLabelAndError";
-import draftToHtml from "draftjs-to-html";
 import { AppState } from "../../typings/redux";
 import FormSelectNoInput from "../../shared/form-components/FormSelectNoInput/FormSelecNoInput";
 
@@ -34,7 +33,7 @@ const AddNoteView: React.FC<IProps> = ({ addNoteView, setAddNoteView, addNotePro
 	const { enqueueSnackbar } = useSnackbar();
 	const submitHandler = async (data: any) => {
 		const classes = data.classes.map(({ label, value }: Option) => ({ label, value }));
-		const note = { ...data, dateModified: Date.now(), classes, content: draftToHtml(data.content) };
+		const note = { ...data, dateModified: Date.now(), classes };
 		const successCallback = () => {
 			enqueueSnackbar(t("snackbar.success.addNote"), { variant: "success" });
 		};

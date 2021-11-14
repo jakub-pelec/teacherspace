@@ -88,7 +88,7 @@ const LoginPage: React.FC<IProps> = ({ changeThemeProps, theme, loginProps, hist
 									/>
 								</FieldWithLabel>
 							</FormField>
-							<Button onClick={resetPassword}>Forgot password?</Button>
+							<Button onClick={resetPassword}>{t('loginPage.forgotPassword')}</Button>
 							<FormField>
 								<Button type="submit" disabled={isLoading}>
 									{isLoading ? <CircularProgress size={23} /> : t("loginPage.login")}

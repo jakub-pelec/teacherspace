@@ -85,7 +85,8 @@
 		"title": "Zaloguj się",
 		"email": "Adres email",
 		"password": "Hasło",
-		"login": "Zaloguj"
+		"login": "Zaloguj",
+		"forgotPassword": "Zapomniałes hasła?"
 	},
 	"registerPage": {
 		"title": "Zarejestruj",

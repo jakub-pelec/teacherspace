@@ -85,7 +85,8 @@
 		"title": "Please log in",
 		"email": "Email address",
 		"password": "Password",
-		"login": "Login"
+		"login": "Login",
+		"forgotPassword": "Forgot password?"
 	},
 	"registerPage": {
 		"title": "Register",

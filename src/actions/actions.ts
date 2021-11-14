@@ -18,12 +18,12 @@ import {
 	browserSessionPersistence,
 	sendPasswordResetEmail,
 } from "@firebase/auth";
-import { collection, onSnapshot, doc, addDoc, updateDoc, DocumentData, arrayUnion, deleteDoc } from "firebase/firestore";
+import { collection, onSnapshot, doc, addDoc, updateDoc, arrayUnion, deleteDoc } from "firebase/firestore";
 import { Dispatch } from "redux";
 import axios from "axios";
 import { AppState } from "../typings/redux";
 import { NoteType } from "../typings/wysiwyg";
-import { convertFromHTML, convertToRaw, ContentState } from "draft-js";
+import deepOmit from 'omit-deep-lodash';
 
 interface RegisterResponseData {
 	code: string;
@@ -104,13 +104,9 @@ export const subscribeToAuthUser = () => async (dispatch: Dispatch) =>
 			onSnapshot(userNotesRef, (snapshot) => {
 				const notes: FirestoreDocumentDataWithId<NoteType>[] = [];
 				snapshot.docs.forEach((doc) => {
-					const docData: DocumentData = doc.data();
-					const blocksFromHTML = convertFromHTML(docData.content);
-					const state = ContentState.createFromBlockArray(blocksFromHTML.contentBlocks, blocksFromHTML.entityMap);
-					//@ts-ignore
+					const docData: NoteType = doc.data() as NoteType;
 					const documentToSave: FirestoreDocumentDataWithId<NoteType> = {
 						...docData,
-						content: convertToRaw(state),
 						id: doc.id,
 					};
 					notes.push(documentToSave);
@@ -146,7 +142,7 @@ export const updateNote =
 			classes,
 			subject,
 			dateModified: Date.now(),
-			content,
+			content: deepOmit(content, '_map'),
 		};
 		try {
 			await updateDoc(noteRef, newNoteData);
