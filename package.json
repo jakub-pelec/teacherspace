@@ -61,6 +61,7 @@
     "build:dev": "cross-env REACT_APP_STAGE=DEV REACT_APP_VERSION=$npm_package_version react-scripts build",
     "deploy:dev": "firebase use dev && firebase target:apply hosting teacherspace teacherspace-dev && npm run build:dev && firebase deploy",
     "deploy:prod": "cli-confirm \"You are going to deploy to production. Do you want to continue? (y/n) \" && firebase use prod && firebase target:apply hosting teacherspace teacherspace && npm run build:prod && firebase deploy",
+    "deploy:all": "npm run deploy:dev && firebase use prod && firebase target:apply hosting teacherspace teacherspace && npm run build:prod && firebase deploy",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
