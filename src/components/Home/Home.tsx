@@ -16,6 +16,7 @@ const Home: React.FC<IProps> = ({ topLevelHistory }) => {
 			</Helmet>
 			<div>
 				<h1>{t("homePage.title")}</h1>
+				<p>This page is left empty on purpose. In future the content will be added according to needs that will come</p>
 			</div>
 		</>
 	);

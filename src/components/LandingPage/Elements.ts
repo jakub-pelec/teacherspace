@@ -26,7 +26,7 @@ export const Subheader = styled.h3`
 
 export const PageWrapper = styled.div`
 	height: 100vh;
-	background-color: ${({ theme }) => theme.white};
+	background-color: ${({ theme }) => theme.background};
 	display: flex;
 	flex-direction: column;
 	align-items: center;
