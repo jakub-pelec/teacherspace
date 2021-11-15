@@ -61,6 +61,14 @@ const NavigationBar: React.FC<IProps> = ({ logoutProps, topLevelHistory }) => {
 						<Label expanded={expanded}>{t("navBar.notesPath")}</Label>
 					</NavOption>
 				</StyledLink>
+				<StyledLink to="/test-payments">
+					<NavOption>
+						<LogOut>
+							<NoteAltIcon fontSize="large" htmlColor={theme.background} />
+						</LogOut>
+						<Label expanded={expanded}>{t("navBar.notesPath")}</Label>
+					</NavOption>
+				</StyledLink>
 			</OptionWrapper>
 			<NavOption>
 				<BottomWrapper>

@@ -4,7 +4,8 @@ import { HashRouter, Switch, Route, Redirect, RouteComponentProps } from "react-
 import Home from "../Home/Home";
 import Profile from "../Profile/Profile";
 import Notes from "../Notes/Notes";
-import { Wrapper, ContentWrapper } from './Elements';
+import { Wrapper, ContentWrapper } from "./Elements";
+import TestPayments from "../TestPayments/TestPayments";
 
 interface IProps extends RouteComponentProps {}
 
@@ -27,13 +28,14 @@ const Dashboard: React.FC<IProps> = ({ history }) => {
 						<Route path="/notes">
 							<Notes topLevelHistory={history} />
 						</Route>
+						<Route exact path="/test-payments">
+							<TestPayments topLevelHistory={history} />
+						</Route>
 					</Switch>
 				</ContentWrapper>
 			</HashRouter>
 		</Wrapper>
 	);
 };
-
-
 
 export default Dashboard;

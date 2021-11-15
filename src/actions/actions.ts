@@ -212,6 +212,16 @@ export const resetAuthPassword = async (email: string, {successCallback, errorCa
 	}
 };
 
+export const createFirstPayment = (data: any) => async(_: Dispatch, getState: () => AppState) => {
+	try {
+		const {firestoreID} = getState().auth;
+		const docRef = collection(firestore, `users/${firestoreID}/payments`);
+		await addDoc(docRef, data);
+	} catch(e) {
+		console.log(e);
+	}
+}
+
 const clearStore = (dispatch: Dispatch) => {
 	dispatch({ type: CLEAR_THEME });
 	dispatch({ type: CLEAR_AUTH });

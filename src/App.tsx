@@ -7,6 +7,7 @@ import reducer from "./reducers/rootReducer";
 
 import Router from "./components/Router/Router";
 import ThemeProvider from "./providers/ThemePovider";
+import StripeProvider from "./providers/StripeProvider";
 import { SnackbarProvider } from "notistack";
 import "./providers/I18nProvider";
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
@@ -14,15 +15,15 @@ const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 function App() {
 	return (
 		<>
-		<ReduxProvider store={store}>
-			<>
-				<ThemeProvider>
-					<SnackbarProvider autoHideDuration={3000}>
-						<Router />
-					</SnackbarProvider>
-				</ThemeProvider>
-			</>
-		</ReduxProvider>
+			<ReduxProvider store={store}>
+				<StripeProvider>
+					<ThemeProvider>
+						<SnackbarProvider autoHideDuration={3000}>
+							<Router />
+						</SnackbarProvider>
+					</ThemeProvider>
+				</StripeProvider>
+			</ReduxProvider>
 		</>
 	);
 }

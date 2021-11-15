@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { AppState } from "../../typings/redux";
 import { useMediaQuery } from "react-responsive";
 import MobileScreenInfo from "../MobileScreenInfo/MobileScreenInfo";
+import TestPayments from '../TestPayments/TestPayments';
 
 interface IProps {
 	isLoggedIn: boolean;
